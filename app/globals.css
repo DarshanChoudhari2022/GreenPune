@@ -26,6 +26,7 @@ body {
   background: #172012;
   color: var(--ink);
   font-family: Inter, "Noto Sans Devanagari", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -43,6 +44,10 @@ main {
   background: var(--paper);
   min-height: 100vh;
   overflow: hidden;
+}
+
+.lang-mr {
+  font-family: "Noto Sans Devanagari", Inter, system-ui, sans-serif;
 }
 
 .topbar {
@@ -97,6 +102,7 @@ footer {
   gap: 24px;
 }
 
+.nav-actions,
 .nav-cta,
 .primary-action,
 .secondary-action,
@@ -121,12 +127,49 @@ footer {
   padding: 10px 18px;
 }
 
+.nav-actions {
+  gap: 10px;
+}
+
+.language-toggle {
+  align-items: center;
+  background: rgba(24, 32, 15, 0.08);
+  border-radius: 999px;
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+}
+
+.language-toggle button {
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: #3f4b35;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 8px 10px;
+}
+
+.language-toggle button.active {
+  background: white;
+  color: var(--leaf);
+  box-shadow: 0 4px 12px rgba(24, 32, 15, 0.1);
+}
+
 .hero {
   display: grid;
   gap: 44px;
   grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
   min-height: 720px;
   padding: 132px clamp(20px, 6vw, 84px) 72px;
+}
+
+.mobile-first-hero {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(214, 106, 18, 0.14), transparent 32%),
+    radial-gradient(circle at 18% 78%, rgba(111, 136, 91, 0.22), transparent 30%),
+    var(--paper);
 }
 
 .hero-copy {
@@ -206,6 +249,62 @@ footer p {
   position: relative;
 }
 
+.poster-orbit {
+  align-self: center;
+  margin: 0 auto;
+  max-width: 500px;
+  min-height: 610px;
+  perspective: 1200px;
+  position: relative;
+  width: 100%;
+}
+
+.poster-card {
+  aspect-ratio: 4 / 5;
+  border: 10px solid #172012;
+  border-radius: 8px;
+  box-shadow: 0 36px 90px rgba(24, 32, 15, 0.28);
+  overflow: hidden;
+  position: relative;
+  transform: rotateY(-13deg) rotateX(5deg);
+  transform-style: preserve-3d;
+}
+
+.poster-card img {
+  object-fit: cover;
+}
+
+.orbit-chip {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(24, 32, 15, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 14px 40px rgba(24, 32, 15, 0.16);
+  color: var(--leaf);
+  display: flex;
+  font-weight: 900;
+  height: 74px;
+  justify-content: center;
+  position: absolute;
+  width: 74px;
+}
+
+.chip-one {
+  right: -18px;
+  top: 70px;
+  transform: translateZ(60px);
+}
+
+.chip-two {
+  bottom: 110px;
+  left: -14px;
+}
+
+.chip-three {
+  bottom: 22px;
+  right: 52px;
+}
+
 .hero-visual img {
   object-fit: cover;
 }
@@ -242,7 +341,6 @@ footer p {
 
 .intro-band,
 .event-section,
-.register-section,
 .portfolio-section {
   padding: 86px clamp(20px, 6vw, 84px);
 }
@@ -341,26 +439,6 @@ footer p {
   text-align: right;
 }
 
-.register-section {
-  background:
-    linear-gradient(rgba(251, 251, 245, 0.86), rgba(251, 251, 245, 0.95)),
-    url("https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1600&q=80");
-  background-position: center;
-  background-size: cover;
-}
-
-.form-panel {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(24, 32, 15, 0.1);
-  border-radius: 8px;
-  display: grid;
-  gap: 36px;
-  grid-template-columns: 0.8fr 1fr;
-  margin: 0 auto;
-  max-width: 1080px;
-  padding: clamp(24px, 5vw, 54px);
-}
-
 .registration-form {
   display: grid;
   gap: 16px;
@@ -420,6 +498,95 @@ footer p {
   font-family: "Noto Sans Devanagari", Inter, sans-serif;
   font-size: 13px;
   margin: 0;
+}
+
+.insights-section {
+  background: #172012;
+  color: white;
+  padding: 92px clamp(20px, 6vw, 84px);
+  position: relative;
+}
+
+.insights-section::before {
+  background: url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80") center/cover;
+  content: "";
+  inset: 0;
+  opacity: 0.16;
+  position: absolute;
+}
+
+.insights-section > * {
+  position: relative;
+}
+
+.insight-copy {
+  max-width: 880px;
+}
+
+.insight-copy .eyebrow,
+.insights-section .eyebrow {
+  color: #fff0c9;
+}
+
+.insight-copy p,
+.projection-card p {
+  color: #d6e5cc;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.projection-stage {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 42px;
+  perspective: 1100px;
+}
+
+.projection-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  min-height: 300px;
+  padding: 26px;
+  transform: rotateX(7deg) translateY(0);
+  transform-style: preserve-3d;
+}
+
+.projection-card:nth-child(2) {
+  transform: translateY(28px) rotateX(7deg) translateZ(36px);
+}
+
+.projection-card span {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.projection-card strong {
+  display: block;
+  font-size: clamp(34px, 5vw, 54px);
+  line-height: 1;
+  margin: 32px 0 18px;
+}
+
+.source-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 62px;
+}
+
+.source-row strong,
+.source-row a {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 11px 14px;
+}
+
+.source-row a {
+  color: #e5f1dc;
 }
 
 .form-status.success {
@@ -492,6 +659,83 @@ footer a {
   z-index: 30;
 }
 
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(34px) scale(0.98);
+  transition:
+    opacity 700ms ease,
+    transform 800ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.register-page {
+  background:
+    radial-gradient(circle at 22% 20%, rgba(242, 189, 85, 0.22), transparent 34%),
+    linear-gradient(135deg, #f8f7ed 0%, #dfe8dc 100%);
+}
+
+.register-topbar {
+  max-width: 980px;
+}
+
+.register-hero {
+  align-items: center;
+  display: grid;
+  gap: clamp(24px, 5vw, 62px);
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1fr);
+  min-height: 100vh;
+  padding: 122px clamp(18px, 6vw, 84px) 54px;
+}
+
+.register-poster {
+  aspect-ratio: 4 / 5;
+  border: 9px solid #172012;
+  border-radius: 8px;
+  box-shadow: 0 28px 80px rgba(24, 32, 15, 0.22);
+  overflow: hidden;
+  position: relative;
+  transform: rotateY(-10deg) rotateX(4deg);
+}
+
+.register-poster img {
+  object-fit: cover;
+}
+
+.register-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(24, 32, 15, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(24, 32, 15, 0.12);
+  padding: clamp(22px, 4vw, 42px);
+}
+
+.register-card h1 {
+  font-size: clamp(34px, 6vw, 62px);
+}
+
+.register-card > p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.register-event-strip {
+  background: var(--sage);
+  border-radius: 8px;
+  display: grid;
+  gap: 6px;
+  margin: 20px 0 24px;
+  padding: 16px;
+}
+
+.register-event-strip span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
 @media (max-width: 900px) {
   .nav-links {
     display: none;
@@ -500,7 +744,8 @@ footer a {
   .hero,
   .intro-band,
   .event-section,
-  .form-panel {
+  .register-hero,
+  .projection-stage {
     grid-template-columns: 1fr;
   }
 
@@ -513,12 +758,34 @@ footer a {
     min-height: 360px;
   }
 
+  .poster-orbit {
+    min-height: 520px;
+    max-width: 390px;
+  }
+
   .intro-band,
   .event-section,
-  .register-section,
+  .insights-section,
   .portfolio-section {
     padding-bottom: 58px;
     padding-top: 58px;
+  }
+
+  .projection-card,
+  .projection-card:nth-child(2) {
+    min-height: auto;
+    transform: none;
+  }
+
+  .register-hero {
+    padding-top: 104px;
+  }
+
+  .register-poster {
+    margin: 0 auto;
+    max-width: 330px;
+    transform: none;
+    width: 78vw;
   }
 }
 
@@ -532,10 +799,22 @@ footer a {
     display: none;
   }
 
+  .language-toggle button {
+    padding: 7px 8px;
+  }
+
   .hero {
     gap: 28px;
     padding-left: 18px;
     padding-right: 18px;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .nav-cta {
+    padding: 10px 13px;
   }
 
   h1 {
@@ -550,6 +829,25 @@ footer a {
   .event-list {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .poster-orbit {
+    min-height: 470px;
+  }
+
+  .poster-card {
+    border-width: 7px;
+    transform: rotateY(-6deg) rotateX(3deg);
+  }
+
+  .orbit-chip {
+    height: 58px;
+    width: 58px;
+    font-size: 12px;
+  }
+
+  .register-card {
+    padding: 20px;
   }
 
   .event-details div {

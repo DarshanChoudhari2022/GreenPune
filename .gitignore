@@ -6,5 +6,8 @@ data/registrations.json
 *.log
 desktop-screenshot.png
 mobile-screenshot.png
+desktop-home-v2.png
+mobile-home-v2.png
+mobile-register-v2.png
 qa-comparison.png
 design-qa.md

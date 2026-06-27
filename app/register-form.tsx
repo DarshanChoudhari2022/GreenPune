@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import type { RegistrationInput } from "@/lib/registration";
+import type { content, Language } from "@/lib/site-content";
 
 type RegisterState = {
   ok?: boolean;
@@ -9,7 +10,28 @@ type RegisterState = {
   errors?: Partial<Record<keyof RegistrationInput, string>>;
 };
 
-export function RegisterForm({ eventId }: { eventId: string }) {
+function localizeErrors(
+  errors: RegisterState["errors"],
+  copy: FormCopy
+): RegisterState["errors"] {
+  if (!errors) return undefined;
+  return {
+    name: errors.name ? copy.nameError : undefined,
+    phone: errors.phone ? copy.phoneError : undefined,
+    address: errors.address ? copy.addressError : undefined,
+    canBringTree: errors.canBringTree ? copy.canBringTreeError : undefined
+  };
+}
+
+type FormCopy = (typeof content)[Language]["form"];
+
+export function RegisterForm({
+  eventId,
+  copy
+}: {
+  eventId: string;
+  copy: FormCopy;
+}) {
   const [state, setState] = useState<RegisterState>({});
   const [pending, setPending] = useState(false);
 
@@ -38,14 +60,14 @@ export function RegisterForm({ eventId }: { eventId: string }) {
     if (!response.ok) {
       setState({
         ok: false,
-        message: result.message || "कृपया आवश्यक माहिती तपासा.",
-        errors: result.errors
+        message: result.message || copy.error,
+        errors: localizeErrors(result.errors, copy)
       });
     } else {
       event.currentTarget.reset();
       setState({
         ok: true,
-        message: "धन्यवाद! तुमची नोंदणी यशस्वी झाली."
+        message: copy.success
       });
     }
 
@@ -57,37 +79,37 @@ export function RegisterForm({ eventId }: { eventId: string }) {
       <input name="eventId" type="hidden" value={eventId} />
 
       <label>
-        <span>नाव</span>
-        <input name="name" placeholder="आपले पूर्ण नाव" />
+        <span>{copy.name}</span>
+        <input name="name" placeholder={copy.namePlaceholder} />
         {state.errors?.name ? <small>{state.errors.name}</small> : null}
       </label>
 
       <label>
-        <span>संपर्क क्रमांक</span>
+        <span>{copy.phone}</span>
         <input
           inputMode="numeric"
           maxLength={10}
           name="phone"
-          placeholder="१० अंकी मोबाइल क्रमांक"
+          placeholder={copy.phonePlaceholder}
         />
         {state.errors?.phone ? <small>{state.errors.phone}</small> : null}
       </label>
 
       <label>
-        <span>पत्ता</span>
-        <textarea name="address" placeholder="घर / सोसायटी / परिसर" rows={3} />
+        <span>{copy.address}</span>
+        <textarea name="address" placeholder={copy.addressPlaceholder} rows={3} />
         {state.errors?.address ? <small>{state.errors.address}</small> : null}
       </label>
 
       <fieldset>
-        <legend>आपण आपले वृक्ष स्वतः आणू शकता का?</legend>
+        <legend>{copy.canBringTree}</legend>
         <label className="choice">
           <input name="canBringTree" type="radio" value="yes" />
-          <span>हो</span>
+          <span>{copy.yes}</span>
         </label>
         <label className="choice">
           <input name="canBringTree" type="radio" value="no" />
-          <span>नाही</span>
+          <span>{copy.no}</span>
         </label>
         {state.errors?.canBringTree ? (
           <small>{state.errors.canBringTree}</small>
@@ -95,7 +117,7 @@ export function RegisterForm({ eventId }: { eventId: string }) {
       </fieldset>
 
       <button disabled={pending} type="submit">
-        {pending ? "नोंदणी होत आहे..." : "नोंदणी करा"}
+        {pending ? copy.pending : copy.submit}
       </button>
 
       {state.message ? (
