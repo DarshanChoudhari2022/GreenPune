@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { currentEvent } from "@/lib/events";
 import { content, type Language } from "@/lib/site-content";
@@ -42,8 +43,14 @@ export function RegisterClient() {
     <main className={`register-page lang-${lang}`}>
       <nav className="topbar register-topbar" aria-label="Registration navigation">
         <Link className="brand" href="/">
-          <span className="brand-mark">GP</span>
-          <span>GreenPune</span>
+          <Image
+            alt="GreenPune"
+            className="brand-logo"
+            height={42}
+            priority
+            src="/images/greenpune-logo.png"
+            width={176}
+          />
         </Link>
         <div className="nav-actions">
           <LanguageToggle lang={lang} setLang={setLang} />

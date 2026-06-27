@@ -64,8 +64,14 @@ export function HomeClient() {
     <main className={`site-shell lang-${lang}`}>
       <nav className="topbar" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="GreenPune home">
-          <span className="brand-mark">GP</span>
-          <span>GreenPune</span>
+          <Image
+            alt="GreenPune"
+            className="brand-logo"
+            height={42}
+            priority
+            src="/images/greenpune-logo.png"
+            width={176}
+          />
         </a>
         <div className="nav-links">
           <a href="#events">{t.nav.events}</a>

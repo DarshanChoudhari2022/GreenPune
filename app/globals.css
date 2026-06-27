@@ -84,6 +84,13 @@ footer {
   gap: 8px;
 }
 
+.brand-logo {
+  display: block;
+  height: 42px;
+  object-fit: contain;
+  width: 176px;
+}
+
 .brand-mark {
   align-items: center;
   background: var(--leaf);
@@ -802,6 +809,11 @@ footer a {
 
   .brand span:last-child {
     display: none;
+  }
+
+  .brand-logo {
+    height: 34px;
+    width: 136px;
   }
 
   .language-toggle button {
