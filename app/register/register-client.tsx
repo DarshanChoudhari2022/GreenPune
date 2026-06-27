@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { currentEvent } from "@/lib/events";
@@ -28,7 +27,7 @@ function LanguageToggle({
         onClick={() => setLang("mr")}
         type="button"
       >
-        मराठी
+        MR
       </button>
     </div>
   );
@@ -48,20 +47,11 @@ export function RegisterClient() {
         </Link>
         <div className="nav-actions">
           <LanguageToggle lang={lang} setLang={setLang} />
-          <Link className="nav-cta" href="/">{lang === "mr" ? "मुख्य पान" : "Home"}</Link>
+          <Link className="nav-cta" href="/">Home</Link>
         </div>
       </nav>
 
-      <section className="register-hero">
-        <div className="register-poster" aria-hidden="true">
-          <Image
-            alt=""
-            fill
-            priority
-            sizes="(max-width: 820px) 78vw, 34vw"
-            src={currentEvent.poster}
-          />
-        </div>
+      <section className="register-hero register-hero-single">
         <div className="register-card">
           <p className="eyebrow">{t.registerPage.eyebrow}</p>
           <h1>{t.registerPage.title}</h1>

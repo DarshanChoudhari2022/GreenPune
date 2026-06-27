@@ -14,7 +14,6 @@ export type EventItem = {
   themeEnglish: string;
   summary: string;
   summaryMarathi: string;
-  poster: string;
   status: "open" | "upcoming" | "completed";
 };
 
@@ -37,7 +36,6 @@ export const events: EventItem[] = [
       "A community tree plantation drive inviting residents to plant, protect, and nurture trees for a greener neighborhood.",
     summaryMarathi:
       "हरित परिसरासाठी झाडे लावणे, त्यांचे संरक्षण करणे आणि त्यांची काळजी घेण्यासाठी नागरिकांना जोडणारा सामुदायिक वृक्षारोपण उपक्रम.",
-    poster: "/images/greenpune-event-poster-2026.png",
     status: "open"
   }
 ];

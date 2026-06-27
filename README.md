@@ -27,4 +27,4 @@ The service-role key is server-only. Do not expose it in frontend code or public
 
 ## Add More Events
 
-Add event entries in `lib/events.ts` and place posters inside `public/images/`.
+Add event entries in `lib/events.ts`. Use real campaign photography or final brand assets for future visual sections.

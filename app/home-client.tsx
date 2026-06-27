@@ -46,7 +46,7 @@ function LanguageToggle({
         onClick={() => setLang("mr")}
         type="button"
       >
-        मराठी
+        MR
       </button>
     </div>
   );
@@ -89,19 +89,28 @@ export function HomeClient() {
             <a className="secondary-action" href="#insights">{t.hero.secondary}</a>
           </div>
         </div>
-        <div className="poster-orbit" data-reveal>
-          <div className="poster-card">
+        <div className="impact-visual" data-reveal>
+          <div className="impact-photo primary-photo">
             <Image
-              alt={`${eventTitle} poster`}
+              alt="Community tree plantation in a green urban space"
               fill
               priority
-              sizes="(max-width: 900px) 86vw, 34vw"
-              src={currentEvent.poster}
+              sizes="(max-width: 900px) 92vw, 44vw"
+              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=85"
             />
           </div>
-          <div className="orbit-chip chip-one">CO2</div>
-          <div className="orbit-chip chip-two">Shade</div>
-          <div className="orbit-chip chip-three">Water</div>
+          <div className="impact-photo secondary-photo">
+            <Image
+              alt="Hands caring for a small sapling"
+              fill
+              sizes="(max-width: 900px) 48vw, 18vw"
+              src="https://images.unsplash.com/photo-1524602585632-a2a01c12307c?auto=format&fit=crop&w=800&q=85"
+            />
+          </div>
+          <div className="impact-meter">
+            <span>{lang === "mr" ? "ध्येय" : "Goal"}</span>
+            <strong>{lang === "mr" ? "सावली + जगवणे" : "Shade + Survival"}</strong>
+          </div>
         </div>
       </section>
 
@@ -122,14 +131,6 @@ export function HomeClient() {
       </section>
 
       <section className="event-section" id="events">
-        <div className="event-poster" data-reveal>
-          <Image
-            alt={`${eventTitle} poster`}
-            fill
-            sizes="(max-width: 900px) 92vw, 38vw"
-            src={currentEvent.poster}
-          />
-        </div>
         <div className="event-copy" data-reveal>
           <p className="eyebrow">{t.event.eyebrow}</p>
           <h2>{eventTitle}</h2>
@@ -152,6 +153,23 @@ export function HomeClient() {
           </dl>
           <p>{eventSummary}</p>
           <a className="primary-action" href="/register">{t.event.cta}</a>
+        </div>
+        <div className="help-grid" data-reveal>
+          <article>
+            <span>01</span>
+            <h3>{lang === "mr" ? "नोंदणी करा" : "Register"}</h3>
+            <p>{lang === "mr" ? "आपली माहिती भरून कार्यक्रमात सहभागी व्हा." : "Enter your details and join the event."}</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>{lang === "mr" ? "रोप आणा" : "Bring a Sapling"}</h3>
+            <p>{lang === "mr" ? "शक्य असल्यास आपले रोप स्वतः आणा." : "Bring your own sapling if possible."}</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>{lang === "mr" ? "झाड जगवा" : "Care After Planting"}</h3>
+            <p>{lang === "mr" ? "लावलेल्या झाडाची जबाबदारी स्थानिक पातळीवर घ्या." : "Help protect and water the tree after planting."}</p>
+          </article>
         </div>
       </section>
 
