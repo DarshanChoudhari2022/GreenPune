@@ -1,0 +1,10 @@
+.next/
+node_modules/
+.env
+.env*.local
+data/registrations.json
+*.log
+desktop-screenshot.png
+mobile-screenshot.png
+qa-comparison.png
+design-qa.md
