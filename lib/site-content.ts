@@ -15,7 +15,7 @@ export const content = {
       titleLine2Start: "ONE ",
       titleHighlight: "TREE",
       titleLine2End: " AT A TIME",
-      body: "Join our campaign to plant over 10 Million trees. We are on a journey to save the forest, Join us!",
+      body: "Join our campaign to plant over 1 Million trees. We are on a journey to save the forest, Join us!",
       primary: "Join the Drive",
       stat: "Help us plant\n1 million trees in Pune over the\nnext 10 years."
     },

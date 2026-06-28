@@ -1459,6 +1459,10 @@ footer a:hover {
   .nav-cta {
     padding: 14px 22px;
   }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* ─── Large Desktop (min-width: 1024px) ─── */
