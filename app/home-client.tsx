@@ -18,6 +18,22 @@ export function HomeClient({ events }: { events: EventItem[] }) {
   const currentEvent = events.find((event) => event.status === "open") || events[0];
 
   useEffect(() => {
+    const saved = localStorage.getItem("greenpune_lang") as Language;
+    if (saved === "en" || saved === "mr") {
+      setLang(saved);
+      document.documentElement.lang = saved;
+    } else {
+      document.documentElement.lang = "en";
+    }
+  }, []);
+
+  const handleSetLang = (newLang: Language) => {
+    setLang(newLang);
+    localStorage.setItem("greenpune_lang", newLang);
+    document.documentElement.lang = newLang;
+  };
+
+  useEffect(() => {
     document.documentElement.classList.add("ppt-mode");
     return () => {
       document.documentElement.classList.remove("ppt-mode");
@@ -28,7 +44,7 @@ export function HomeClient({ events }: { events: EventItem[] }) {
     <>
       <ScrollProgress />
       <main className={`site-shell lang-${lang}`}>
-        <Topbar lang={lang} setLang={setLang} variant="home" />
+        <Topbar lang={lang} setLang={handleSetLang} variant="home" />
         <HeroSection t={t} />
         <MissionSection t={t} />
         <EventSection t={t} lang={lang} event={currentEvent} />

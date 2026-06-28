@@ -18,9 +18,30 @@ export function RegisterClient({
   const t = content[lang];
   const eventTitle = lang === "mr" ? currentEvent.titleDevanagari : currentEvent.titleEnglish;
 
+  // Sync language with localStorage preference on mount
+  useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("greenpune_lang") as Language;
+      if (saved === "en" || saved === "mr") {
+        setLang(saved);
+        document.documentElement.lang = saved;
+      } else {
+        document.documentElement.lang = "mr";
+      }
+    }
+  });
+
+  const handleSetLang = (newLang: Language) => {
+    setLang(newLang);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("greenpune_lang", newLang);
+      document.documentElement.lang = newLang;
+    }
+  };
+
   return (
     <main className={`register-page lang-${lang}`}>
-      <Topbar lang={lang} setLang={setLang} variant="register" />
+      <Topbar lang={lang} setLang={handleSetLang} variant="register" />
 
       <section className="register-hero register-hero-single">
         <div className="register-card fade-up delay-1">
