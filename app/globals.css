@@ -337,7 +337,7 @@ h3 {
 
 .hero-heading {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(36px, 6.5vw, 78px);
+  font-size: clamp(32px, 5vw, 60px);
   font-weight: 900;
   line-height: 1.05;
   text-align: center;
@@ -369,8 +369,16 @@ h3 {
 .tree-img {
   width: auto;
   height: 100%;
-  max-height: 38vh;
+  max-height: 42vh;
   object-fit: contain;
+}
+
+.hero-center-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  z-index: 15;
+  position: relative;
 }
 
 .hero-bottom-grid {

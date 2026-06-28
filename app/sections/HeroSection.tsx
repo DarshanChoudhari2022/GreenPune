@@ -45,6 +45,16 @@ export function HeroSection({ t }: HeroSectionProps) {
           />
         </div>
 
+        <div className="hero-center-cta">
+          <Link href="/register" className="plant-btn">
+            {t.hero.primary}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </Link>
+        </div>
+
         <div className="hero-bottom-grid">
           <div className="hero-stat-box">
             {statLines.map((line, idx) => (
@@ -58,13 +68,6 @@ export function HeroSection({ t }: HeroSectionProps) {
             <p>
               {t.hero.body}
             </p>
-            <Link href="/register" className="plant-btn">
-              {t.hero.primary}
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </Link>
           </div>
         </div>
       </div>
