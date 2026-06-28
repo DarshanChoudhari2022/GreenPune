@@ -22,31 +22,35 @@ export async function listRegistrations(): Promise<RegistrationRecord[]> {
   const table = process.env.SUPABASE_TABLE || "event_registrations";
 
   if (supabaseUrl && supabaseKey) {
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    const { data, error } = await supabase
-      .from(table)
-      .select("id,event_id,name,phone,address,can_bring_tree,created_at")
-      .order("created_at", { ascending: false });
+    try {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      const { data, error } = await supabase
+        .from(table)
+        .select("id,event_id,name,phone,address,can_bring_tree,created_at")
+        .order("created_at", { ascending: false });
 
-    if (error) {
-      throw new Error(error.message);
+      if (error) {
+        console.error("Supabase error, falling back to local storage:", error.message);
+      } else if (data) {
+        return data.map((record) => {
+          const answers: Record<string, string> = {
+            canBringTree: record.can_bring_tree ? "yes" : "no"
+          };
+          return {
+            id: record.id,
+            eventId: record.event_id,
+            name: record.name,
+            phone: record.phone,
+            address: record.address,
+            canBringTree: record.can_bring_tree ? "yes" : "no",
+            createdAt: record.created_at,
+            answers
+          };
+        });
+      }
+    } catch (e: any) {
+      console.error("Supabase connection exception, falling back to local:", e.message || e);
     }
-
-    return (data || []).map((record) => {
-      const answers: Record<string, string> = {
-        canBringTree: record.can_bring_tree ? "yes" : "no"
-      };
-      return {
-        id: record.id,
-        eventId: record.event_id,
-        name: record.name,
-        phone: record.phone,
-        address: record.address,
-        canBringTree: record.can_bring_tree ? "yes" : "no",
-        createdAt: record.created_at,
-        answers
-      };
-    });
   }
 
   try {

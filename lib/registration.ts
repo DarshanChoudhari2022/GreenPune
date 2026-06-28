@@ -33,9 +33,7 @@ export async function validateRegistration(
       : "Please enter a valid 10-digit mobile number.";
   }
 
-  if (!input.address || input.address.trim().length < 6) {
-    errors.address = isMarathi ? "कृपया पूर्ण पत्ता टाका." : "Please enter your complete address.";
-  }
+  // Address is optional, no validation required
 
   // Validate custom questions
   const questions = await listQuestions();

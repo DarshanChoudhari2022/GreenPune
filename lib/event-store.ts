@@ -96,34 +96,38 @@ export async function listEvents(): Promise<EventItem[]> {
   const table = process.env.SUPABASE_EVENTS_TABLE || "events";
 
   if (supabaseUrl && supabaseKey && process.env.SUPABASE_EVENTS_TABLE) {
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    const { data, error } = await supabase
-      .from(table)
-      .select("*")
-      .order("date", { ascending: false });
+    try {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      const { data, error } = await supabase
+        .from(table)
+        .select("*")
+        .order("date", { ascending: false });
 
-    if (error) {
-      throw new Error(error.message);
+      if (error) {
+        console.error("Supabase error listing events, falling back to local:", error.message);
+      } else if (data) {
+        return (data || []).map((record) => ({
+          id: record.id,
+          title: record.title_english,
+          titleEnglish: record.title_english,
+          titleDevanagari: record.title_devanagari,
+          organizer: record.organizer,
+          organizerEnglish: record.organizer_english,
+          date: record.date,
+          dateLabel: record.date_label,
+          dateLabelEnglish: record.date_label_english,
+          location: record.location,
+          locationEnglish: record.location_english,
+          theme: record.theme,
+          themeEnglish: record.theme_english,
+          summary: record.summary,
+          summaryMarathi: record.summary_marathi,
+          status: record.status
+        }));
+      }
+    } catch (e: any) {
+      console.error("Supabase exception listing events, falling back to local:", e.message || e);
     }
-
-    return (data || []).map((record) => ({
-      id: record.id,
-      title: record.title_english,
-      titleEnglish: record.title_english,
-      titleDevanagari: record.title_devanagari,
-      organizer: record.organizer,
-      organizerEnglish: record.organizer_english,
-      date: record.date,
-      dateLabel: record.date_label,
-      dateLabelEnglish: record.date_label_english,
-      location: record.location,
-      locationEnglish: record.location_english,
-      theme: record.theme,
-      themeEnglish: record.theme_english,
-      summary: record.summary,
-      summaryMarathi: record.summary_marathi,
-      status: record.status
-    }));
   }
 
   return readLocalEvents();
@@ -140,29 +144,33 @@ export async function upsertEvent(event: EventItem) {
   const table = process.env.SUPABASE_EVENTS_TABLE || "events";
 
   if (supabaseUrl && supabaseKey && process.env.SUPABASE_EVENTS_TABLE) {
-    const supabase = createClient(supabaseUrl, supabaseKey);
-    const { error } = await supabase.from(table).upsert({
-      id: event.id,
-      title_english: event.titleEnglish,
-      title_devanagari: event.titleDevanagari,
-      organizer: event.organizer,
-      organizer_english: event.organizerEnglish,
-      date: event.date,
-      date_label: event.dateLabel,
-      date_label_english: event.dateLabelEnglish,
-      location: event.location,
-      location_english: event.locationEnglish,
-      theme: event.theme,
-      theme_english: event.themeEnglish,
-      summary: event.summary,
-      summary_marathi: event.summaryMarathi,
-      status: event.status
-    });
+    try {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      const { error } = await supabase.from(table).upsert({
+        id: event.id,
+        title_english: event.titleEnglish,
+        title_devanagari: event.titleDevanagari,
+        organizer: event.organizer,
+        organizer_english: event.organizerEnglish,
+        date: event.date,
+        date_label: event.dateLabel,
+        date_label_english: event.dateLabelEnglish,
+        location: event.location,
+        location_english: event.locationEnglish,
+        theme: event.theme,
+        theme_english: event.themeEnglish,
+        summary: event.summary,
+        summary_marathi: event.summaryMarathi,
+        status: event.status
+      });
 
-    if (error) {
-      throw new Error(error.message);
+      if (!error) {
+        return;
+      }
+      console.error("Supabase upsert event error, falling back to local:", error.message);
+    } catch (e: any) {
+      console.error("Supabase upsert event exception, falling back to local:", e.message || e);
     }
-    return;
   }
 
   const events = await readLocalEvents();

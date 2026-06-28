@@ -3,14 +3,33 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  t: {
+    hero: {
+      titleLine1: string;
+      titleLine2Start: string;
+      titleHighlight: string;
+      titleLine2End: string;
+      body: string;
+      primary: string;
+      stat: string;
+    };
+  };
+}
+
+export function HeroSection({ t }: HeroSectionProps) {
+  // Split the stat text by newlines to render br tags
+  const statLines = t.hero.stat.split("\n");
+
   return (
     <section className="hero-slide">
       <div className="hero-inner">
         <h1 className="hero-heading">
-          <div className="hero-line">SOW A FUTURE</div>
+          <div className="hero-line">{t.hero.titleLine1}</div>
           <div className="hero-line">
-            ONE <span className="text-leaf">TREE</span> AT A TIME
+            {t.hero.titleLine2Start}
+            <span className="text-leaf">{t.hero.titleHighlight}</span>
+            {t.hero.titleLine2End}
           </div>
         </h1>
 
@@ -28,16 +47,19 @@ export function HeroSection() {
 
         <div className="hero-bottom-grid">
           <div className="hero-stat-box">
-            Help us plant <br />
-            1 million trees in Pune over the <br />
-            next 5 years.
+            {statLines.map((line, idx) => (
+              <span key={idx}>
+                {line}
+                {idx < statLines.length - 1 && <br />}
+              </span>
+            ))}
           </div>
           <div className="hero-cta-box">
             <p>
-              Join our campaign to plant over <strong>10 Million trees</strong>. We are on a journey to save the forest, Join us!
+              {t.hero.body}
             </p>
             <Link href="/register" className="plant-btn">
-              Join the Drive
+              {t.hero.primary}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>

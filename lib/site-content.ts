@@ -11,14 +11,13 @@ export const content = {
       register: "Register"
     },
     hero: {
-      titleLine1: "PLANT THE FUTURE",
+      titleLine1: "SOW A FUTURE",
       titleLine2Start: "ONE ",
       titleHighlight: "TREE",
       titleLine2End: " AT A TIME",
-      body: "Join our campaign to plant trees across Pune neighborhoods. We are on a journey to make Pune greener, Join us!",
-      primary: "Enroll upcoming tree plantation drive",
-      secondary: "See Pune need",
-      stat: "WE ARE STARTING WITH\nMAHADJI SHINDE NAGAR\nFOR A GREENER PUNE"
+      body: "Join our campaign to plant over 10 Million trees. We are on a journey to save the forest, Join us!",
+      primary: "Join the Drive",
+      stat: "Help us plant\n1 million trees in Pune over the\nnext 5 years."
     },
     mission: {
       eyebrow: "Why GreenPune",
@@ -129,10 +128,9 @@ export const content = {
       titleLine2Start: "एक ",
       titleHighlight: "वृक्ष",
       titleLine2End: " एका वेळी",
-      body: "पुण्यातील प्रत्येक परिसर हरित करण्यासाठी आमच्या मोहिमेत सहभागी व्हा!",
-      primary: "वृक्ष लावा",
-      secondary: "पुण्याची गरज पहा",
-      stat: "सुरुवात\nमहादजी शिंदे नगर\nहरित पुण्यासाठी"
+      body: "पुण्यात १० लाखांपेक्षा जास्त झाडे लावण्याच्या मोहिमेत सहभागी व्हा. आम्ही जंगले वाचवण्याच्या प्रवासावर आहोत, आमच्याशी जोडा!",
+      primary: "मोहिमेत सहभागी व्हा",
+      stat: "पुण्यात पुढील ५ वर्षात\n१० लाख झाडे लावण्यासाठी\nआम्हाला मदत करा."
     },
     mission: {
       eyebrow: "ग्रीनपुणे का",

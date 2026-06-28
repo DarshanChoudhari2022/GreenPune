@@ -28,8 +28,8 @@ export function HomeClient({ events }: { events: EventItem[] }) {
     <>
       <ScrollProgress />
       <main className={`site-shell lang-${lang}`}>
-        <Topbar />
-        <HeroSection />
+        <Topbar lang={lang} setLang={setLang} variant="home" />
+        <HeroSection t={t} />
         <MissionSection t={t} />
         <EventSection t={t} lang={lang} event={currentEvent} />
         <InsightsSection t={t} />

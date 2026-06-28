@@ -1226,6 +1226,7 @@ footer a:hover {
     font-size: 13px;
     padding: 14px 20px;
     justify-content: center;
+    transform: none !important;
   }
 
   .floating-register svg {
@@ -2373,5 +2374,31 @@ footer a:hover {
     flex-direction: column;
     text-align: center;
   }
+}
+
+/* ─── Devanagari (Marathi) Professional Spacing ─── */
+.lang-mr {
+  line-height: 1.65;
+}
+
+.lang-mr h1,
+.lang-mr h2,
+.lang-mr h3,
+.lang-mr .hero-heading,
+.lang-mr .hero-stat-box,
+.lang-mr .brand-text {
+  line-height: 1.35 !important;
+  letter-spacing: normal !important;
+}
+
+.lang-mr input,
+.lang-mr textarea,
+.lang-mr button,
+.lang-mr select {
+  line-height: 1.5;
+}
+
+.lang-mr .hero-heading {
+  font-weight: 800; /* slightly lighter than 900 for Devanagari legibility */
 }
 

@@ -28,29 +28,27 @@ export function Topbar({ lang, setLang, variant = "home" }: TopbarProps) {
           <a href="/about#forest" className="nav-pill nav-pill-solid">FOREST</a>
         </div>
       ) : (
-        <div className="topbar-center">
-          {setLang && lang && (
-            <div className="lang-switcher-pills" style={{ display: "flex", gap: "6px" }}>
-              <button
-                type="button"
-                onClick={() => setLang("en")}
-                className={`nav-pill ${lang === "en" ? "nav-pill-solid" : "nav-pill-outline"}`}
-              >
-                ENGLISH
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang("mr")}
-                className={`nav-pill ${lang === "mr" ? "nav-pill-solid" : "nav-pill-outline"}`}
-              >
-                मराठी
-              </button>
-            </div>
-          )}
-        </div>
+        <div className="topbar-center" />
       )}
 
-      <div className="topbar-right">
+      <div className="topbar-right" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        {setLang && lang && (
+          <button
+            type="button"
+            onClick={() => setLang(lang === "en" ? "mr" : "en")}
+            className="nav-about"
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              fontFamily: "inherit",
+              textTransform: "uppercase"
+            }}
+          >
+            🌐 {lang === "en" ? "मराठी" : "ENGLISH"}
+          </button>
+        )}
         <a href={variant === "home" ? "/about" : "/"} className="nav-about">
           {variant === "home" ? "ABOUT" : "HOME"}
         </a>
