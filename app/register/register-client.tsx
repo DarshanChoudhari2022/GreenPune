@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { Topbar } from "@/app/components/Topbar";
-import { currentEvent } from "@/lib/events";
+import { type EventItem } from "@/lib/events";
 import { content, type Language } from "@/lib/site-content";
 import { RegisterForm } from "../register-form";
 
-export function RegisterClient() {
+export function RegisterClient({ currentEvent }: { currentEvent: EventItem }) {
   const [lang, setLang] = useState<Language>("mr");
   const t = content[lang];
   const eventTitle = lang === "mr" ? currentEvent.titleDevanagari : currentEvent.titleEnglish;

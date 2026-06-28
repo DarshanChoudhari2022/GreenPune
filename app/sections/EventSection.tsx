@@ -1,7 +1,7 @@
 "use client";
 
 import { Section } from "@/app/components/Section";
-import { currentEvent } from "@/lib/events";
+import { type EventItem } from "@/lib/events";
 import { type Language } from "@/lib/site-content";
 
 interface EventSectionProps {
@@ -15,11 +15,12 @@ interface EventSectionProps {
     };
   };
   lang: Language;
+  event: EventItem;
 }
 
-export function EventSection({ t, lang }: EventSectionProps) {
-  const eventTitle = lang === "mr" ? currentEvent.titleDevanagari : currentEvent.titleEnglish;
-  const eventSummary = lang === "mr" ? currentEvent.summaryMarathi : currentEvent.summary;
+export function EventSection({ t, lang, event }: EventSectionProps) {
+  const eventTitle = lang === "mr" ? event.titleDevanagari : event.titleEnglish;
+  const eventSummary = lang === "mr" ? event.summaryMarathi : event.summary;
 
   return (
     <Section id="events" className="event-slide" theme="green">
@@ -28,20 +29,20 @@ export function EventSection({ t, lang }: EventSectionProps) {
           <p className="eyebrow">{t.event.eyebrow}</p>
           <h2>{eventTitle}</h2>
           <p className="organizer">
-            {lang === "mr" ? currentEvent.organizer : currentEvent.organizerEnglish}
+            {lang === "mr" ? event.organizer : event.organizerEnglish}
           </p>
           <dl className="event-details">
             <div>
               <dt>{t.event.date}</dt>
-              <dd>{lang === "mr" ? currentEvent.dateLabel : currentEvent.dateLabelEnglish}</dd>
+              <dd>{lang === "mr" ? event.dateLabel : event.dateLabelEnglish}</dd>
             </div>
             <div>
               <dt>{t.event.location}</dt>
-              <dd>{lang === "mr" ? currentEvent.location : currentEvent.locationEnglish}</dd>
+              <dd>{lang === "mr" ? event.location : event.locationEnglish}</dd>
             </div>
             <div>
               <dt>{t.event.theme}</dt>
-              <dd>{lang === "mr" ? currentEvent.theme : currentEvent.themeEnglish}</dd>
+              <dd>{lang === "mr" ? event.theme : event.themeEnglish}</dd>
             </div>
           </dl>
           <p>{eventSummary}</p>

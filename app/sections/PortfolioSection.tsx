@@ -1,7 +1,7 @@
 "use client";
 
 import { Section } from "@/app/components/Section";
-import { events } from "@/lib/events";
+import { type EventItem } from "@/lib/events";
 import { type Language } from "@/lib/site-content";
 
 interface PortfolioSectionProps {
@@ -14,9 +14,10 @@ interface PortfolioSectionProps {
     };
   };
   lang: Language;
+  events: EventItem[];
 }
 
-export function PortfolioSection({ t, lang }: PortfolioSectionProps) {
+export function PortfolioSection({ t, lang, events }: PortfolioSectionProps) {
   return (
     <Section className="portfolio-slide" theme="light">
       <div className="portfolio-section">

@@ -9,11 +9,13 @@ import { EventSection } from "@/app/sections/EventSection";
 import { InsightsSection } from "@/app/sections/InsightsSection";
 import { PortfolioSection } from "@/app/sections/PortfolioSection";
 import { FooterSection } from "@/app/sections/FooterSection";
+import { type EventItem } from "@/lib/events";
 import { content, type Language } from "@/lib/site-content";
 
-export function HomeClient() {
+export function HomeClient({ events }: { events: EventItem[] }) {
   const [lang, setLang] = useState<Language>("mr");
   const t = content[lang];
+  const currentEvent = events.find((event) => event.status === "open") || events[0];
 
   useEffect(() => {
     document.documentElement.classList.add("ppt-mode");
@@ -29,9 +31,9 @@ export function HomeClient() {
         <Topbar lang={lang} setLang={setLang} t={t} />
         <HeroSection t={t} lang={lang} />
         <MissionSection t={t} />
-        <EventSection t={t} lang={lang} />
+        <EventSection t={t} lang={lang} event={currentEvent} />
         <InsightsSection t={t} />
-        <PortfolioSection t={t} lang={lang} />
+        <PortfolioSection t={t} lang={lang} events={events} />
         <FooterSection t={t} />
 
         <a className="floating-register" href="/register" aria-label="Open registration form">
