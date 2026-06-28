@@ -1145,6 +1145,170 @@ footer a:hover {
 .delay-4 { animation-delay: 0.4s; }
 .delay-5 { animation-delay: 0.5s; }
 
+/* ─── Mobile (max-width: 639px) ─── */
+@media (max-width: 639px) {
+  /* Topbar: compact layout */
+  .topbar {
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .brand-text {
+    font-size: 13px;
+    gap: 4px;
+  }
+
+  .brand-text .drop {
+    font-size: 15px;
+  }
+
+  /* Hide the SAVE THE: OCEAN FOREST pills on mobile */
+  .topbar-center {
+    display: none;
+  }
+
+  .nav-about {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0;
+    background: none;
+    border: none;
+  }
+
+  /* Hero: tighten up */
+  .hero-inner {
+    padding-top: 80px;
+  }
+
+  .hero-heading {
+    font-size: clamp(32px, 9.5vw, 52px);
+    padding: 0 8px;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-tree {
+    margin-top: 10px;
+    flex: none;
+    height: auto;
+  }
+
+  .tree-img {
+    max-height: 32vh;
+    width: auto;
+  }
+
+  /* Hero bottom: stack vertically, hide CTA box (floating register handles it) */
+  .hero-bottom-grid {
+    padding: 0 14px 14px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .hero-cta-box {
+    display: none;
+  }
+
+  .hero-stat-box {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1.7;
+  }
+
+  /* Floating register: full-width at bottom */
+  .floating-register {
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    width: auto;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    padding: 14px 20px;
+    justify-content: center;
+  }
+
+  .floating-register svg {
+    display: none;
+  }
+
+  /* Slide inner padding */
+  .slide-inner {
+    padding: 60px 16px;
+  }
+
+  .hero-slide .slide-inner {
+    padding-top: 80px;
+  }
+
+  /* Section headings */
+  .section-heading {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  /* Mission stats */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Event section */
+  .event-section {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  /* Help grid */
+  .help-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Insights / projection */
+  .projection-stage {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Portfolio */
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer */
+  .footer-content {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  /* Register page */
+  .register-hero {
+    padding-top: 100px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .register-card {
+    padding: 24px 16px;
+  }
+
+  /* Nav pills for register page */
+  .lang-switcher-pills {
+    flex-wrap: wrap;
+  }
+}
+
+/* ─── Very small phones (max-width: 380px) ─── */
+@media (max-width: 380px) {
+  .hero-heading {
+    font-size: clamp(28px, 10vw, 40px);
+  }
+
+  .brand-text {
+    font-size: 12px;
+  }
+}
+
 /* ─── Tablet+ (min-width: 640px) ─── */
 @media (min-width: 640px) {
   .topbar {
@@ -1227,6 +1391,7 @@ footer a:hover {
     padding-right: 24px;
   }
 }
+
 
 /* ─── Desktop (min-width: 820px) ─── */
 @media (min-width: 820px) {
