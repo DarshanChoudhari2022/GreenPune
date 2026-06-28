@@ -28,7 +28,8 @@ export const content = {
     stats: [
       ["40%", "Tree canopy target often used by urban forest planners"],
       ["9 m2", "Minimum urban green space per person benchmark"],
-      ["2026", "First GreenPune event year"]
+      ["2026", "First GreenPune event year"],
+      ["80%", "Survival rate target with 3-year post-plantation care"]
     ],
     event: {
       eyebrow: "Current Event",
@@ -153,7 +154,8 @@ export const content = {
     stats: [
       ["४०%", "शहरी वन नियोजनात वापरला जाणारा कॅनोपी उद्देश"],
       ["९ चौ.मी.", "प्रति नागरिक किमान हरित जागेचा बेंचमार्क"],
-      ["२०२६", "पहिले ग्रीनपुणे कार्यक्रम वर्ष"]
+      ["२०२६", "पहिले ग्रीनपुणे कार्यक्रम वर्ष"],
+      ["८०%", "३ वर्षांच्या देखभालीसह रोपे जगवण्याचे लक्ष्य"]
     ],
     event: {
       eyebrow: "सध्याचा कार्यक्रम",

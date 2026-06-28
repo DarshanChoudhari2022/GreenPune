@@ -2714,3 +2714,199 @@ footer a:hover {
   transform: scale(1.05);
 }
 
+/* ─── Registration Count Badge ─── */
+.reg-count-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--leaf-soft), #e8f5e1);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  margin-bottom: 20px;
+}
+
+.reg-count-number {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--leaf-dark);
+  line-height: 1;
+}
+
+.reg-count-label {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ─── Success Dialog Overlay ─── */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeInOverlay 0.25s ease;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.success-dialog {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: clamp(28px, 5vw, 44px);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.success-dialog h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.success-dialog p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.success-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--leaf-soft);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  margin-bottom: 20px;
+}
+
+.success-count strong {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--leaf-dark);
+}
+
+.success-count span {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.success-btn {
+  background: var(--leaf-dark);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 14px 36px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 100%;
+}
+
+.success-btn:hover {
+  background: var(--leaf);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13, 74, 26, 0.25);
+}
+
+/* ─── Professional Typography Scale ─── */
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.brand-text {
+  font-size: 17px;
+}
+
+.brand-text .drop {
+  font-size: 20px;
+}
+
+.nav-about {
+  font-size: 13px;
+}
+
+.eyebrow {
+  font-size: 12px;
+}
+
+.mission-body,
+.event-copy > p,
+.insight-copy p,
+.portfolio-section p,
+.register-card > p {
+  font-size: clamp(15px, 2vw, 17px);
+}
+
+.stats-grid strong {
+  font-size: clamp(30px, 6vw, 44px);
+}
+
+.stats-grid span {
+  font-size: 13px;
+}
+
+.help-grid p {
+  font-size: 14px;
+}
+
+.event-details dt {
+  font-size: 11px;
+}
+
+.event-details dd {
+  font-size: 15px;
+}
+
+.registration-form label > span,
+.registration-form legend {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.registration-form input,
+.registration-form textarea {
+  font-size: 15px;
+}
+
+.form-powered-by {
+  font-size: 11px;
+}
+
+footer p {
+  font-size: 14px;
+}
+
