@@ -1177,7 +1177,13 @@ footer a:hover {
   }
 
   /* Hero: tighten up */
+  .hero-slide {
+    height: auto;
+    min-height: 100vh;
+  }
+
   .hero-inner {
+    height: auto;
     padding-top: 80px;
   }
 
@@ -1200,7 +1206,7 @@ footer a:hover {
 
   /* Hero bottom: stack vertically, hide CTA box (floating register handles it) */
   .hero-bottom-grid {
-    padding: 0 14px 14px;
+    padding: 24px 14px 100px;
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
