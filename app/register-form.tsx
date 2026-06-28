@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import type { RegistrationInput } from "@/lib/registration";
 import type { content, Language } from "@/lib/site-content";
 import { type QuestionItem } from "@/lib/questions-store";
@@ -28,6 +28,7 @@ export function RegisterForm({
   const [pending, setPending] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [regCount, setRegCount] = useState<number | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   // Fetch live registration count on mount and after each successful registration
   const fetchCount = async () => {
@@ -50,45 +51,69 @@ export function RegisterForm({
     setState({});
     setShowSuccess(false);
 
-    const formData = new FormData(event.currentTarget);
-    const answers: Record<string, string> = {};
+    // Capture the form element immediately before any await
+    const form = formRef.current;
 
-    questions.forEach((q) => {
-      answers[q.id] = String(formData.get(`answers_${q.id}`) || "");
-    });
+    try {
+      const formData = new FormData(event.currentTarget);
+      const answers: Record<string, string> = {};
 
-    const payload = {
-      eventId,
-      lang,
-      name: String(formData.get("name") || ""),
-      phoneCountryCode: String(formData.get("phoneCountryCode") || ""),
-      phone: String(formData.get("phone") || ""),
-      address: String(formData.get("address") || ""),
-      answers
-    };
+      questions.forEach((q) => {
+        answers[q.id] = String(formData.get(`answers_${q.id}`) || "");
+      });
 
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+      const payload = {
+        eventId,
+        lang,
+        name: String(formData.get("name") || ""),
+        phoneCountryCode: String(formData.get("phoneCountryCode") || ""),
+        phone: String(formData.get("phone") || ""),
+        address: String(formData.get("address") || ""),
+        answers
+      };
 
-    const result = (await response.json()) as RegisterState;
+      // Add a 15-second timeout to prevent hanging forever
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
 
-    if (!response.ok) {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeout);
+
+      const result = (await response.json()) as RegisterState;
+
+      if (!response.ok) {
+        setState({
+          ok: false,
+          message: result.message || (lang === "mr" ? "कृपया त्रुटी दुरुस्त करा." : "Please correct the errors."),
+          errors: result.errors
+        });
+      } else {
+        // Reset form using the ref (safe after await)
+        if (form) form.reset();
+        setState({ ok: true, message: copy.success });
+        setShowSuccess(true);
+        // Fire-and-forget: don't block success UI for count refresh
+        fetchCount();
+      }
+    } catch (err: any) {
+      // Handle network errors, timeouts, JSON parse failures
+      const isTimeout = err?.name === "AbortError";
       setState({
         ok: false,
-        message: result.message || (lang === "mr" ? "कृपया त्रुटी दुरुस्त करा." : "Please correct the errors."),
-        errors: result.errors
+        message: isTimeout
+          ? (lang === "mr" ? "सर्व्हर प्रतिसाद देत नाही. कृपया पुन्हा प्रयत्न करा." : "Server not responding. Please try again.")
+          : (lang === "mr" ? "नोंदणी जतन करता आली नाही. कृपया पुन्हा प्रयत्न करा." : "Could not save registration. Please try again.")
       });
-    } else {
-      event.currentTarget.reset();
-      setState({ ok: true, message: copy.success });
-      setShowSuccess(true);
-      fetchCount(); // refresh count after success
+    } finally {
+      // ALWAYS re-enable the button, no matter what
+      setPending(false);
     }
-
-    setPending(false);
   }
 
   const successTitle = lang === "mr" ? "🎉 नोंदणी यशस्वी!" : "🎉 Registration Successful!";
@@ -108,7 +133,7 @@ export function RegisterForm({
         </div>
       )}
 
-      <form className="registration-form" id="register" onSubmit={handleSubmit}>
+      <form className="registration-form" id="register" ref={formRef} onSubmit={handleSubmit}>
         <input name="eventId" type="hidden" value={eventId} />
 
         <label>

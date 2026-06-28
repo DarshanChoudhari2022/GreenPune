@@ -21,8 +21,66 @@ async function saveLocal(record: any) {
   await fs.writeFile(fallbackPath, JSON.stringify(existing, null, 2));
 }
 
+/**
+ * Fast duplicate check — queries Supabase with a targeted filter instead of
+ * pulling every registration into memory.  Falls back to the full-list approach
+ * only when Supabase is not configured.
+ */
+async function isDuplicatePhone(
+  eventId: string,
+  phone: string
+): Promise<boolean> {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const table = process.env.SUPABASE_TABLE || "event_registrations";
+
+  if (supabaseUrl && supabaseKey) {
+    try {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      const { count, error } = await supabase
+        .from(table)
+        .select("id", { count: "exact", head: true })
+        .eq("event_id", eventId)
+        .eq("phone", phone);
+
+      if (!error && typeof count === "number") {
+        return count > 0;
+      }
+      if (error) {
+        console.error("Supabase duplicate-check error (non-blocking):", error.message);
+      }
+      return false;
+    } catch (err: any) {
+      console.error("Duplicate check exception (non-blocking):", err.message || err);
+      return false;
+    }
+  }
+
+  // Local fallback: scan the JSON file
+  try {
+    const existing = await listRegistrations();
+    return existing.some(
+      (r) =>
+        r.eventId === eventId &&
+        r.phone.replace(/\s+/g, "") === phone
+    );
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
-  const payload = (await request.json()) as Partial<RegistrationInput>;
+  let payload: Partial<RegistrationInput>;
+
+  try {
+    payload = (await request.json()) as Partial<RegistrationInput>;
+  } catch {
+    return NextResponse.json(
+      { ok: false, message: "Invalid request body." },
+      { status: 400 }
+    );
+  }
+
   const validation = await validateRegistration(payload, payload.lang || "mr");
 
   if (!validation.ok) {
@@ -38,29 +96,18 @@ export async function POST(request: Request) {
   const trimmedName = (payload.name || "").trim();
   const eventId = payload.eventId || "";
 
-  // Duplicate Check: Check if name + phone already exists for this event
-  try {
-    const existing = await listRegistrations();
-    const isDuplicate = existing.some(
-      (r) =>
-        r.eventId === eventId &&
-        r.name.trim().toLowerCase() === trimmedName.toLowerCase() &&
-        r.phone.replace(/\s+/g, "") === formattedPhone
+  // Fast duplicate check — phone number only
+  const duplicate = await isDuplicatePhone(eventId, formattedPhone);
+  if (duplicate) {
+    return NextResponse.json(
+      {
+        ok: false,
+        message: payload.lang === "mr"
+          ? "या मोबाईल क्रमांकाने आधीच नोंदणी झाली आहे. कृपया दुसरा मोबाईल क्रमांक वापरा."
+          : "This mobile number is already registered. Please use a different mobile number."
+      },
+      { status: 400 }
     );
-
-    if (isDuplicate) {
-      return NextResponse.json(
-        {
-          ok: false,
-          message: payload.lang === "mr"
-            ? "या नावाने आणि मोबाईल क्रमांकाने आधीच नोंदणी केली आहे."
-            : "A registration with this name and mobile number already exists for this event."
-        },
-        { status: 400 }
-      );
-    }
-  } catch (err: any) {
-    console.error("Duplicate check failed:", err);
   }
 
   // Extract canBringTree for backward compatibility with older entries
@@ -133,5 +180,3 @@ export async function GET() {
     return NextResponse.json({ ok: false, count: 0 }, { status: 500 });
   }
 }
-
-
