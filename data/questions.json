@@ -1,0 +1,11 @@
+[
+  {
+    "id": "canBringTree",
+    "type": "yes_no",
+    "labelEnglish": "Can you bring your own tree sapling?",
+    "labelMarathi": "आपण आपले वृक्ष स्वतः आणू शकता का?",
+    "placeholderEnglish": "",
+    "placeholderMarathi": "",
+    "required": true
+  }
+]

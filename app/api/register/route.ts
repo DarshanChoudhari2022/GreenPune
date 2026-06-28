@@ -6,7 +6,7 @@ import { validateRegistration, type RegistrationInput } from "@/lib/registration
 
 const fallbackPath = path.join(process.cwd(), "data", "registrations.json");
 
-async function saveLocal(record: RegistrationInput & { createdAt: string }) {
+async function saveLocal(record: any) {
   await fs.mkdir(path.dirname(fallbackPath), { recursive: true });
 
   let existing: unknown[] = [];
@@ -22,7 +22,7 @@ async function saveLocal(record: RegistrationInput & { createdAt: string }) {
 
 export async function POST(request: Request) {
   const payload = (await request.json()) as Partial<RegistrationInput>;
-  const validation = validateRegistration(payload);
+  const validation = await validateRegistration(payload, payload.lang || "mr");
 
   if (!validation.ok) {
     return NextResponse.json(
@@ -31,12 +31,20 @@ export async function POST(request: Request) {
     );
   }
 
+  // Combine country code and 10-digit phone number
+  const cleanPhone = payload.phone!.replace(/\s+/g, "");
+  const formattedPhone = `+91${cleanPhone}`;
+
+  // Extract canBringTree for backward compatibility with older entries
+  const canBringTree = payload.answers?.canBringTree === "yes" ? "yes" : "no";
+
   const record = {
     eventId: payload.eventId!,
     name: payload.name!.trim(),
-    phone: payload.phone!.replace(/\s+/g, ""),
+    phone: formattedPhone,
     address: payload.address!.trim(),
-    canBringTree: payload.canBringTree!,
+    canBringTree,
+    answers: payload.answers || {},
     createdAt: new Date().toISOString()
   };
 
@@ -67,3 +75,4 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ ok: true });
 }
+

@@ -2,8 +2,10 @@ import { redirect } from "next/navigation";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getCurrentEvent, listEvents } from "@/lib/event-store";
 import { listRegistrations } from "@/lib/registration-store";
+import { listQuestions } from "@/lib/questions-store";
 import { logoutAdmin } from "./actions";
 import { EventForm } from "./event-form";
+import { QuestionsEditor } from "./questions-editor";
 import { type EventItem } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
@@ -46,13 +48,14 @@ export default async function AdminPage() {
     redirect("/admin/login");
   }
 
-  const [registrations, events, currentEvent] = await Promise.all([
+  const [registrations, events, currentEvent, questions] = await Promise.all([
     listRegistrations(),
     listEvents(),
-    getCurrentEvent()
+    getCurrentEvent(),
+    listQuestions()
   ]);
 
-  const bringTreeCount = registrations.filter((record) => record.canBringTree === "yes").length;
+  const bringTreeCount = registrations.filter((record) => record.canBringTree === "yes" || record.answers?.canBringTree === "yes").length;
 
   return (
     <main className="admin-page">
@@ -107,6 +110,9 @@ export default async function AdminPage() {
         <EventForm event={blankEvent} />
       </section>
 
+      {/* Dynamic Questions Editor Panel */}
+      <QuestionsEditor initialQuestions={questions} />
+
       <section className="admin-panel">
         <div className="admin-panel-header">
           <div>
@@ -121,8 +127,8 @@ export default async function AdminPage() {
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Address</th>
-                <th>Sapling</th>
                 <th>Event</th>
+                <th>Custom Answers</th>
                 <th>Received</th>
               </tr>
             </thead>
@@ -135,10 +141,18 @@ export default async function AdminPage() {
                 registrations.map((record, index) => (
                   <tr key={record.id || `${record.phone}-${index}`}>
                     <td>{record.name}</td>
-                    <td>{record.phone}</td>
+                    <td><code>{record.phone}</code></td>
                     <td>{record.address}</td>
-                    <td>{record.canBringTree === "yes" ? "Yes" : "No"}</td>
-                    <td>{record.eventId}</td>
+                    <td><code>{record.eventId}</code></td>
+                    <td>
+                      <div style={{ fontSize: "12px", display: "flex", flexDirection: "column", gap: "4px" }}>
+                        {Object.entries(record.answers || {}).map(([key, value]) => (
+                          <span key={key}>
+                            <strong>{key}:</strong> {value}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
                     <td>{formatDate(record.createdAt)}</td>
                   </tr>
                 ))
@@ -150,3 +164,4 @@ export default async function AdminPage() {
     </main>
   );
 }
+

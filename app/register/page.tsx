@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { RegisterClient } from "./register-client";
 import { getCurrentEvent } from "@/lib/event-store";
+import { listQuestions } from "@/lib/questions-store";
 
 export const metadata: Metadata = {
   title: "Register | GreenPune Events",
@@ -10,7 +11,10 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function RegisterPage() {
-  const currentEvent = await getCurrentEvent();
+  const [currentEvent, questions] = await Promise.all([
+    getCurrentEvent(),
+    listQuestions()
+  ]);
 
-  return <RegisterClient currentEvent={currentEvent} />;
+  return <RegisterClient currentEvent={currentEvent} questions={questions} />;
 }

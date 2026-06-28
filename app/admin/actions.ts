@@ -68,3 +68,81 @@ export async function saveEvent(
     message: "Event saved and published on the site."
   };
 }
+
+export async function saveQuestionAction(
+  _previousState: any,
+  formData: FormData
+) {
+  if (!(await isAdminAuthenticated())) {
+    redirect("/admin/login");
+  }
+
+  // Generate ID if not specified or clean it
+  let id = String(formData.get("id") || "").trim();
+  if (!id) {
+    id = "q_" + Date.now();
+  } else {
+    id = id.toLowerCase().replace(/[^a-z0-9_]/g, "");
+  }
+
+  const type = String(formData.get("type") || "text") as "text" | "textarea" | "yes_no";
+  const labelEnglish = String(formData.get("labelEnglish") || "").trim();
+  const labelMarathi = String(formData.get("labelMarathi") || "").trim();
+  const placeholderEnglish = String(formData.get("placeholderEnglish") || "").trim();
+  const placeholderMarathi = String(formData.get("placeholderMarathi") || "").trim();
+  const required = formData.get("required") === "true" || formData.get("required") === "on";
+
+  if (!labelEnglish || !labelMarathi) {
+    return { ok: false, message: "Labels are required in both English and Marathi." };
+  }
+
+  const { addQuestion, updateQuestion, listQuestions } = await import("@/lib/questions-store");
+  const list = await listQuestions();
+  const exists = list.some(q => q.id === id);
+
+  const question = {
+    id,
+    type,
+    labelEnglish,
+    labelMarathi,
+    placeholderEnglish,
+    placeholderMarathi,
+    required
+  };
+
+  if (exists) {
+    await updateQuestion(question);
+  } else {
+    await addQuestion(question);
+  }
+
+  revalidatePath("/");
+  revalidatePath("/register");
+  revalidatePath("/admin");
+
+  return { ok: true, message: "Question saved successfully." };
+}
+
+export async function deleteQuestionAction(
+  _previousState: any,
+  formData: FormData
+) {
+  if (!(await isAdminAuthenticated())) {
+    redirect("/admin/login");
+  }
+
+  const id = String(formData.get("id") || "").trim();
+  if (!id) {
+    return { ok: false, message: "Question ID is required." };
+  }
+
+  const { deleteQuestion } = await import("@/lib/questions-store");
+  await deleteQuestion(id);
+
+  revalidatePath("/");
+  revalidatePath("/register");
+  revalidatePath("/admin");
+
+  return { ok: true, message: "Question deleted successfully." };
+}
+

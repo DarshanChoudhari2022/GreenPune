@@ -1,60 +1,59 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { type Language } from "@/lib/site-content";
-import { LanguageToggle } from "./LanguageToggle";
 
 interface TopbarProps {
-  lang: Language;
-  setLang: (lang: Language) => void;
-  t: {
-    nav: {
-      events: string;
-      mission: string;
-      insights: string;
-      contact: string;
-      join: string;
-      register: string;
-    };
-  };
+  lang?: Language;
+  setLang?: (lang: Language) => void;
   variant?: "home" | "register";
 }
 
-export function Topbar({ lang, setLang, t, variant = "home" }: TopbarProps) {
-  const isRegister = variant === "register";
-
+export function Topbar({ lang, setLang, variant = "home" }: TopbarProps) {
   return (
-    <nav
-      className={`topbar ${isRegister ? "register-topbar" : ""}`}
-      aria-label="Primary navigation"
-      data-pinned
-    >
-      <Link className="brand" href="/" aria-label="GreenPune home">
-        <Image
-          alt="GreenPune"
-          className="brand-logo"
-          height={42}
-          priority
-          src="/images/greenpune-logo.png"
-          width={176}
-        />
-      </Link>
+    <nav className="topbar">
+      <div className="topbar-left">
+        <a href="/" className="brand-text">
+          <span className="drop">☘️</span>
+          <div className="brand-stack">
+            <span className="brand-bold">GREEN</span>
+            <span className="brand-light">PUNE</span>
+          </div>
+        </a>
+      </div>
 
-      {!isRegister && (
-        <div className="nav-links">
-          <a href="#events">{t.nav.events}</a>
-          <a href="#mission">{t.nav.mission}</a>
-          <a href="#insights">{t.nav.insights}</a>
-          <a href="#contact">{t.nav.contact}</a>
+      {variant === "home" ? (
+        <div className="topbar-center">
+          <span className="save-the-text">SAVE THE:</span>
+          <a href="/about#ocean" className="nav-pill nav-pill-outline">OCEAN</a>
+          <a href="/about#forest" className="nav-pill nav-pill-solid">FOREST</a>
+        </div>
+      ) : (
+        <div className="topbar-center">
+          {setLang && lang && (
+            <div className="lang-switcher-pills" style={{ display: "flex", gap: "6px" }}>
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                className={`nav-pill ${lang === "en" ? "nav-pill-solid" : "nav-pill-outline"}`}
+              >
+                ENGLISH
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang("mr")}
+                className={`nav-pill ${lang === "mr" ? "nav-pill-solid" : "nav-pill-outline"}`}
+              >
+                मराठी
+              </button>
+            </div>
+          )}
         </div>
       )}
 
-      <div className="nav-actions">
-        <LanguageToggle lang={lang} setLang={setLang} />
-        <Link className="nav-cta" href={isRegister ? "/" : "/register"}>
-          {isRegister ? "Home" : t.nav.join}
-        </Link>
+      <div className="topbar-right">
+        <a href={variant === "home" ? "/about" : "/"} className="nav-about">
+          {variant === "home" ? "ABOUT" : "HOME"}
+        </a>
       </div>
     </nav>
   );

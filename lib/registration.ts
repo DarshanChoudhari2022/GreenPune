@@ -1,29 +1,63 @@
+import { listQuestions } from "./questions-store";
+
 export type RegistrationInput = {
   eventId: string;
+  lang: "en" | "mr";
   name: string;
+  phoneCountryCode: string;
   phone: string;
   address: string;
-  canBringTree: "yes" | "no";
+  answers: Record<string, string>;
 };
 
-export function validateRegistration(input: Partial<RegistrationInput>) {
-  const errors: Partial<Record<keyof RegistrationInput, string>> = {};
+export async function validateRegistration(
+  input: Partial<RegistrationInput>,
+  preferredLang: "en" | "mr" = "mr"
+) {
+  const errors: Record<string, string> = {};
+  const isMarathi = preferredLang === "mr";
 
   if (!input.name || input.name.trim().length < 2) {
-    errors.name = "कृपया योग्य नाव टाका.";
+    errors.name = isMarathi ? "कृपया योग्य नाव टाका." : "Please enter a valid name.";
+  }
+
+  const countryCode = input.phoneCountryCode?.trim().replace(/\+/g, "") ?? "";
+  if (countryCode !== "91") {
+    errors.phoneCountryCode = isMarathi ? "देश कोड +91 असावा." : "Country code must be +91.";
   }
 
   const phone = input.phone?.replace(/\s+/g, "") ?? "";
   if (!/^[6-9]\d{9}$/.test(phone)) {
-    errors.phone = "कृपया १० अंकी संपर्क क्रमांक टाका.";
+    errors.phone = isMarathi
+      ? "कृपया १० अंकी वैध संपर्क क्रमांक टाका."
+      : "Please enter a valid 10-digit mobile number.";
   }
 
   if (!input.address || input.address.trim().length < 6) {
-    errors.address = "कृपया पूर्ण पत्ता टाका.";
+    errors.address = isMarathi ? "कृपया पूर्ण पत्ता टाका." : "Please enter your complete address.";
   }
 
-  if (input.canBringTree !== "yes" && input.canBringTree !== "no") {
-    errors.canBringTree = "कृपया एक पर्याय निवडा.";
+  // Validate custom questions
+  const questions = await listQuestions();
+  const answers = input.answers || {};
+
+  for (const question of questions) {
+    const value = answers[question.id];
+    if (question.required) {
+      if (question.type === "yes_no") {
+        if (value !== "yes" && value !== "no") {
+          errors[`answers_${question.id}`] = isMarathi
+            ? "कृपया एक पर्याय निवडा."
+            : "Please select an option.";
+        }
+      } else {
+        if (!value || value.trim().length === 0) {
+          errors[`answers_${question.id}`] = isMarathi
+            ? "कृपया विचारलेली माहिती भरा."
+            : "Please fill out this field.";
+        }
+      }
+    }
   }
 
   return {
@@ -31,3 +65,4 @@ export function validateRegistration(input: Partial<RegistrationInput>) {
     errors
   };
 }
+

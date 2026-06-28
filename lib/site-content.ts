@@ -11,12 +11,14 @@ export const content = {
       register: "Register"
     },
     hero: {
-      eyebrow: "GreenPune Community Portfolio",
-      title: "Planting for a cooler, greener Pune.",
-      body:
-        "A mobile-first civic platform for tree plantation events, resident registrations, and transparent neighborhood action.",
-      primary: "Register for event",
-      secondary: "See Pune need"
+      titleLine1: "PLANT THE FUTURE",
+      titleLine2Start: "ONE ",
+      titleHighlight: "TREE",
+      titleLine2End: " AT A TIME",
+      body: "Join our campaign to plant trees across Pune neighborhoods. We are on a journey to make Pune greener, Join us!",
+      primary: "Enroll upcoming tree plantation drive",
+      secondary: "See Pune need",
+      stat: "WE ARE STARTING WITH\nMAHADJI SHINDE NAGAR\nFOR A GREENER PUNE"
     },
     mission: {
       eyebrow: "Why GreenPune",
@@ -123,12 +125,14 @@ export const content = {
       register: "नोंदणी"
     },
     hero: {
-      eyebrow: "ग्रीनपुणे सामुदायिक पोर्टफोलिओ",
-      title: "थंड, हरित पुण्यासाठी वृक्षारोपण.",
-      body:
-        "वृक्षारोपण कार्यक्रम, नागरिक नोंदणी आणि स्थानिक कृती यासाठी तयार केलेले मोबाइल-फर्स्ट व्यासपीठ.",
-      primary: "कार्यक्रमासाठी नोंदणी",
-      secondary: "पुण्याची गरज पहा"
+      titleLine1: "भविष्य पेरा",
+      titleLine2Start: "एक ",
+      titleHighlight: "वृक्ष",
+      titleLine2End: " एका वेळी",
+      body: "पुण्यातील प्रत्येक परिसर हरित करण्यासाठी आमच्या मोहिमेत सहभागी व्हा!",
+      primary: "वृक्ष लावा",
+      secondary: "पुण्याची गरज पहा",
+      stat: "सुरुवात\nमहादजी शिंदे नगर\nहरित पुण्यासाठी"
     },
     mission: {
       eyebrow: "ग्रीनपुणे का",

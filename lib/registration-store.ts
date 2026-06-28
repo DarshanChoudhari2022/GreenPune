@@ -10,7 +10,9 @@ export type RegistrationRecord = {
   address: string;
   canBringTree: "yes" | "no";
   createdAt: string;
+  answers?: Record<string, string>;
 };
+
 
 const fallbackPath = path.join(process.cwd(), "data", "registrations.json");
 
@@ -30,22 +32,32 @@ export async function listRegistrations(): Promise<RegistrationRecord[]> {
       throw new Error(error.message);
     }
 
-    return (data || []).map((record) => ({
-      id: record.id,
-      eventId: record.event_id,
-      name: record.name,
-      phone: record.phone,
-      address: record.address,
-      canBringTree: record.can_bring_tree ? "yes" : "no",
-      createdAt: record.created_at
-    }));
+    return (data || []).map((record) => {
+      const answers: Record<string, string> = {
+        canBringTree: record.can_bring_tree ? "yes" : "no"
+      };
+      return {
+        id: record.id,
+        eventId: record.event_id,
+        name: record.name,
+        phone: record.phone,
+        address: record.address,
+        canBringTree: record.can_bring_tree ? "yes" : "no",
+        createdAt: record.created_at,
+        answers
+      };
+    });
   }
 
   try {
     const raw = await fs.readFile(fallbackPath, "utf8");
     const records = JSON.parse(raw) as RegistrationRecord[];
-    return records.toReversed();
+    return records.map((record) => ({
+      ...record,
+      answers: record.answers || { canBringTree: record.canBringTree || "no" }
+    })).toReversed();
   } catch {
     return [];
   }
 }
+

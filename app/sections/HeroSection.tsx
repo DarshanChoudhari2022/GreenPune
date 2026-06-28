@@ -1,63 +1,51 @@
 "use client";
 
 import Image from "next/image";
-import { Section } from "@/app/components/Section";
-import { type Language } from "@/lib/site-content";
+import Link from "next/link";
 
-interface HeroSectionProps {
-  t: {
-    hero: {
-      eyebrow: string;
-      title: string;
-      body: string;
-      primary: string;
-      secondary: string;
-    };
-  };
-  lang: Language;
-}
-
-export function HeroSection({ t, lang }: HeroSectionProps) {
+export function HeroSection() {
   return (
-    <Section id="top" className="hero-slide" theme="light">
-      <div className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">{t.hero.eyebrow}</p>
-          <h1>{t.hero.title}</h1>
-          <p>{t.hero.body}</p>
-          <div className="hero-actions">
-            <a className="primary-action" href="/register">
-              {t.hero.primary}
-            </a>
-            <a className="secondary-action" href="#insights">
-              {t.hero.secondary}
-            </a>
+    <section className="hero-slide">
+      <div className="hero-inner">
+        <h1 className="hero-heading">
+          <div className="hero-line">SOW A FUTURE</div>
+          <div className="hero-line">
+            ONE <span className="text-leaf">TREE</span> AT A TIME
           </div>
+        </h1>
+
+        <div className="hero-tree">
+          <Image
+            alt="Lush green tree"
+            src="/images/hero-tree.png"
+            width={700}
+            height={800}
+            priority
+            quality={100}
+            className="tree-img"
+          />
         </div>
-        <div className="impact-visual">
-          <div className="impact-photo primary-photo">
-            <Image
-              alt="Community tree plantation in a green urban space"
-              fill
-              priority
-              sizes="(max-width: 900px) 92vw, 44vw"
-              src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=85"
-            />
+
+        <div className="hero-bottom-grid">
+          <div className="hero-stat-box">
+            Help us plant <br />
+            1 million trees in Pune over the <br />
+            next 5 years.
           </div>
-          <div className="impact-photo secondary-photo">
-            <Image
-              alt="Hands caring for a small sapling"
-              fill
-              sizes="(max-width: 900px) 48vw, 18vw"
-              src="https://images.unsplash.com/photo-1524602585632-a2a01c12307c?auto=format&fit=crop&w=800&q=85"
-            />
-          </div>
-          <div className="impact-meter">
-            <span>{lang === "mr" ? "ध्येय" : "Goal"}</span>
-            <strong>{lang === "mr" ? "सावली + जगवणे" : "Shade + Survival"}</strong>
+          <div className="hero-cta-box">
+            <p>
+              Join our campaign to plant over <strong>10 Million trees</strong>. We are on a journey to save the forest, Join us!
+            </p>
+            <Link href="/register" className="plant-btn">
+              Join the Drive
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </Link>
           </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

@@ -13,7 +13,7 @@ import { type EventItem } from "@/lib/events";
 import { content, type Language } from "@/lib/site-content";
 
 export function HomeClient({ events }: { events: EventItem[] }) {
-  const [lang, setLang] = useState<Language>("mr");
+  const [lang, setLang] = useState<Language>("en");
   const t = content[lang];
   const currentEvent = events.find((event) => event.status === "open") || events[0];
 
@@ -28,8 +28,8 @@ export function HomeClient({ events }: { events: EventItem[] }) {
     <>
       <ScrollProgress />
       <main className={`site-shell lang-${lang}`}>
-        <Topbar lang={lang} setLang={setLang} t={t} />
-        <HeroSection t={t} lang={lang} />
+        <Topbar />
+        <HeroSection />
         <MissionSection t={t} />
         <EventSection t={t} lang={lang} event={currentEvent} />
         <InsightsSection t={t} />

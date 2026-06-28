@@ -7,8 +7,13 @@ function getAdminPassword() {
 }
 
 function getSessionValue() {
-  return Buffer.from(`greenpune:${getAdminPassword()}`).toString("base64url");
+  const rawCreds = `greenpune:${getAdminPassword()}`;
+  if (typeof btoa === "function") {
+    return btoa(rawCreds).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  return Buffer.from(rawCreds).toString("base64url");
 }
+
 
 export async function isAdminAuthenticated() {
   const cookieStore = await cookies();

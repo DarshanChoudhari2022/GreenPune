@@ -18,15 +18,15 @@ interface InsightsSectionProps {
 export function InsightsSection({ t }: InsightsSectionProps) {
   return (
     <Section id="insights" className="insights-slide" theme="dark">
-      <div className="insights-section">
-        <div className="insight-copy">
+      <div className="insights-section fade-up delay-1">
+        <div className="insight-copy fade-up delay-2">
           <p className="eyebrow">{t.insights.eyebrow}</p>
           <h2>{t.insights.title}</h2>
           <p>{t.insights.intro}</p>
         </div>
-        <div className="projection-stage">
+        <div className="projection-stage fade-up delay-3">
           {t.insights.cards.map((card, index) => (
-            <article className="projection-card" key={card.title}>
+            <article className="projection-card fade-up" key={card.title} style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
               <span>0{index + 1}</span>
               <strong>{card.value}</strong>
               <h3>{card.title}</h3>
@@ -34,7 +34,7 @@ export function InsightsSection({ t }: InsightsSectionProps) {
             </article>
           ))}
         </div>
-        <div className="source-row">
+        <div className="source-row fade-up delay-4">
           <strong>{t.insights.sourcesTitle}</strong>
           {t.insights.sources.map((source) => (
             <a href={source.href} key={source.href} rel="noreferrer" target="_blank">
@@ -46,3 +46,4 @@ export function InsightsSection({ t }: InsightsSectionProps) {
     </Section>
   );
 }
+

@@ -20,20 +20,20 @@ interface PortfolioSectionProps {
 export function PortfolioSection({ t, lang, events }: PortfolioSectionProps) {
   return (
     <Section className="portfolio-slide" theme="light">
-      <div className="portfolio-section">
-        <div className="portfolio-header">
+      <div className="portfolio-section fade-up delay-1">
+        <div className="portfolio-header fade-up delay-2">
           <p className="eyebrow">{t.portfolio.eyebrow}</p>
           <h2>{t.portfolio.title}</h2>
         </div>
-        <div className="event-list">
-          {events.map((event) => (
-            <article key={event.id}>
+        <div className="event-list fade-up delay-3">
+          {events.map((event, index) => (
+            <article key={event.id} className="fade-up" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
               <span>{event.status}</span>
               <h3>{lang === "mr" ? event.titleDevanagari : event.titleEnglish}</h3>
               <p>{lang === "mr" ? event.dateLabel : event.dateLabelEnglish}</p>
             </article>
           ))}
-          <article className="muted-card">
+          <article className="muted-card fade-up" style={{ animationDelay: `${0.3 + events.length * 0.1}s` }}>
             <span>upcoming</span>
             <h3>{t.portfolio.nextTitle}</h3>
             <p>{t.portfolio.nextBody}</p>
@@ -43,3 +43,4 @@ export function PortfolioSection({ t, lang, events }: PortfolioSectionProps) {
     </Section>
   );
 }
+

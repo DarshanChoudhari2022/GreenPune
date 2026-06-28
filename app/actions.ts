@@ -15,13 +15,17 @@ export async function registerParticipant(
 ): Promise<RegisterState> {
   const input: RegistrationInput = {
     eventId: String(formData.get("eventId") || currentEvent.id),
+    lang: "mr",
     name: String(formData.get("name") || ""),
+    phoneCountryCode: String(formData.get("phoneCountryCode") || "+91"),
     phone: String(formData.get("phone") || ""),
     address: String(formData.get("address") || ""),
-    canBringTree: String(formData.get("canBringTree") || "") as "yes" | "no"
+    answers: {
+      canBringTree: String(formData.get("canBringTree") || "")
+    }
   };
 
-  const validation = validateRegistration(input);
+  const validation = await validateRegistration(input, "mr");
   if (!validation.ok) {
     return {
       ok: false,
@@ -29,6 +33,7 @@ export async function registerParticipant(
       errors: validation.errors
     };
   }
+
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://127.0.0.1:3000";
   const response = await fetch(`${baseUrl}/api/register`, {

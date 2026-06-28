@@ -24,8 +24,8 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
 
   return (
     <Section id="events" className="event-slide" theme="green">
-      <div className="event-section">
-        <div className="event-copy">
+      <div className="event-section fade-up delay-1">
+        <div className="event-copy fade-up delay-2">
           <p className="eyebrow">{t.event.eyebrow}</p>
           <h2>{eventTitle}</h2>
           <p className="organizer">
@@ -50,8 +50,8 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
             {t.event.cta}
           </a>
         </div>
-        <div className="help-grid">
-          <article>
+        <div className="help-grid fade-up delay-3">
+          <article className="fade-up" style={{ animationDelay: "0.4s" }}>
             <span>01</span>
             <h3>{lang === "mr" ? "नोंदणी करा" : "Register"}</h3>
             <p>
@@ -60,7 +60,7 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
                 : "Enter your details and join the event."}
             </p>
           </article>
-          <article>
+          <article className="fade-up" style={{ animationDelay: "0.5s" }}>
             <span>02</span>
             <h3>{lang === "mr" ? "रोप आणा" : "Bring a Sapling"}</h3>
             <p>
@@ -69,7 +69,7 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
                 : "Bring your own sapling if possible."}
             </p>
           </article>
-          <article>
+          <article className="fade-up" style={{ animationDelay: "0.6s" }}>
             <span>03</span>
             <h3>{lang === "mr" ? "झाड जगवा" : "Care After Planting"}</h3>
             <p>
@@ -83,3 +83,4 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
     </Section>
   );
 }
+
