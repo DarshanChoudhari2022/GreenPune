@@ -3,9 +3,11 @@ import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { getCurrentEvent, listEvents } from "@/lib/event-store";
 import { listRegistrations } from "@/lib/registration-store";
 import { listQuestions } from "@/lib/questions-store";
+import { listGalleryImages } from "@/lib/gallery-store";
 import { logoutAdmin } from "./actions";
 import { EventForm } from "./event-form";
 import { QuestionsEditor } from "./questions-editor";
+import { GalleryManager } from "./gallery-manager";
 import { type EventItem } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
@@ -48,11 +50,12 @@ export default async function AdminPage() {
     redirect("/admin/login");
   }
 
-  const [registrations, events, currentEvent, questions] = await Promise.all([
+  const [registrations, events, currentEvent, questions, images] = await Promise.all([
     listRegistrations(),
     listEvents(),
     getCurrentEvent(),
-    listQuestions()
+    listQuestions(),
+    listGalleryImages()
   ]);
 
   const bringTreeCount = registrations.filter((record) => record.canBringTree === "yes" || record.answers?.canBringTree === "yes").length;
@@ -112,6 +115,9 @@ export default async function AdminPage() {
 
       {/* Dynamic Questions Editor Panel */}
       <QuestionsEditor initialQuestions={questions} />
+
+      {/* Gallery Manager Panel */}
+      <GalleryManager initialImages={images} />
 
       <section className="admin-panel">
         <div className="admin-panel-header">

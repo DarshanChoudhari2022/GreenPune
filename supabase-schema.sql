@@ -54,3 +54,22 @@ create policy "Service role can manage events"
   for all
   using (auth.role() = 'service_role')
   with check (auth.role() = 'service_role');
+
+create table if not exists public.gallery_images (
+  id uuid primary key default gen_random_uuid(),
+  url text not null,
+  caption text,
+  created_at timestamptz not null default now()
+);
+
+alter table public.gallery_images enable row level security;
+
+drop policy if exists "Service role can manage gallery"
+  on public.gallery_images;
+
+create policy "Service role can manage gallery"
+  on public.gallery_images
+  for all
+  using (auth.role() = 'service_role')
+  with check (auth.role() = 'service_role');
+

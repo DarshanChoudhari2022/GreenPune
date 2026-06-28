@@ -112,6 +112,18 @@ export const content = {
       phoneError: "Please enter a valid 10 digit mobile number.",
       addressError: "Please enter your complete address.",
       canBringTreeError: "Please choose one option."
+    },
+    gallery: {
+      eyebrow: "Gallery",
+      title: "Memories from the Ground",
+      uploadTitle: "Upload Event Image",
+      uploadCta: "Choose File",
+      submit: "Upload Image",
+      captionPlaceholder: "Add a caption...",
+      noImages: "No images in the gallery yet.",
+      joinTitle: "Share your own tree plantation memory!",
+      successMessage: "Image uploaded successfully!",
+      errorMessage: "Failed to upload image. Please try again."
     }
   },
   mr: {
@@ -225,6 +237,18 @@ export const content = {
       phoneError: "कृपया १० अंकी संपर्क क्रमांक टाका.",
       addressError: "कृपया पूर्ण पत्ता टाका.",
       canBringTreeError: "कृपया एक पर्याय निवडा."
+    },
+    gallery: {
+      eyebrow: "गॅलरी",
+      title: "वृक्षारोपणाचे क्षण",
+      uploadTitle: "इव्हेंटचे छायाचित्र अपलोड करा",
+      uploadCta: "फाईल निवडा",
+      submit: "छायाचित्र अपलोड करा",
+      captionPlaceholder: "कॅप्शन लिहा...",
+      noImages: "गॅलरीमध्ये अद्याप कोणतीही चित्रे नाहीत.",
+      joinTitle: "तुमची स्वतःची वृक्षारोपणाची आठवण शेअर करा!",
+      successMessage: "छायाचित्र यशस्वीरित्या अपलोड झाले!",
+      errorMessage: "छायाचित्र अपलोड करण्यात त्रुटी आली. कृपया पुन्हा प्रयत्न करा."
     }
   }
 } as const;

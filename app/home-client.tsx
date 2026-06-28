@@ -9,10 +9,18 @@ import { EventSection } from "@/app/sections/EventSection";
 import { InsightsSection } from "@/app/sections/InsightsSection";
 import { PortfolioSection } from "@/app/sections/PortfolioSection";
 import { FooterSection } from "@/app/sections/FooterSection";
+import { GallerySection } from "@/app/sections/GallerySection";
 import { type EventItem } from "@/lib/events";
 import { content, type Language } from "@/lib/site-content";
+import { type GalleryImage } from "@/lib/gallery-store";
 
-export function HomeClient({ events }: { events: EventItem[] }) {
+export function HomeClient({ 
+  events, 
+  initialImages 
+}: { 
+  events: EventItem[]; 
+  initialImages: GalleryImage[];
+}) {
   const [lang, setLang] = useState<Language>("en");
   const t = content[lang];
   const currentEvent = events.find((event) => event.status === "open") || events[0];
@@ -50,11 +58,8 @@ export function HomeClient({ events }: { events: EventItem[] }) {
         <EventSection t={t} lang={lang} event={currentEvent} />
         <InsightsSection t={t} />
         <PortfolioSection t={t} lang={lang} events={events} />
+        <GallerySection lang={lang} initialImages={initialImages} />
         <FooterSection t={t} />
-
-        <a className="floating-register" href="/register" aria-label="Open registration form">
-          {t.nav.register}
-        </a>
       </main>
     </>
   );
