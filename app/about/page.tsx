@@ -41,7 +41,7 @@ export default function AboutPage() {
           </h1>
           <p className="about-hero-sub">
             A citizen-led urban greening movement — beginning 15 August 2026 at
-            Mahadji Shinde Nagar. Our goal: <strong>1 million trees in 5 years.</strong>
+            Mahadji Shinde Nagar. Our goal: <strong>1 million trees in 10 years.</strong>
           </p>
           <div className="about-hero-actions">
             <Link href="/register" className="primary-action">

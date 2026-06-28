@@ -8,6 +8,7 @@ import { logoutAdmin } from "./actions";
 import { EventForm } from "./event-form";
 import { QuestionsEditor } from "./questions-editor";
 import { GalleryManager } from "./gallery-manager";
+import { CollapsiblePanel } from "./collapsible-panel";
 import { type EventItem } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
@@ -60,6 +61,11 @@ export default async function AdminPage() {
 
   const bringTreeCount = registrations.filter((record) => record.canBringTree === "yes" || record.answers?.canBringTree === "yes").length;
 
+  // Sort registrations latest first
+  const sortedRegistrations = [...registrations].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
   return (
     <main className="admin-page">
       <header className="admin-header">
@@ -90,35 +96,7 @@ export default async function AdminPage() {
         </article>
       </section>
 
-      <section className="admin-panel">
-        <div className="admin-panel-header">
-          <div>
-            <p className="admin-kicker">Current site event</p>
-            <h2>{currentEvent.titleEnglish}</h2>
-          </div>
-          <a className="admin-link-button" href="/" target="_blank">
-            View site
-          </a>
-        </div>
-        <EventForm event={currentEvent} />
-      </section>
-
-      <section className="admin-panel">
-        <div className="admin-panel-header">
-          <div>
-            <p className="admin-kicker">Push new event</p>
-            <h2>Create event</h2>
-          </div>
-        </div>
-        <EventForm event={blankEvent} />
-      </section>
-
-      {/* Dynamic Questions Editor Panel */}
-      <QuestionsEditor initialQuestions={questions} />
-
-      {/* Gallery Manager Panel */}
-      <GalleryManager initialImages={images} />
-
+      {/* Registrations received (Entries) - moved to top */}
       <section className="admin-panel">
         <div className="admin-panel-header">
           <div>
@@ -139,12 +117,12 @@ export default async function AdminPage() {
               </tr>
             </thead>
             <tbody>
-              {registrations.length === 0 ? (
+              {sortedRegistrations.length === 0 ? (
                 <tr>
                   <td colSpan={6}>No registrations yet.</td>
                 </tr>
               ) : (
-                registrations.map((record, index) => (
+                sortedRegistrations.map((record, index) => (
                   <tr key={record.id || `${record.phone}-${index}`}>
                     <td>{record.name}</td>
                     <td><code>{record.phone}</code></td>
@@ -167,6 +145,35 @@ export default async function AdminPage() {
           </table>
         </div>
       </section>
+
+      {/* Collapsible Panel for Current Site Event */}
+      <CollapsiblePanel 
+        kicker="Current site event" 
+        title={currentEvent.titleEnglish || "Current Event"} 
+        action={
+          <a className="admin-link-button" href="/" target="_blank">
+            View site
+          </a>
+        }
+        defaultExpanded={true}
+      >
+        <EventForm key={currentEvent.id || "current"} event={currentEvent} />
+      </CollapsiblePanel>
+
+      {/* Collapsible Panel for Create Event */}
+      <CollapsiblePanel 
+        kicker="Push new event" 
+        title="Create event"
+        defaultExpanded={false}
+      >
+        <EventForm key="new" event={blankEvent} />
+      </CollapsiblePanel>
+
+      {/* Dynamic Questions Editor Panel */}
+      <QuestionsEditor initialQuestions={questions} />
+
+      {/* Gallery Manager Panel */}
+      <GalleryManager initialImages={images} />
     </main>
   );
 }
