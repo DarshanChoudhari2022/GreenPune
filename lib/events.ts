@@ -5,38 +5,56 @@ export type EventItem = {
   titleEnglish: string;
   organizer: string;
   organizerEnglish: string;
+  contactPerson?: string;
+  contactPhone?: string;
   date: string;
   dateLabel: string;
   dateLabelEnglish: string;
+  timeLabel?: string;
+  timeLabelEnglish?: string;
   location: string;
   locationEnglish: string;
   theme: string;
   themeEnglish: string;
   summary: string;
   summaryMarathi: string;
+  treesPlanted?: number;
+  specialAct?: string;
+  specialActMarathi?: string;
+  whatsappUrl?: string;
+  mapUrl?: string;
   status: "open" | "upcoming" | "completed";
 };
 
 export const events: EventItem[] = [
   {
-    id: "mahadji-shinde-nagar-tree-plantation-2026",
-    title: "Mahadji Shinde Nagar Tree Plantation 2026",
-    titleDevanagari: "श्री महादजी शिंदे नगर वृक्षारोपण २०२६",
-    titleEnglish: "Mahadji Shinde Nagar Tree Plantation 2026",
-    organizer: "सकल हिंदू समाज",
-    organizerEnglish: "Sakal Hindu Samaj",
+    id: "nandanvan-mahadevwadi-tree-plantation-2026",
+    title: "Nandanvan Mahadevwadi Tree Plantation Drive",
+    titleDevanagari: "नंदनवन महादेववाडी वृक्षारोपण मोहीम २०२६",
+    titleEnglish: "Nandanvan Mahadevwadi Tree Plantation Drive",
+    organizer: "सकल हिंदू समाज आणि चोक्सी स्कूल पुणे",
+    organizerEnglish: "Sakal Hindu Samaj & Choksi School Pune",
+    contactPerson: "Mayank Goher",
+    contactPhone: "+91 9623130157",
     date: "2026-08-15",
     dateLabel: "१५ ऑगस्ट २०२६",
     dateLabelEnglish: "15 August 2026",
-    location: "श्री महादजी शिंदे नगर",
-    locationEnglish: "Shri Mahadji Shinde Nagar",
+    timeLabel: "सकाळी ११:०० ते दुपारी २:००",
+    timeLabelEnglish: "11:00 AM - 2:00 PM",
+    location: "नंदनवन, महादेववाडी, पुणे",
+    locationEnglish: "Nandanvan, Mahadevwadi, Pune",
     theme: "हरित नगर - सुंदर नगर - समृद्ध नगर",
     themeEnglish: "Green Neighborhood - Beautiful Neighborhood - Prosperous Neighborhood",
+    treesPlanted: 110,
+    specialAct: "Tree Plantation Awareness Dance Performance by students of Choksi School Pune",
+    specialActMarathi: "चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य सादरीकरण",
     summary:
-      "A community tree plantation drive inviting residents to plant, protect, and nurture trees for a greener neighborhood.",
+      "Successfully planted 110 native trees at Nandanvan, Mahadevwadi from 11:00 AM to 2:00 PM today! The drive featured an inspiring tree plantation awareness dance act by Choksi School Pune students. Contact Mayank Goher (+91 9623130157) for details.",
     summaryMarathi:
-      "हरित परिसरासाठी झाडे लावणे, त्यांचे संरक्षण करणे आणि त्यांची काळजी घेण्यासाठी नागरिकांना जोडणारा सामुदायिक वृक्षारोपण उपक्रम.",
-    status: "open"
+      "आज सकाळी ११ ते दुपारी २ या वेळेत नंदनवन, महादेववाडी येथे ११० वृक्षांची यशस्वी लागवड करण्यात आली! याप्रसंगी चोक्सी स्कूल पुणे च्या विद्यार्थ्यांनी वृक्षारोपण जनजागृती नृत्य सादर केले. अधिक माहितीसाठी मयांक गोहर (+91 9623130157) यांच्याशी संपर्क साधा.",
+    whatsappUrl: "https://wa.me/919623130157?text=Hi%20Mayank,%20I%20want%20to%20know%20more%20about%20GreenPune%20Tree%20Plantation%20Drive",
+    mapUrl: "https://maps.google.com/?q=Nandanvan+Mahadevwadi+Pune",
+    status: "completed"
   }
 ];
 

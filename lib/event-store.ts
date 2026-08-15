@@ -27,6 +27,9 @@ export function eventFromFormData(formData: FormData): EventItem {
     String(formData.get("id") || "").trim() ||
     slugify(`${titleEnglish || "greenpune-event"}-${date || Date.now()}`);
 
+  const treesPlantedRaw = formData.get("treesPlanted");
+  const treesPlanted = treesPlantedRaw ? Number(treesPlantedRaw) : undefined;
+
   return {
     id,
     title: titleEnglish,
@@ -34,15 +37,24 @@ export function eventFromFormData(formData: FormData): EventItem {
     titleDevanagari: String(formData.get("titleDevanagari") || titleEnglish).trim(),
     organizer: String(formData.get("organizer") || "").trim(),
     organizerEnglish: String(formData.get("organizerEnglish") || "").trim(),
+    contactPerson: String(formData.get("contactPerson") || "Mayank Goher").trim(),
+    contactPhone: String(formData.get("contactPhone") || "+91 9623130157").trim(),
     date,
     dateLabel: String(formData.get("dateLabel") || "").trim(),
     dateLabelEnglish: String(formData.get("dateLabelEnglish") || "").trim(),
+    timeLabel: String(formData.get("timeLabel") || "सकाळी ११:०० ते दुपारी २:००").trim(),
+    timeLabelEnglish: String(formData.get("timeLabelEnglish") || "11:00 AM - 2:00 PM").trim(),
     location: String(formData.get("location") || "").trim(),
     locationEnglish: String(formData.get("locationEnglish") || "").trim(),
     theme: String(formData.get("theme") || "").trim(),
     themeEnglish: String(formData.get("themeEnglish") || "").trim(),
     summary: String(formData.get("summary") || "").trim(),
     summaryMarathi: String(formData.get("summaryMarathi") || "").trim(),
+    treesPlanted,
+    specialAct: String(formData.get("specialAct") || "").trim() || undefined,
+    specialActMarathi: String(formData.get("specialActMarathi") || "").trim() || undefined,
+    whatsappUrl: String(formData.get("whatsappUrl") || "https://wa.me/919623130157?text=Hi%20Mayank,%20I%20want%20to%20know%20more%20about%20GreenPune%20Tree%20Plantation%20Drive").trim(),
+    mapUrl: String(formData.get("mapUrl") || "https://maps.google.com/?q=Nandanvan+Mahadevwadi+Pune").trim(),
     status: normalizeStatus(formData.get("status"))
   };
 }
@@ -113,15 +125,24 @@ export async function listEvents(): Promise<EventItem[]> {
           titleDevanagari: record.title_devanagari,
           organizer: record.organizer,
           organizerEnglish: record.organizer_english,
+          contactPerson: record.contact_person || "Mayank Goher",
+          contactPhone: record.contact_phone || "+91 9623130157",
           date: record.date,
           dateLabel: record.date_label,
           dateLabelEnglish: record.date_label_english,
+          timeLabel: record.time_label || "सकाळी ११:०० ते दुपारी २:००",
+          timeLabelEnglish: record.time_label_english || "11:00 AM - 2:00 PM",
           location: record.location,
           locationEnglish: record.location_english,
           theme: record.theme,
           themeEnglish: record.theme_english,
           summary: record.summary,
           summaryMarathi: record.summary_marathi,
+          treesPlanted: record.trees_planted || 110,
+          specialAct: record.special_act || "Tree Plantation Awareness Dance Performance by students of Choksi School Pune",
+          specialActMarathi: record.special_act_marathi || "चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य सादरीकरण",
+          whatsappUrl: record.whatsapp_url || "https://wa.me/919623130157?text=Hi%20Mayank,%20I%20want%20to%20know%20more%20about%20GreenPune%20Tree%20Plantation%20Drive",
+          mapUrl: record.map_url || "https://maps.google.com/?q=Nandanvan+Mahadevwadi+Pune",
           status: record.status
         }));
       }
@@ -152,15 +173,24 @@ export async function upsertEvent(event: EventItem) {
         title_devanagari: event.titleDevanagari,
         organizer: event.organizer,
         organizer_english: event.organizerEnglish,
+        contact_person: event.contactPerson,
+        contact_phone: event.contactPhone,
         date: event.date,
         date_label: event.dateLabel,
         date_label_english: event.dateLabelEnglish,
+        time_label: event.timeLabel,
+        time_label_english: event.timeLabelEnglish,
         location: event.location,
         location_english: event.locationEnglish,
         theme: event.theme,
         theme_english: event.themeEnglish,
         summary: event.summary,
         summary_marathi: event.summaryMarathi,
+        trees_planted: event.treesPlanted,
+        special_act: event.specialAct,
+        special_act_marathi: event.specialActMarathi,
+        whatsapp_url: event.whatsappUrl,
+        map_url: event.mapUrl,
         status: event.status
       });
 

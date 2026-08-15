@@ -403,9 +403,9 @@ export default function AboutPage() {
             <div className="about-footer-links">
               <h4>Contact</h4>
               <ul>
+                <li><a href="https://wa.me/919623130157?text=Hi%20Mayank,%20I%20want%20to%20know%20more%20about%20GreenPune%20Tree%20Plantation%20Drive" target="_blank" rel="noopener noreferrer">💬 Mayank Goher: +91 9623130157</a></li>
                 <li><a href="mailto:hello@greenpune.in">📧 hello@greenpune.in</a></li>
                 <li><a href="mailto:donate@greenpune.in">💚 donate@greenpune.in</a></li>
-                <li><a href="mailto:csr@greenpune.in">🏢 csr@greenpune.in</a></li>
                 <li><a href="/register">📋 Register for Event</a></li>
               </ul>
             </div>
@@ -414,7 +414,7 @@ export default function AboutPage() {
             <p>© 2026 GreenPune Initiative. All rights reserved.</p>
             <p>
               Powered by{" "}
-              <a href="https://bracketdex.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.bracketdex.com/" target="_blank" rel="noopener noreferrer">
                 BracketDex Technologies
               </a>
             </p>

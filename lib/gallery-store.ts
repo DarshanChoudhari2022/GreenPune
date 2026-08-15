@@ -7,6 +7,7 @@ export interface GalleryImage {
   url: string;
   caption: string;
   createdAt: string;
+  mediaType?: "image" | "video";
 }
 
 const fallbackPath = path.join(process.cwd(), "data", "gallery.json");

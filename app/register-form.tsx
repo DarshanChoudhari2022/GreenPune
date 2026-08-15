@@ -234,7 +234,7 @@ export function RegisterForm({
 
         <p className="form-powered-by">
           Powered by{" "}
-          <a href="https://bracketdex.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.bracketdex.com/" target="_blank" rel="noopener noreferrer">
             BracketDex Technologies
           </a>
         </p>

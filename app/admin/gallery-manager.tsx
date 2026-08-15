@@ -4,6 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { type GalleryImage } from "@/lib/gallery-store";
 
+function isVideoUrl(url: string, mediaType?: string) {
+  if (mediaType === "video") return true;
+  return /\.(mp4|webm|mov|avi|mkv)$/i.test(url);
+}
+
 export function GalleryManager({ initialImages }: { initialImages: GalleryImage[] }) {
   const [images, setImages] = useState<GalleryImage[]>(initialImages);
   const [isUploading, setIsUploading] = useState(false);
@@ -23,7 +28,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!file) {
-      setUploadError("Please select an image file.");
+      setUploadError("Please select a photo or video file.");
       return;
     }
 
@@ -44,7 +49,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
       const result = await response.json();
 
       if (response.ok && result.ok) {
-        setUploadSuccess("Image uploaded successfully!");
+        setUploadSuccess("Photo / Video uploaded successfully!");
         setImages((prev) => [result.image, ...prev]);
         setFile(null);
         setCaption("");
@@ -53,7 +58,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
         const fileInput = document.getElementById("admin-gallery-file-input") as HTMLInputElement;
         if (fileInput) fileInput.value = "";
       } else {
-        setUploadError(result.error || "Failed to upload image.");
+        setUploadError(result.error || "Failed to upload photo / video.");
       }
     } catch (err) {
       setUploadError("An error occurred during upload.");
@@ -63,7 +68,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this image from the gallery?")) {
+    if (!confirm("Are you sure you want to delete this media item from the gallery?")) {
       return;
     }
 
@@ -77,7 +82,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
       if (response.ok && result.ok) {
         setImages((prev) => prev.filter((img) => img.id !== id));
       } else {
-        alert(result.error || "Failed to delete image.");
+        alert(result.error || "Failed to delete item.");
       }
     } catch (err) {
       alert("An error occurred during deletion.");
@@ -89,7 +94,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
       <div className="admin-panel-header">
         <div>
           <p className="admin-kicker">Gallery administration</p>
-          <h2>Manage Gallery</h2>
+          <h2>Manage Event Media & Gallery</h2>
         </div>
       </div>
 
@@ -97,28 +102,33 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
         
         {/* Upload Form */}
         <div className="admin-card-inner" style={{ background: "#f9f9f9", padding: "20px", borderRadius: "8px", border: "1px solid #eee" }}>
-          <h3 style={{ marginTop: 0, marginBottom: "16px", fontSize: "16px", color: "#111" }}>Upload New Image</h3>
+          <h3 style={{ marginTop: 0, marginBottom: "16px", fontSize: "16px", color: "#111" }}>Upload Photo or Video Highlight</h3>
           <form onSubmit={handleUpload} className="admin-event-form" style={{ padding: 0 }}>
             <div className="admin-form-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "16px" }}>
               <label>
-                <span>Image File</span>
+                <span>Media File (Photo / Video)</span>
                 <input
                   type="file"
                   id="admin-gallery-file-input"
-                  accept="image/*"
+                  accept="image/*,video/*"
                   onChange={handleFileChange}
                   required
                   style={{ border: "1px dashed #ccc", padding: "8px", background: "#fff", borderRadius: "4px" }}
                 />
+                {file && (
+                  <span style={{ fontSize: "12px", color: "#666", marginTop: "4px", display: "block" }}>
+                    Selected: {file.name} ({(file.size / (1024 * 1024)).toFixed(2)} MB)
+                  </span>
+                )}
               </label>
               <label>
-                <span>Caption (Optional)</span>
+                <span>Caption (Location / Activity Tag)</span>
                 <input
                   type="text"
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
-                  placeholder="e.g. Tree plantation drive group photo"
-                  maxLength={100}
+                  placeholder="e.g. Nandanvan Mahadevwadi 110 Trees Drive - Choksi School Dance Act"
+                  maxLength={150}
                 />
               </label>
             </div>
@@ -127,66 +137,78 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
             {uploadSuccess && <p className="admin-success" style={{ margin: "12px 0 0" }}>{uploadSuccess}</p>}
 
             <button disabled={isUploading} type="submit" style={{ marginTop: "16px", width: "auto" }}>
-              {isUploading ? "Uploading..." : "Upload Image"}
+              {isUploading ? "Uploading Media..." : "Upload Photo / Video"}
             </button>
           </form>
         </div>
 
-        {/* Uploaded Images List */}
+        {/* Uploaded Media List */}
         <div>
-          <h3 style={{ marginTop: 0, marginBottom: "16px", fontSize: "16px", color: "#111" }}>Uploaded Images ({images.length})</h3>
+          <h3 style={{ marginTop: 0, marginBottom: "16px", fontSize: "16px", color: "#111" }}>Gallery Media Items ({images.length})</h3>
           {images.length === 0 ? (
-            <p style={{ color: "#666", fontStyle: "italic" }}>No images uploaded yet.</p>
+            <p style={{ color: "#666", fontStyle: "italic" }}>No photos or videos uploaded yet.</p>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "16px" }}>
-              {images.map((img) => (
-                <div 
-                  key={img.id} 
-                  style={{ 
-                    border: "1px solid #eee", 
-                    borderRadius: "8px", 
-                    overflow: "hidden", 
-                    background: "#fff",
-                    boxShadow: "0 2px 4px rgba(0,0,0,0.02)",
-                    display: "flex",
-                    flexDirection: "column"
-                  }}
-                >
-                  <div style={{ position: "relative", width: "100%", height: "120px", background: "#f5f5f5" }}>
-                    <Image
-                      src={img.url}
-                      alt={img.caption || "Gallery Preview"}
-                      fill
-                      sizes="180px"
-                      style={{ objectFit: "cover" }}
-                    />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "16px" }}>
+              {images.map((img) => {
+                const isVid = isVideoUrl(img.url, img.mediaType);
+                return (
+                  <div 
+                    key={img.id} 
+                    style={{ 
+                      border: "1px solid #eee", 
+                      borderRadius: "8px", 
+                      overflow: "hidden", 
+                      background: "#fff",
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.02)",
+                      display: "flex",
+                      flexDirection: "column"
+                    }}
+                  >
+                    <div style={{ position: "relative", width: "100%", height: "130px", background: "#f5f5f5" }}>
+                      {isVid ? (
+                        <video
+                          src={img.url}
+                          controls
+                          style={{ width: "100%", height: "130px", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <Image
+                          src={img.url}
+                          alt={img.caption || "Gallery Preview"}
+                          fill
+                          sizes="200px"
+                          style={{ objectFit: "cover" }}
+                        />
+                      )}
+                    </div>
+                    <div style={{ padding: "8px", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                      <p style={{ margin: "0 0 8px 0", fontSize: "12px", color: "#333", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", height: "32px", lineHeight: "1.3" }}>
+                        {isVid && <strong style={{ color: "#2563eb", marginRight: "4px" }}>[VIDEO]</strong>}
+                        {img.caption || <span style={{ color: "#aaa", fontStyle: "italic" }}>No caption</span>}
+                      </p>
+                      <button 
+                        onClick={() => handleDelete(img.id)}
+                        style={{ 
+                          background: "#fee2e2", 
+                          color: "#991b1b", 
+                          border: "none", 
+                          padding: "6px 12px", 
+                          borderRadius: "4px", 
+                          fontSize: "11px", 
+                          fontWeight: "600",
+                          width: "100%",
+                          cursor: "pointer",
+                          transition: "background 0.2s"
+                        }}
+                        onMouseOver={(e) => (e.currentTarget.style.background = "#fecaca")}
+                        onMouseOut={(e) => (e.currentTarget.style.background = "#fee2e2")}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
-                  <div style={{ padding: "8px", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                    <p style={{ margin: "0 0 8px 0", fontSize: "12px", color: "#333", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", height: "32px", lineHeight: "1.3" }}>
-                      {img.caption || <span style={{ color: "#aaa", fontStyle: "italic" }}>No caption</span>}
-                    </p>
-                    <button 
-                      onClick={() => handleDelete(img.id)}
-                      style={{ 
-                        background: "#fee2e2", 
-                        color: "#991b1b", 
-                        border: "none", 
-                        padding: "6px 12px", 
-                        borderRadius: "4px", 
-                        fontSize: "11px", 
-                        fontWeight: "600",
-                        width: "100%",
-                        cursor: "pointer",
-                        transition: "background 0.2s"
-                      }}
-                      onMouseOver={(e) => (e.currentTarget.style.background = "#fecaca")}
-                      onMouseOut={(e) => (e.currentTarget.style.background = "#fee2e2")}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

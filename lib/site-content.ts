@@ -4,45 +4,51 @@ export const content = {
   en: {
     nav: {
       events: "Events",
-      mission: "Mission",
+      mission: "Impact Tracker",
       insights: "Pune Need",
       contact: "Contact",
       join: "Join",
       register: "Register"
     },
     hero: {
-      titleLine1: "SOW A FUTURE",
+      titleLine1: "Plant and protect native trees in Pune.",
       titleLine2Start: "ONE ",
       titleHighlight: "TREE",
       titleLine2End: " AT A TIME",
-      body: "Join our campaign to plant over 1 Million trees. We are on a journey to save the forest, Join us!",
-      primary: "Join the Drive",
-      stat: "Help us plant\n1 million trees in Pune over the\nnext 10 years."
+      body: "Join a local plantation drive, then help care for each tree for the next three years.",
+      primary: "Register for Next Drive",
+      secondary: "See Impact Tracker",
+      stat: "110 Trees Planted Today!\nNandanvan, Mahadevwadi, Pune\n15 August 2026"
     },
     mission: {
-      eyebrow: "Why GreenPune",
-      title: "Every event becomes part of a long-term urban forest portfolio.",
+      eyebrow: "Impact Tracker & Stewardship",
+      title: "110 Trees Planted & 3-Year Post-Plantation Care Commitment",
       body:
-        "We are starting with Mahadji Shinde Nagar and building a repeatable system for future tree drives: posters, registrations, local participation, and follow-up care."
+        "Our 15 August 2026 drive at Nandanvan, Mahadevwadi planted 110 native trees in partnership with Sakal Hindu Samaj and Choksi School Pune. Every event connects immediate plantation with a 3-year local watering and protection schedule."
     },
     stats: [
-      ["40%", "Tree canopy target often used by urban forest planners"],
-      ["9 m2", "Minimum urban green space per person benchmark"],
-      ["2026", "First GreenPune event year"],
-      ["80%", "Survival rate target with 3-year post-plantation care"]
+      ["110", "Trees Planted Today (15 Aug 2026)"],
+      ["100%", "Native Species (Neem, Peepal, Banyan, Karanj, Tamarind)"],
+      ["3 Years", "Post-Plantation Care & Weekly Watering"],
+      ["80%+", "Survival Target with Protective Tree Guards"]
     ],
     event: {
-      eyebrow: "Current Event",
+      eyebrow: "Completed Event Highlights",
       date: "Date",
+      time: "Event Time",
       location: "Location",
-      theme: "Theme",
-      cta: "Open form"
+      theme: "Theme & Partners",
+      trees: "Trees Planted",
+      danceAct: "Awareness Performance",
+      cta: "Register for Next Drive",
+      whatsapp: "Join WhatsApp Group",
+      mapPin: "View Location Map"
     },
     insights: {
       eyebrow: "Pune Tree Requirement",
       title: "Pune needs shade where people actually live, walk, and wait.",
       intro:
-        "Public reports do not give one final tree-deficit number for every ward. GreenPune therefore treats Pune's need as a planning signal: protect existing canopy, plant native shade trees near daily life, and track survival instead of only counting plantation-day saplings.",
+        "Public reports do not give one final tree-deficit number for every ward. GreenPune treats Pune's need as a planning signal: protect existing canopy, plant native shade trees near daily life, and track survival instead of only counting plantation-day saplings.",
       cards: [
         {
           title: "Canopy monitoring",
@@ -60,7 +66,7 @@ export const content = {
           title: "Survival first",
           value: "3-year care",
           text:
-            "The highest-impact drives plan watering, guards, species choice, and local ownership from day one."
+            "The highest-impact drives plan watering, guards, native species choice, and local ownership from day one."
         }
       ],
       sourcesTitle: "Research references",
@@ -81,88 +87,95 @@ export const content = {
     },
     portfolio: {
       eyebrow: "Events Portfolio",
-      title: "Built to host many events next.",
-      nextTitle: "Next community event",
-      nextBody: "Ready to add when the next poster and details arrive."
+      title: "Community Drives & Completed Milestones",
+      nextTitle: "Next Community Plantation Drive",
+      nextBody: "Registrations open for upcoming ward plantation drives in Pune."
     },
     footer: {
       line: "Harit Nagar. Sundar Nagar. Samruddha Nagar.",
-      share: "Share form link"
+      share: "Share Registration Link",
+      poweredBy: "Powered by"
     },
     registerPage: {
       eyebrow: "Event Registration",
-      title: "Enter your details for the tree plantation drive.",
+      title: "Register for the Next Tree Plantation Drive",
       body:
-        "Share this page in WhatsApp groups so residents can register directly. Details are saved securely through the server."
+        "Share this page in WhatsApp groups so Pune residents can register directly. Details are saved securely through the server."
     },
     form: {
       name: "Name",
       namePlaceholder: "Your full name",
       phone: "Contact number",
       phonePlaceholder: "10 digit mobile number",
-      address: "Address",
-      addressPlaceholder: "House / society / area",
-      canBringTree: "Can you bring your own tree sapling?",
+      address: "Address / Locality in Pune",
+      addressPlaceholder: "House / society / area (e.g. Mahadevwadi, Pune)",
+      canBringTree: "Can you bring your own native tree sapling?",
       yes: "Yes",
       no: "No",
-      submit: "Submit registration",
+      submit: "Submit Registration for Next Drive",
       pending: "Submitting...",
       success: "Thank you! Your registration is complete.",
       error: "Please check the required details.",
       nameError: "Please enter a valid name.",
       phoneError: "Please enter a valid 10 digit mobile number.",
-      addressError: "Please enter your complete address.",
+      addressError: "Please enter your complete address in Pune.",
       canBringTreeError: "Please choose one option."
     },
     gallery: {
-      eyebrow: "Gallery",
-      title: "Memories from the Ground",
-      uploadTitle: "Upload Event Image",
+      eyebrow: "Event Gallery",
+      title: "Memories & Highlights from Nandanvan Drive",
+      uploadTitle: "Upload Event Image / Video Highlight",
       uploadCta: "Choose File",
-      submit: "Upload Image",
-      captionPlaceholder: "Add a caption...",
-      noImages: "No images in the gallery yet.",
+      submit: "Upload Highlight",
+      captionPlaceholder: "Add location & caption (e.g. Nandanvan Mahadevwadi 110 Trees Drive)...",
+      noImages: "Photos & video highlights will be uploaded here shortly.",
       joinTitle: "Share your own tree plantation memory!",
-      successMessage: "Image uploaded successfully!",
-      errorMessage: "Failed to upload image. Please try again."
+      successMessage: "Highlight uploaded successfully!",
+      errorMessage: "Failed to upload file. Please try again."
     }
   },
   mr: {
     nav: {
       events: "कार्यक्रम",
-      mission: "ध्येय",
+      mission: "इम्पॅक्ट ट्रॅकर",
       insights: "पुण्याची गरज",
       contact: "संपर्क",
       join: "सहभाग",
       register: "नोंदणी"
     },
     hero: {
-      titleLine1: "भविष्य पेरा",
+      titleLine1: "पुण्यात देशी झाडे लावा आणि त्यांचे जतन करा.",
       titleLine2Start: "एक ",
       titleHighlight: "वृक्ष",
       titleLine2End: " एका वेळी",
-      body: "पुण्यात १० लाखांपेक्षा जास्त झाडे लावण्याच्या मोहिमेत सहभागी व्हा. आम्ही जंगले वाचवण्याच्या प्रवासावर आहोत, आमच्याशी जोडा!",
-      primary: "मोहिमेत सहभागी व्हा",
-      stat: "पुण्यात पुढील ५ वर्षात\n१० लाख झाडे लावण्यासाठी\nआम्हाला मदत करा."
+      body: "स्थानिक वृक्षारोपण मोहिमेत सहभागी व्हा आणि पुढील ३ वर्षे प्रत्येक झाडाची काळजी घ्या.",
+      primary: "पुढील मोहिमेसाठी नोंदणी करा",
+      secondary: "इम्पॅक्ट ट्रॅकर पहा",
+      stat: "आज ११० रोपे लावली!\nनंदनवन, महादेववाडी, पुणे\n१५ ऑगस्ट २०२६"
     },
     mission: {
-      eyebrow: "ग्रीनपुणे का",
-      title: "प्रत्येक कार्यक्रम दीर्घकालीन शहरी वन मोहिमेचा भाग बनेल.",
+      eyebrow: "इम्पॅक्ट ट्रॅकर आणि जबाबदारी",
+      title: "११० वृक्षांची यशस्वी लागवड आणि ३ वर्षे देखभाल संकल्प",
       body:
-        "श्री महादजी शिंदे नगरपासून सुरुवात करून पुढील वृक्षारोपण मोहिमांसाठी पोस्टर, नोंदणी, स्थानिक सहभाग आणि झाडांची देखभाल यांची पुनरावृत्ती होणारी पद्धत तयार करत आहोत."
+        "१५ ऑगस्ट २०२६ रोजी नंदनवन, महादेववाडी येथे सकल हिंदू समाज आणि चोक्सी स्कूल पुणे यांच्या सहकार्याने ११० देशी वृक्षांची लागवड करण्यात आली. झाड लावण्यासोबतच पुढील ३ वर्षे पाण्याचे नियोजन व संरक्षणाची जबाबदारी घेतली जात आहे."
     },
     stats: [
-      ["४०%", "शहरी वन नियोजनात वापरला जाणारा कॅनोपी उद्देश"],
-      ["९ चौ.मी.", "प्रति नागरिक किमान हरित जागेचा बेंचमार्क"],
-      ["२०२६", "पहिले ग्रीनपुणे कार्यक्रम वर्ष"],
-      ["८०%", "३ वर्षांच्या देखभालीसह रोपे जगवण्याचे लक्ष्य"]
+      ["११०", "रोपे लावली (१५ ऑगस्ट २०२६)"],
+      ["१००%", "देशी वनस्पती (कडू निंब, पिंपळ, वड, करंज, चिंच)"],
+      ["३ वर्षे", "झाडांची काळजी आणि नियमित पाण्याचे नियोजन"],
+      ["८०%+", "संरक्षक जाळीसह झाडे जगवण्याचे ध्येय"]
     ],
     event: {
-      eyebrow: "सध्याचा कार्यक्रम",
+      eyebrow: "आजच्या कार्यक्रमाचे वैशिष्ट्ये",
       date: "दिनांक",
+      time: "वेळ",
       location: "स्थान",
-      theme: "संकल्पना",
-      cta: "फॉर्म उघडा"
+      theme: "संकल्पना व आयोजक",
+      trees: "लागवड केलेली झाडे",
+      danceAct: "जनजागृती उपक्रम",
+      cta: "पुढील मोहिमेसाठी नोंदणी करा",
+      whatsapp: "WhatsApp ग्रुप जॉईन करा",
+      mapPin: "नकाशा पहा"
     },
     insights: {
       eyebrow: "पुण्याची वृक्ष गरज",
@@ -207,17 +220,18 @@ export const content = {
     },
     portfolio: {
       eyebrow: "कार्यक्रम पोर्टफोलिओ",
-      title: "पुढील अनेक कार्यक्रमांसाठी तयार.",
-      nextTitle: "पुढील सामुदायिक कार्यक्रम",
-      nextBody: "पुढील पोस्टर आणि तपशील मिळताच जोडण्यासाठी तयार."
+      title: "सामुदायिक उपक्रम आणि पूर्ण झालेले टप्पे",
+      nextTitle: "पुढील सामुदायिक वृक्षारोपण मोहीम",
+      nextBody: "पुण्यातील पुढील भागांतील उपक्रमांसाठी नोंदणी सुरु आहे."
     },
     footer: {
       line: "हरित नगर. सुंदर नगर. समृद्ध नगर.",
-      share: "फॉर्म लिंक शेअर करा"
+      share: "फॉर्म लिंक शेअर करा",
+      poweredBy: "Powered by"
     },
     registerPage: {
       eyebrow: "कार्यक्रम नोंदणी",
-      title: "वृक्षारोपण मोहिमेसाठी आपली माहिती भरा.",
+      title: "पुढील वृक्षारोपण मोहिमेसाठी आपली माहिती भरा",
       body:
         "ही लिंक WhatsApp ग्रुपमध्ये शेअर करा, जेणेकरून नागरिक थेट नोंदणी करू शकतील. माहिती सर्व्हरमार्फत सुरक्षितरीत्या जतन केली जाते."
     },
@@ -226,28 +240,28 @@ export const content = {
       namePlaceholder: "आपले पूर्ण नाव",
       phone: "संपर्क क्रमांक",
       phonePlaceholder: "१० अंकी मोबाइल क्रमांक",
-      address: "पत्ता",
-      addressPlaceholder: "घर / सोसायटी / परिसर",
-      canBringTree: "आपण आपले वृक्ष स्वतः आणू शकता का?",
+      address: "पत्ता / परिसर (पुणे)",
+      addressPlaceholder: "घर / सोसायटी / परिसर (उदा. महादेववाडी, पुणे)",
+      canBringTree: "आपण आपले रोप स्वतः आणू शकता का?",
       yes: "हो",
       no: "नाही",
-      submit: "नोंदणी करा",
+      submit: "पुढील मोहिमेसाठी नोंदणी करा",
       pending: "नोंदणी होत आहे...",
       success: "धन्यवाद! तुमची नोंदणी यशस्वी झाली.",
       error: "कृपया आवश्यक माहिती तपासा.",
       nameError: "कृपया योग्य नाव टाका.",
       phoneError: "कृपया १० अंकी संपर्क क्रमांक टाका.",
-      addressError: "कृपया पूर्ण पत्ता टाका.",
+      addressError: "कृपया पुण्याचा पूर्ण पत्ता टाका.",
       canBringTreeError: "कृपया एक पर्याय निवडा."
     },
     gallery: {
       eyebrow: "गॅलरी",
-      title: "वृक्षारोपणाचे क्षण",
-      uploadTitle: "इव्हेंटचे छायाचित्र अपलोड करा",
+      title: "नंदनवन महादेववाडी मोहिमेचे क्षणचित्रे",
+      uploadTitle: "छायाचित्र किंवा व्हिडिओ हायलाईट अपलोड करा",
       uploadCta: "फाईल निवडा",
-      submit: "छायाचित्र अपलोड करा",
-      captionPlaceholder: "कॅप्शन लिहा...",
-      noImages: "गॅलरीमध्ये अद्याप कोणतीही चित्रे नाहीत.",
+      submit: "अपलोड करा",
+      captionPlaceholder: "स्थान आणि कॅप्शन टाका (उदा. नंदनवन महादेववाडी ११० वृक्ष लागवड)...",
+      noImages: "नंदनवन उपक्रमाची छायाचित्रे व व्हिडिओ लवकरच येथे दिसतील.",
       joinTitle: "तुमची स्वतःची वृक्षारोपणाची आठवण शेअर करा!",
       successMessage: "छायाचित्र यशस्वीरित्या अपलोड झाले!",
       errorMessage: "छायाचित्र अपलोड करण्यात त्रुटी आली. कृपया पुन्हा प्रयत्न करा."

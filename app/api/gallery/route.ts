@@ -6,6 +6,7 @@ import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 export async function GET() {
   try {
@@ -23,8 +24,16 @@ export async function POST(request: Request) {
     const file = formData.get("file") as File | null;
     const caption = String(formData.get("caption") || "").trim();
 
-    if (!file) {
-      return NextResponse.json({ ok: false, error: "No file uploaded." }, { status: 400 });
+    if (!file || typeof file === "string") {
+      return NextResponse.json({ ok: false, error: "Please select a valid photo or video file." }, { status: 400 });
+    }
+
+    const mimeType = file.type || "";
+    const isVideo = mimeType.startsWith("video/") || /\.(mp4|webm|mov|avi|mkv)$/i.test(file.name);
+    const isImage = mimeType.startsWith("image/") || /\.(png|jpe?g|webp|gif|heic|avif|bmp)$/i.test(file.name);
+
+    if (!isImage && !isVideo) {
+      return NextResponse.json({ ok: false, error: "Only image and video files are allowed." }, { status: 400 });
     }
 
     // Read file bytes
@@ -37,7 +46,7 @@ export async function POST(request: Request) {
 
     // Generate unique name
     const timestamp = Date.now();
-    const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
+    const sanitizedName = (file.name || "upload").replace(/[^a-zA-Z0-9.-]/g, "_");
     const filename = `${timestamp}-${sanitizedName}`;
     const filepath = path.join(uploadDir, filename);
 
@@ -47,20 +56,21 @@ export async function POST(request: Request) {
     const imageRecord: GalleryImage = {
       id: `img_${timestamp}_${Math.random().toString(36).substring(2, 7)}`,
       url: imageUrl,
-      caption,
-      createdAt: new Date().toISOString()
+      caption: caption || (isVideo ? "Nandanvan Drive Video Highlight" : "Nandanvan Drive Photo"),
+      createdAt: new Date().toISOString(),
+      mediaType: isVideo ? "video" : "image"
     };
 
     await addGalleryImage(imageRecord);
 
-    // Revalidate paths so the new image shows up immediately
+    // Revalidate paths so the new upload shows up immediately
     revalidatePath("/");
     revalidatePath("/admin");
 
     return NextResponse.json({ ok: true, image: imageRecord });
   } catch (error: any) {
     console.error("POST /api/gallery error:", error);
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: false, error: error?.message || "Server error while saving uploaded file." }, { status: 500 });
   }
 }
 

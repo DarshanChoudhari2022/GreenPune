@@ -12,13 +12,13 @@ interface HeroSectionProps {
       titleLine2End: string;
       body: string;
       primary: string;
+      secondary: string;
       stat: string;
     };
   };
 }
 
 export function HeroSection({ t }: HeroSectionProps) {
-  // Split the stat text by newlines to render br tags
   const statLines = t.hero.stat.split("\n");
 
   return (
@@ -45,7 +45,7 @@ export function HeroSection({ t }: HeroSectionProps) {
           />
         </div>
 
-        <div className="hero-center-cta">
+        <div className="hero-center-cta hero-dual-cta">
           <Link href="/register" className="plant-btn">
             {t.hero.primary}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -53,6 +53,12 @@ export function HeroSection({ t }: HeroSectionProps) {
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </Link>
+          <a href="#mission" className="secondary-btn">
+            {t.hero.secondary}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </a>
         </div>
 
         <div className="hero-bottom-grid">
@@ -65,9 +71,7 @@ export function HeroSection({ t }: HeroSectionProps) {
             ))}
           </div>
           <div className="hero-cta-box">
-            <p>
-              {t.hero.body}
-            </p>
+            <p>{t.hero.body}</p>
           </div>
         </div>
       </div>
