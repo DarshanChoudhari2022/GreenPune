@@ -117,7 +117,7 @@ export async function listEvents(): Promise<EventItem[]> {
 
       if (error) {
         console.error("Supabase error listing events, falling back to local:", error.message);
-      } else if (data) {
+      } else if (data && data.length > 0) {
         return (data || []).map((record) => ({
           id: record.id,
           title: record.title_english,

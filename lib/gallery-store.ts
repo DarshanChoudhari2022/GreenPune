@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { createClient } from "@supabase/supabase-js";
+import defaultGalleryData from "@/data/gallery.json";
 
 export interface GalleryImage {
   id: string;
@@ -27,12 +28,13 @@ export async function listGalleryImages(): Promise<GalleryImage[]> {
 
       if (error) {
         console.error("Supabase error listing gallery, falling back to local:", error.message);
-      } else if (data) {
+      } else if (data && data.length > 0) {
         return data.map((record) => ({
           id: record.id,
           url: record.url,
           caption: record.caption || "",
-          createdAt: record.created_at
+          createdAt: record.created_at,
+          mediaType: record.media_type || (/\.(mp4|webm|mov)$/i.test(record.url) ? "video" : "image")
         }));
       }
     } catch (e: any) {
@@ -40,14 +42,20 @@ export async function listGalleryImages(): Promise<GalleryImage[]> {
     }
   }
 
-  // Fallback to local file storage
+  // Fallback to local file storage or bundled default data
   try {
     const raw = await fs.readFile(fallbackPath, "utf8");
     const images = JSON.parse(raw) as GalleryImage[];
-    return images.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    if (images.length > 0) {
+      return images.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    }
   } catch {
-    return [];
+    // Ignore read error and use imported default JSON
   }
+
+  return (defaultGalleryData as GalleryImage[]).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
 }
 
 export async function addGalleryImage(image: GalleryImage): Promise<void> {
@@ -62,7 +70,8 @@ export async function addGalleryImage(image: GalleryImage): Promise<void> {
         id: image.id,
         url: image.url,
         caption: image.caption,
-        created_at: image.createdAt
+        created_at: image.createdAt,
+        media_type: image.mediaType || "image"
       });
 
       if (error) {
@@ -80,7 +89,7 @@ export async function addGalleryImage(image: GalleryImage): Promise<void> {
       const raw = await fs.readFile(fallbackPath, "utf8");
       images = JSON.parse(raw) as GalleryImage[];
     } catch {
-      images = [];
+      images = defaultGalleryData as GalleryImage[];
     }
 
     images.push(image);
