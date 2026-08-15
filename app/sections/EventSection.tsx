@@ -94,6 +94,18 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
           <p className="event-summary-text">{eventSummary}</p>
 
           <div className="event-cta-group">
+            <a
+              className="whatsapp-action share-event-btn"
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                lang === "mr"
+                  ? `🌳 *आनंदवन महादेववाडी वृक्षारोपण मोहीम २०२६*\n📅 *दिनांक*: १५ ऑगस्ट २०२६\n⏰ *वेळ*: सकाळी ११:०० ते दुपारी २:००\n📍 *स्थान*: आनंदवन, महादेववाडी, पुणे\n🌿 *झाडे लावली*: ११० रोपे\n🤝 *आयोजक*: सकल हिंदू समाज आणि चोक्सी स्कूल पुणे\n🎭 *जनजागृती नृत्य*: चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य सादरीकरण\n📞 *संपर्क*: मयांक गोहर (+91 9623130157)\n\n📸 *मोहिमेचे फोटो व व्हिडिओ पहा*: https://greenpune.in/#gallery\n📁 *Google Drive फोटो अल्बम*: https://drive.google.com/drive/folders/17Z-pQMYlNhUkpZpvk2Rjt6hWhvocGW7r`
+                  : `🌳 *Anandvan, Mahadevwadi Tree Plantation Drive 2026*\n📅 *Date*: 15 August 2026\n⏰ *Time*: 11:00 AM – 2:00 PM IST\n📍 *Location*: Anandvan, Mahadevwadi, Pune\n🌿 *Trees Planted*: 110 Native Trees\n🤝 *Organizers*: Sakal Hindu Samaj & Choksi School Pune\n🎭 *Special Performance*: Tree Plantation Awareness Dance Act by students of Choksi School Pune\n📞 *Contact*: Mayank Goher (+91 9623130157)\n\n📸 *View Photos & Video Highlights*: https://greenpune.in/#gallery\n📁 *Google Drive Album*: https://drive.google.com/drive/folders/17Z-pQMYlNhUkpZpvk2Rjt6hWhvocGW7r`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              📲 {lang === "mr" ? "मोहिमेचे तपशील व फोटो WhatsApp वर शेअर करा" : "Share Event Highlights & Photos on WhatsApp"}
+            </a>
             <a className="primary-action" href="/register">
               {t.event.cta}
             </a>

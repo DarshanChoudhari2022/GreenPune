@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "GreenPune Events",
+  title: "GreenPune Events — Anandvan Mahadevwadi 110 Trees Drive",
   description:
-    "Community portfolio and registrations for GreenPune tree plantation events.",
+    "110 native trees planted at Anandvan, Mahadevwadi, Pune (11:00 AM - 2:00 PM, 15 Aug 2026). Featuring Choksi School Pune awareness dance act & Sakal Hindu Samaj.",
   metadataBase: new URL("https://greenpune.in"),
   openGraph: {
-    title: "GreenPune Events",
-    description: "Community portfolio and registrations for GreenPune tree plantation events.",
+    title: "GreenPune Events — Anandvan Mahadevwadi 110 Trees Drive",
+    description: "110 native trees planted at Anandvan, Mahadevwadi, Pune (11:00 AM - 2:00 PM, 15 Aug 2026). Featuring Choksi School Pune awareness dance act & Sakal Hindu Samaj.",
     url: "https://greenpune.in",
     siteName: "GreenPune",
     images: [
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GreenPune Events",
-    description: "Community portfolio and registrations for GreenPune tree plantation events.",
+    title: "GreenPune Events — Anandvan Mahadevwadi 110 Trees Drive",
+    description: "110 native trees planted at Anandvan, Mahadevwadi, Pune (11:00 AM - 2:00 PM, 15 Aug 2026). Featuring Choksi School Pune awareness dance act & Sakal Hindu Samaj.",
     images: ["/images/greenpune-logo.png"]
   }
 };

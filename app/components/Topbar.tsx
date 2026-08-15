@@ -24,7 +24,7 @@ export function Topbar({ lang, setLang, variant = "home" }: TopbarProps) {
       {variant === "home" ? (
         <div className="topbar-center">
           <span className="save-the-text">SAVE THE:</span>
-          <a href="/about#ocean" className="nav-pill nav-pill-outline">OCEAN</a>
+          <a href="/about#rivers" className="nav-pill nav-pill-outline">RIVERS</a>
           <a href="/about#forest" className="nav-pill nav-pill-solid">FOREST</a>
         </div>
       ) : (

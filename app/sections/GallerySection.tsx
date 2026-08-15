@@ -40,8 +40,8 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
   }[lang];
 
   const shareText = lang === "mr"
-    ? "🌳 आनंदवन, महादेववाडी, पुणे येथे ११० वृक्षांची यशस्वी लागवड! 🎭 चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य. फोटो आणि व्हिडिओ पहा:"
-    : "🌳 110 Trees Planted at Anandvan, Mahadevwadi, Pune! 🎭 Featuring Choksi School Pune Tree Awareness Dance Performance. View drive photos & video highlights:";
+    ? `🌳 *आनंदवन महादेववाडी वृक्षारोपण मोहीम २०२६*\n📅 *दिनांक*: १५ ऑगस्ट २०२६ (सकाळी ११:०० ते दुपारी २:००)\n📍 *स्थान*: आनंदवन, महादेववाडी, पुणे\n🌿 *झाडे लावली*: ११० रोपे\n🤝 *आयोजक*: सकल हिंदू समाज आणि चोक्सी स्कूल पुणे\n🎭 *जनजागृती नृत्य*: चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य सादरीकरण\n📞 *संपर्क*: मयांक गोहर (+91 9623130157)\n\n📸 *मोहिमेचे फोटो व व्हिडिओ पहा*:`
+    : `🌳 *Anandvan, Mahadevwadi Tree Plantation Drive 2026*\n📅 *Date*: 15 August 2026 (11:00 AM – 2:00 PM IST)\n📍 *Location*: Anandvan, Mahadevwadi, Pune\n🌿 *Trees Planted*: 110 Native Trees\n🤝 *Organizers*: Sakal Hindu Samaj & Choksi School Pune\n🎭 *Special Performance*: Tree Plantation Awareness Dance Act by students of Choksi School Pune\n📞 *Contact*: Mayank Goher (+91 9623130157)\n\n📸 *View Photos & Video Highlights*:`;
 
   const shareUrl = typeof window !== "undefined" ? `${window.location.origin}/#gallery` : "https://greenpune.in/#gallery";
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;

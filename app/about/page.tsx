@@ -23,7 +23,7 @@ export default function AboutPage() {
         </div>
         <div className="topbar-center">
           <span className="save-the-text">SAVE THE:</span>
-          <a href="/about#ocean" className="nav-pill nav-pill-outline">OCEAN</a>
+          <a href="/about#rivers" className="nav-pill nav-pill-outline">RIVERS</a>
           <a href="/about#forest" className="nav-pill nav-pill-solid">FOREST</a>
         </div>
         <div className="topbar-right">
@@ -256,30 +256,29 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Ocean section */}
-      <section className="about-section about-section-blue" id="ocean">
+      {/* Rivers & Watersheds Section */}
+      <section className="about-section about-section-blue" id="rivers">
         <div className="about-section-inner">
-          <p className="about-label" style={{ color: "rgba(255,255,255,0.7)" }}>SAVE THE OCEAN</p>
-          <h2 style={{ color: "white" }}>Pune's Role in Protecting Maharashtra's Coastline</h2>
+          <p className="about-label" style={{ color: "rgba(255,255,255,0.7)" }}>SAVE OUR RIVERS</p>
+          <h2 style={{ color: "white" }}>Protecting Pune's Mula-Mutha River & Watershed Ecology</h2>
           <p className="about-lead" style={{ color: "rgba(255,255,255,0.85)" }}>
-            Inland cities like Pune have a critical role to play in ocean
-            conservation. Plastic waste from Pune's drains travels through rivers
-            to the Arabian Sea. Urban trees and green cover reduce runoff,
-            filter pollutants, and protect watersheds that feed Maharashtra's
-            coastal ecosystems.
+            Urban tree cover plays a direct role in protecting Pune's rivers,
+            groundwater aquifers, and monsoon runoff. Dense native roots filter
+            urban pollutants, prevent topsoil erosion into Mula-Mutha riverbed,
+            and absorb rainfall to recharge Pune's water table.
           </p>
           <div className="about-ocean-facts">
             <div>
-              <strong>Mutha River</strong>
-              <p>Pune's Mutha River flows into the Krishna and eventually to the Bay. What we put in our drains reaches the sea.</p>
+              <strong>Mula-Mutha Rivers</strong>
+              <p>Pune's Mula and Mutha rivers are the lifelines of the city. Native tree plantation along riverbanks stops siltation and preserves aquatic ecology.</p>
             </div>
             <div>
-              <strong>Plastic Pollution</strong>
-              <p>Maharashtra generates significant plastic waste that ends up in waterways. Reducing single-use plastic in Pune events is a GreenPune commitment.</p>
+              <strong>Groundwater Recharge</strong>
+              <p>Deep native root systems act as natural sponges, absorbing monsoon water and replenishing Pune's drying underground aquifers.</p>
             </div>
             <div>
-              <strong>Trees = Ocean Health</strong>
-              <p>Urban trees reduce stormwater runoff, preventing soil and pollutant flow into rivers. A greener Pune means cleaner waterways.</p>
+              <strong>Monsoon Flood Control</strong>
+              <p>Dense tree canopy reduces stormwater runoff speed, preventing topsoil erosion into storm drains and cutting urban flood risks in Pune.</p>
             </div>
           </div>
         </div>
