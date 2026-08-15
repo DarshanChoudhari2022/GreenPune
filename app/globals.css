@@ -474,6 +474,22 @@ h3 {
   transform: translateY(-1px);
 }
 
+.gdrive-btn {
+  background: #ffffff !important;
+  color: #1a73e8 !important;
+  border: 1px solid #dadce0 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08);
+}
+
+.gdrive-btn:hover {
+  background: #f8f9fa !important;
+  border-color: #1a73e8 !important;
+  color: #1557b0 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(26, 115, 232, 0.15);
+}
+
 .event-status-badge {
   display: flex;
   align-items: center;

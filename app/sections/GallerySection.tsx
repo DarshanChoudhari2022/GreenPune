@@ -74,6 +74,15 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
 
           <div className="gallery-share-bar" style={{ marginTop: "16px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <a
+              href="https://drive.google.com/drive/folders/17Z-pQMYlNhUkpZpvk2Rjt6hWhvocGW7r"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="secondary-btn gdrive-btn"
+              style={{ padding: "10px 18px", fontSize: "13px" }}
+            >
+              📁 {lang === "mr" ? "सर्व फोटो व व्हिडिओ Google Drive वर पहा" : "View All Photos & Videos on Google Drive"}
+            </a>
+            <a
               href={whatsappShareUrl}
               target="_blank"
               rel="noopener noreferrer"

@@ -105,6 +105,14 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
             >
               💬 {lang === "mr" ? "मयांक गोहर यांच्याशी WhatsApp वर बोला" : "Chat on WhatsApp with Mayank"}
             </a>
+            <a
+              className="secondary-btn gdrive-btn"
+              href="https://drive.google.com/drive/folders/17Z-pQMYlNhUkpZpvk2Rjt6hWhvocGW7r"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              📁 {lang === "mr" ? "Google Drive फोटो व व्हिडिओ" : "Google Drive Photos & Videos"}
+            </a>
           </div>
         </div>
 
