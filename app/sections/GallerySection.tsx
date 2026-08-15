@@ -24,24 +24,24 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
     en: {
       eyebrow: "Community Gallery & Highlights",
       title: "Memories & Video Highlights",
-      intro: "Photos and videos from our 15 August 2026 plantation drive at Nandanvan, Mahadevwadi, Pune.",
+      intro: "Photos and videos from our 15 August 2026 plantation drive at Anandvan, Mahadevwadi, Pune.",
       noImages: "Photos & video highlights will be uploaded here shortly by our team!",
       shareBtn: "Share Drive Highlights & Gallery",
       copiedText: "Link Copied to Clipboard!"
     },
     mr: {
       eyebrow: "कम्युनिटी गॅलरी आणि हायलाईट्स",
-      title: "नंदनवन मोहिमेचे क्षणचित्र आणि व्हिडिओ",
-      intro: "१५ ऑगस्ट २०२६ रोजी नंदनवन, महादेववाडी, पुणे येथील वृक्षारोपण मोहिमेची छायाचित्रे व व्हिडिओ हायलाईट्स.",
-      noImages: "नंदनवन मोहिमेची छायाचित्रे आणि व्हिडिओ लवकरच येथे अपलोड केले जातील!",
+      title: "आनंदवन मोहिमेचे क्षणचित्र आणि व्हिडिओ",
+      intro: "१५ ऑगस्ट २०२६ रोजी आनंदवन, महादेववाडी, पुणे येथील वृक्षारोपण मोहिमेची छायाचित्रे व व्हिडिओ हायलाईट्स.",
+      noImages: "आनंदवन मोहिमेची छायाचित्रे आणि व्हिडिओ लवकरच येथे अपलोड केले जातील!",
       shareBtn: "मोहिमेचे फोटो व व्हिडिओ शेअर करा",
       copiedText: "दुवा कॉपी झाला!"
     }
   }[lang];
 
   const shareText = lang === "mr"
-    ? "🌳 नंदनवन, महादेववाडी, पुणे येथे ११० वृक्षांची यशस्वी लागवड! 🎭 चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य. फोटो आणि व्हिडिओ पहा:"
-    : "🌳 110 Trees Planted at Nandanvan, Mahadevwadi, Pune! 🎭 Featuring Choksi School Pune Tree Awareness Dance Performance. View drive photos & video highlights:";
+    ? "🌳 आनंदवन, महादेववाडी, पुणे येथे ११० वृक्षांची यशस्वी लागवड! 🎭 चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य. फोटो आणि व्हिडिओ पहा:"
+    : "🌳 110 Trees Planted at Anandvan, Mahadevwadi, Pune! 🎭 Featuring Choksi School Pune Tree Awareness Dance Performance. View drive photos & video highlights:";
 
   const shareUrl = typeof window !== "undefined" ? `${window.location.origin}/#gallery` : "https://greenpune.in/#gallery";
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;

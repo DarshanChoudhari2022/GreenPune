@@ -2732,6 +2732,9 @@ footer .powered-by-link:hover {
   cursor: pointer;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .gallery-card:hover {
@@ -2742,23 +2745,34 @@ footer .powered-by-link:hover {
 .gallery-image-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 75%; /* 4:3 aspect ratio */
+  aspect-ratio: 4 / 3;
   background: #f5f5f4;
   overflow: hidden;
 }
 
-.gallery-img {
+.gallery-img,
+.gallery-image-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.gallery-card:hover .gallery-img {
+.gallery-card:hover .gallery-img,
+.gallery-card:hover .gallery-image-wrapper video {
   transform: scale(1.05);
 }
 
 .gallery-caption {
-  padding: 16px;
+  padding: 14px 16px;
   border-top: 1px solid #f5f5f4;
+  margin-top: auto;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
 }
 
 .gallery-caption p {

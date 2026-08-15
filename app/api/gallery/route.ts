@@ -56,7 +56,7 @@ export async function POST(request: Request) {
     const imageRecord: GalleryImage = {
       id: `img_${timestamp}_${Math.random().toString(36).substring(2, 7)}`,
       url: imageUrl,
-      caption: caption || (isVideo ? "Nandanvan Drive Video Highlight" : "Nandanvan Drive Photo"),
+      caption: caption || (isVideo ? "Anandvan Drive Video Highlight" : "Anandvan Drive Photo"),
       createdAt: new Date().toISOString(),
       mediaType: isVideo ? "video" : "image"
     };

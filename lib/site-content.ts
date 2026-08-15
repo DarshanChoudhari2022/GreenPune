@@ -18,13 +18,13 @@ export const content = {
       body: "Join a local plantation drive, then help care for each tree for the next three years.",
       primary: "Register for Next Drive",
       secondary: "See Impact Tracker",
-      stat: "110 Trees Planted Today!\nNandanvan, Mahadevwadi, Pune\n15 August 2026"
+      stat: "110 Trees Planted Today!\nAnandvan, Mahadevwadi, Pune\n15 August 2026"
     },
     mission: {
       eyebrow: "Impact Tracker & Stewardship",
       title: "110 Trees Planted & 3-Year Post-Plantation Care Commitment",
       body:
-        "Our 15 August 2026 drive at Nandanvan, Mahadevwadi planted 110 native trees in partnership with Sakal Hindu Samaj and Choksi School Pune. Every event connects immediate plantation with a 3-year local watering and protection schedule."
+        "Our 15 August 2026 drive at Anandvan, Mahadevwadi planted 110 native trees in partnership with Sakal Hindu Samaj and Choksi School Pune. Every event connects immediate plantation with a 3-year local watering and protection schedule."
     },
     stats: [
       ["110", "Trees Planted Today (15 Aug 2026)"],
@@ -123,11 +123,11 @@ export const content = {
     },
     gallery: {
       eyebrow: "Event Gallery",
-      title: "Memories & Highlights from Nandanvan Drive",
+      title: "Memories & Highlights from Anandvan Drive",
       uploadTitle: "Upload Event Image / Video Highlight",
       uploadCta: "Choose File",
       submit: "Upload Highlight",
-      captionPlaceholder: "Add location & caption (e.g. Nandanvan Mahadevwadi 110 Trees Drive)...",
+      captionPlaceholder: "Add location & caption (e.g. Anandvan Mahadevwadi 110 Trees Drive)...",
       noImages: "Photos & video highlights will be uploaded here shortly.",
       joinTitle: "Share your own tree plantation memory!",
       successMessage: "Highlight uploaded successfully!",
@@ -151,13 +151,13 @@ export const content = {
       body: "स्थानिक वृक्षारोपण मोहिमेत सहभागी व्हा आणि पुढील ३ वर्षे प्रत्येक झाडाची काळजी घ्या.",
       primary: "पुढील मोहिमेसाठी नोंदणी करा",
       secondary: "इम्पॅक्ट ट्रॅकर पहा",
-      stat: "आज ११० रोपे लावली!\nनंदनवन, महादेववाडी, पुणे\n१५ ऑगस्ट २०२६"
+      stat: "आज ११० रोपे लावली!\nआनंदवन, महादेववाडी, पुणे\n१५ ऑगस्ट २०२६"
     },
     mission: {
       eyebrow: "इम्पॅक्ट ट्रॅकर आणि जबाबदारी",
       title: "११० वृक्षांची यशस्वी लागवड आणि ३ वर्षे देखभाल संकल्प",
       body:
-        "१५ ऑगस्ट २०२६ रोजी नंदनवन, महादेववाडी येथे सकल हिंदू समाज आणि चोक्सी स्कूल पुणे यांच्या सहकार्याने ११० वृक्षांची लागवड करण्यात आली. झाड लावण्यासोबतच पुढील ३ वर्षे पाण्याचे नियोजन व संरक्षणाची जबाबदारी घेतली जात आहे."
+        "१५ ऑगस्ट २०२६ रोजी आनंदवन, महादेववाडी येथे सकल हिंदू समाज आणि चोक्सी स्कूल पुणे यांच्या सहकार्याने ११० वृक्षांची लागवड करण्यात आली. झाड लावण्यासोबतच पुढील ३ वर्षे पाण्याचे नियोजन व संरक्षणाची जबाबदारी घेतली जात आहे."
     },
     stats: [
       ["११०", "रोपे लावली (१५ ऑगस्ट २०२६)"],
@@ -256,12 +256,12 @@ export const content = {
     },
     gallery: {
       eyebrow: "गॅलरी",
-      title: "नंदनवन महादेववाडी मोहिमेचे क्षणचित्रे",
+      title: "आनंदवन महादेववाडी मोहिमेचे क्षणचित्रे",
       uploadTitle: "छायाचित्र किंवा व्हिडिओ हायलाईट अपलोड करा",
       uploadCta: "फाईल निवडा",
       submit: "अपलोड करा",
-      captionPlaceholder: "स्थान आणि कॅप्शन टाका (उदा. नंदनवन महादेववाडी ११० वृक्ष लागवड)...",
-      noImages: "नंदनवन उपक्रमाची छायाचित्रे व व्हिडिओ लवकरच येथे दिसतील.",
+      captionPlaceholder: "स्थान आणि कॅप्शन टाका (उदा. आनंदवन महादेववाडी ११० वृक्ष लागवड)...",
+      noImages: "आनंदवन उपक्रमाची छायाचित्रे व व्हिडिओ लवकरच येथे दिसतील.",
       joinTitle: "तुमची स्वतःची वृक्षारोपणाची आठवण शेअर करा!",
       successMessage: "छायाचित्र यशस्वीरित्या अपलोड झाले!",
       errorMessage: "छायाचित्र अपलोड करण्यात त्रुटी आली. कृपया पुन्हा प्रयत्न करा."

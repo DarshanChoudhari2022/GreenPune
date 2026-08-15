@@ -114,8 +114,8 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
             <h3>{lang === "mr" ? "११० झाडे लावली" : "110 Trees Planted"}</h3>
             <p>
               {lang === "mr"
-                ? "नंदनवन, महादेववाडी येथे नागरिकांच्या सहभागाने ११० रोपे लावली."
-                : "Planted 110 native tree saplings at Nandanvan, Mahadevwadi with local residents."}
+                ? "आनंदवन, महादेववाडी येथे नागरिकांच्या सहभागाने ११० रोपे लावली."
+                : "Planted 110 native tree saplings at Anandvan, Mahadevwadi with local residents."}
             </p>
           </article>
           <article className="fade-up" style={{ animationDelay: "0.5s" }}>

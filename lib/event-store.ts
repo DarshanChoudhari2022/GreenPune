@@ -54,7 +54,7 @@ export function eventFromFormData(formData: FormData): EventItem {
     specialAct: String(formData.get("specialAct") || "").trim() || undefined,
     specialActMarathi: String(formData.get("specialActMarathi") || "").trim() || undefined,
     whatsappUrl: String(formData.get("whatsappUrl") || "https://wa.me/919623130157?text=Hi%20Mayank,%20I%20want%20to%20know%20more%20about%20GreenPune%20Tree%20Plantation%20Drive").trim(),
-    mapUrl: String(formData.get("mapUrl") || "https://maps.google.com/?q=Nandanvan+Mahadevwadi+Pune").trim(),
+    mapUrl: String(formData.get("mapUrl") || "https://maps.google.com/?q=Anandvan+Mahadevwadi+Pune").trim(),
     status: normalizeStatus(formData.get("status"))
   };
 }
@@ -142,7 +142,7 @@ export async function listEvents(): Promise<EventItem[]> {
           specialAct: record.special_act || "Tree Plantation Awareness Dance Performance by students of Choksi School Pune",
           specialActMarathi: record.special_act_marathi || "चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य सादरीकरण",
           whatsappUrl: record.whatsapp_url || "https://wa.me/919623130157?text=Hi%20Mayank,%20I%20want%20to%20know%20more%20about%20GreenPune%20Tree%20Plantation%20Drive",
-          mapUrl: record.map_url || "https://maps.google.com/?q=Nandanvan+Mahadevwadi+Pune",
+          mapUrl: record.map_url || "https://maps.google.com/?q=Anandvan+Mahadevwadi+Pune",
           status: record.status
         }));
       }

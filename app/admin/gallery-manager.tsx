@@ -127,7 +127,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
                   type="text"
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
-                  placeholder="e.g. Nandanvan Mahadevwadi 110 Trees Drive - Choksi School Dance Act"
+                  placeholder="e.g. Anandvan Mahadevwadi 110 Trees Drive - Choksi School Dance Act"
                   maxLength={150}
                 />
               </label>
