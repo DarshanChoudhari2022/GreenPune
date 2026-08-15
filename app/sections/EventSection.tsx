@@ -87,7 +87,7 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
           </dl>
 
           <div className="locality-pills">
-            <span className="pill-item">🌱 {lang === "mr" ? "देशी वनस्पती: कडू निंब, पिंपळ, वड, करंज" : "Native Species: Neem, Peepal, Banyan, Karanj"}</span>
+            <span className="pill-item">🌱 {lang === "mr" ? "वनस्पती: कडू निंब, पिंपळ, वड, करंज" : "Native Species: Neem, Peepal, Banyan, Karanj"}</span>
             <span className="pill-item">💧 {lang === "mr" ? "३ वर्षे पाणी व देखभाल नियोजन" : "3-Year Care & Water Schedule"}</span>
           </div>
 
@@ -114,7 +114,7 @@ export function EventSection({ t, lang, event }: EventSectionProps) {
             <h3>{lang === "mr" ? "११० झाडे लावली" : "110 Trees Planted"}</h3>
             <p>
               {lang === "mr"
-                ? "नंदनवन, महादेववाडी येथे नागरिकांच्या सहभागाने ११० देशी रोपे लावली."
+                ? "नंदनवन, महादेववाडी येथे नागरिकांच्या सहभागाने ११० रोपे लावली."
                 : "Planted 110 native tree saplings at Nandanvan, Mahadevwadi with local residents."}
             </p>
           </article>
