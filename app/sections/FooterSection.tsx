@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Section } from "@/app/components/Section";
-import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
 
 interface FooterSectionProps {
   t: {
@@ -27,13 +26,6 @@ export function FooterSection({ t }: FooterSectionProps) {
             <Link href="/register" style={{ border: "none", padding: 0, textDecoration: "underline" }}>Register</Link>
             <Link href="/faq" style={{ border: "none", padding: 0, textDecoration: "underline" }}>FAQ</Link>
             <Link href="/privacy" style={{ border: "none", padding: 0, textDecoration: "underline" }}>Privacy Policy</Link>
-            <CookieSettingsButton
-              style={{
-                color: "rgba(255, 255, 255, 0.8)",
-                fontSize: "13px",
-                textDecoration: "underline"
-              }}
-            />
           </div>
           <p className="powered-by-text" style={{ marginTop: "4px" }}>
             {t.footer.poweredBy || "Powered by"}{" "}

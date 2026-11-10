@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
 
 export const metadata: Metadata = {
   title: "About Us — 1 Million Trees Urban Greening Mission",
@@ -426,13 +425,6 @@ export default function AboutPage() {
           <div className="about-footer-bottom">
             <p>© 2026 GreenPune Initiative. All rights reserved.</p>
             <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-              <CookieSettingsButton
-                style={{
-                  color: "rgba(255, 255, 255, 0.6)",
-                  fontSize: "13px",
-                  textDecoration: "underline"
-                }}
-              />
               <Link href="/privacy" style={{ color: "rgba(255, 255, 255, 0.6)" }}>
                 Privacy
               </Link>

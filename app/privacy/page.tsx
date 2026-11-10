@@ -119,16 +119,11 @@ export default function PrivacyPage() {
 
           <section>
             <h2 style={{ fontSize: "20px", fontWeight: 800, color: "#111", marginBottom: "10px" }}>
-              4. Optional Analytics & Cookies
+              4. Analytics & Tracking
             </h2>
             <p>
-              We value your privacy by design:
+              We value visitor privacy. Our website does not run intrusive profiling trackers, aggressive tracking scripts, or commercial ad pixels. Standard server logs and optional privacy-friendly metrics are used solely to assess site availability and community reach.
             </p>
-            <ul style={{ paddingLeft: "20px", marginTop: "8px" }}>
-              <li><strong>No Tracking Without Consent:</strong> Google Analytics 4 (GA4) is completely disabled by default. No requests are sent to Google until you explicitly choose "Accept" on our cookie banner.</li>
-              <li><strong>Equal Choice:</strong> You have an equal, unhindered option to decline cookies. Declining does not affect your ability to browse or register.</li>
-              <li><strong>Consent Withdrawal:</strong> You can modify or withdraw your cookie consent at any time by clicking "Cookie Settings" in the footer.</li>
-            </ul>
           </section>
 
           <section>
