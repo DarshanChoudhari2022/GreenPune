@@ -1,31 +1,39 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function ScrollProgress() {
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!barRef.current) return;
+    let ticking = false;
 
-    const ctx = gsap.context(() => {
-      gsap.to(barRef.current, {
-        scaleX: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: document.body,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.3
-        }
-      });
-    });
+    const updateScrollProgress = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(Math.max(scrollY / docHeight, 0), 1) : 0;
 
-    return () => ctx.revert();
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${progress})`;
+      }
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollProgress);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    updateScrollProgress();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
@@ -34,7 +42,11 @@ export function ScrollProgress() {
       className="scroll-progress"
       role="progressbar"
       aria-label="Scroll progress"
-      style={{ transform: "scaleX(0)", transformOrigin: "left" }}
+      style={{
+        transform: "scaleX(0)",
+        transformOrigin: "left",
+        willChange: "transform"
+      }}
     />
   );
 }

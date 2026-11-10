@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Topbar } from "@/app/components/Topbar";
 import { type EventItem } from "@/lib/events";
 import { content, type Language } from "@/lib/site-content";
@@ -19,7 +19,7 @@ export function RegisterClient({
   const eventTitle = lang === "mr" ? currentEvent.titleDevanagari : currentEvent.titleEnglish;
 
   // Sync language with localStorage preference on mount
-  useState(() => {
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("greenpune_lang") as Language;
       if (saved === "en" || saved === "mr") {
@@ -29,7 +29,7 @@ export function RegisterClient({
         document.documentElement.lang = "mr";
       }
     }
-  });
+  }, []);
 
   const handleSetLang = (newLang: Language) => {
     setLang(newLang);
