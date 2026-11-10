@@ -57,7 +57,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  line-height: 1.6;
+  font-size: clamp(15px, 1.1vw, 16px);
+  line-height: 1.65;
 }
 
 a {
@@ -86,23 +87,23 @@ h1, h2, h3, p {
 }
 
 h1 {
-  font-size: clamp(28px, 5vw, 48px);
+  font-size: clamp(30px, 4.5vw, 54px);
   font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 16px;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  margin-bottom: 18px;
 }
 
 h2 {
-  font-size: clamp(22px, 4vw, 36px);
+  font-size: clamp(24px, 3.2vw, 40px);
   font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  margin-bottom: 14px;
 }
 
 h3 {
-  font-size: clamp(16px, 2.5vw, 22px);
+  font-size: clamp(18px, 2.2vw, 24px);
   font-weight: 700;
   line-height: 1.3;
   margin-bottom: 8px;
@@ -149,13 +150,13 @@ h3 {
 
 .brand-text {
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
+  font-size: clamp(20px, 1.8vw, 26px);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
   color: #111;
   display: flex;
-  align-items: flex-end;
-  gap: 3px;
+  align-items: center;
+  gap: 8px;
 }
 
 .brand-stack {
@@ -166,15 +167,22 @@ h3 {
 
 .brand-bold {
   font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #111;
 }
 
 .brand-light {
-  font-weight: 400;
+  font-weight: 500;
+  color: var(--leaf-dark, #529624);
+  letter-spacing: 0.02em;
 }
 
 .brand-text .drop {
-  font-size: 18px;
-  margin-bottom: 1px;
+  font-size: clamp(26px, 2.4vw, 36px);
+  margin-bottom: 0;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .topbar-center {
@@ -187,18 +195,18 @@ h3 {
 }
 
 .save-the-text {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #333;
+  letter-spacing: 0.06em;
+  color: #444;
 }
 
 .nav-pill {
   border-radius: 99px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 6px 16px;
+  padding: 7px 18px;
   cursor: pointer;
 }
 
@@ -215,9 +223,9 @@ h3 {
 }
 
 .nav-about {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   color: #333;
 }
 
@@ -337,13 +345,13 @@ h3 {
 
 .hero-heading {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(26px, 5vw, 48px);
+  font-size: clamp(30px, 4.4vw, 58px);
   font-weight: 900;
   line-height: 1.1;
   text-align: center;
   color: #111;
   margin: 0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   z-index: 10;
   position: relative;
 }
@@ -393,25 +401,25 @@ h3 {
 
 .hero-stat-box {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(11px, 1.2vw, 14px);
-  font-weight: 700;
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 800;
   color: #111;
   line-height: 1.6;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .hero-cta-box {
   text-align: right;
-  max-width: 420px;
+  max-width: 440px;
 }
 
 .hero-cta-box p {
   font-family: 'Inter', sans-serif;
-  font-size: 15px;
+  font-size: clamp(14px, 1.25vw, 17px);
   color: #333;
-  line-height: 1.6;
-  margin-bottom: 16px;
+  line-height: 1.65;
+  margin-bottom: 20px;
 }
 
 .hero-cta-box strong {
@@ -423,9 +431,9 @@ h3 {
   background: var(--leaf);
   color: white;
   border-radius: 99px;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 26px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -457,9 +465,9 @@ h3 {
   color: var(--ink);
   border: 1px solid rgba(26, 46, 26, 0.18);
   border-radius: 99px;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 26px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -614,7 +622,7 @@ h3 {
 footer p,
 .register-card > p {
   color: var(--muted);
-  font-size: clamp(14px, 1.6vw, 16px);
+  font-size: clamp(15px, 1.2vw, 17px);
   line-height: 1.7;
 }
 
@@ -669,7 +677,8 @@ footer p,
 .stats-grid strong {
   color: var(--leaf);
   display: block;
-  font-size: clamp(24px, 4vw, 36px);
+  font-size: clamp(28px, 3.6vw, 44px);
+  font-weight: 900;
   line-height: 1;
   margin-bottom: 8px;
 }
@@ -871,9 +880,10 @@ footer p,
 
 .projection-card strong {
   display: block;
-  font-size: clamp(24px, 4vw, 38px);
+  font-size: clamp(28px, 3.8vw, 46px);
+  font-weight: 900;
   line-height: 1;
-  margin: 16px 0 12px;
+  margin: 18px 0 12px;
   background: linear-gradient(135deg, #fff, var(--leaf));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1335,12 +1345,12 @@ footer .powered-by-link:hover {
   }
 
   .brand-text {
-    font-size: 14px;
-    gap: 6px;
+    font-size: 18px;
+    gap: 7px;
   }
 
   .brand-text .drop {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   /* Hide the SAVE THE: OCEAN FOREST pills on mobile */
@@ -1497,14 +1507,23 @@ footer .powered-by-link:hover {
   }
 
   .brand-text {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 
 /* ─── Tablet+ (min-width: 640px) ─── */
 @media (min-width: 640px) {
   .topbar {
-    padding: 20px 28px;
+    padding: 20px 32px;
+  }
+
+  .brand-text {
+    font-size: 21px;
+    gap: 8px;
+  }
+
+  .brand-text .drop {
+    font-size: 28px;
   }
 
   .brand-logo {
@@ -1593,6 +1612,15 @@ footer .powered-by-link:hover {
 @media (min-width: 820px) {
   .topbar {
     padding: 24px 48px;
+  }
+
+  .brand-text {
+    font-size: 24px;
+    gap: 9px;
+  }
+
+  .brand-text .drop {
+    font-size: 32px;
   }
 
   .brand-logo {
@@ -3033,72 +3061,21 @@ footer .powered-by-link:hover {
   box-shadow: 0 8px 24px rgba(13, 74, 26, 0.25);
 }
 
-/* ─── Professional Typography Scale ─── */
-body {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.brand-text {
-  font-size: 15px;
-}
-
-.brand-text .drop {
-  font-size: 17px;
-}
-
-.nav-about {
-  font-size: 12px;
-}
-
-.eyebrow {
-  font-size: 11px;
-}
-
-.mission-body,
-.event-copy > p,
-.insight-copy p,
-.portfolio-section p,
-.register-card > p {
-  font-size: clamp(14px, 1.6vw, 16px);
-}
-
-.stats-grid strong {
-  font-size: clamp(24px, 4vw, 36px);
-}
-
-.stats-grid span {
-  font-size: 13px;
-}
-
-.help-grid p {
-  font-size: 13px;
-}
-
-.event-details dt {
-  font-size: 10px;
-}
-
-.event-details dd {
-  font-size: 14px;
+/* ─── Responsive Typography Polish ─── */
+footer strong {
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
 }
 
 .registration-form label > span,
 .registration-form legend {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .registration-form input,
 .registration-form textarea {
-  font-size: 14px;
-}
-
-.form-powered-by {
-  font-size: 10px;
-}
-
-footer p {
-  font-size: 13px;
+  font-size: 15px;
 }
 
