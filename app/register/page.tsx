@@ -4,8 +4,17 @@ import { getCurrentEvent } from "@/lib/event-store";
 import { listQuestions } from "@/lib/questions-store";
 
 export const metadata: Metadata = {
-  title: "Register | GreenPune Events",
-  description: "Register for the GreenPune tree plantation event."
+  title: "Register for Tree Plantation Drive",
+  description: "Register to participate in the GreenPune native tree plantation drive. Free volunteer registration with post-plantation care stewardship.",
+  alternates: {
+    canonical: "/register"
+  },
+  openGraph: {
+    title: "Register for Tree Plantation Drive | GreenPune",
+    description: "Register to participate in the GreenPune native tree plantation drive. Free volunteer registration.",
+    url: "/register",
+    type: "website"
+  }
 };
 
 export const dynamic = "force-dynamic";

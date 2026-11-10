@@ -129,7 +129,7 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
                     ) : (
                       <Image
                         src={img.url}
-                        alt={img.caption || "Gallery Image"}
+                        alt={img.caption || (lang === "mr" ? "ग्रीनपुणे आनंदवन वृक्षारोपण मोहीम छायाचित्र" : "GreenPune Anandvan tree plantation drive highlight")}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="gallery-img"
@@ -172,7 +172,7 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
               ) : (
                 <img
                   src={selectedMedia.url}
-                  alt={selectedMedia.caption || "Gallery Image"}
+                  alt={selectedMedia.caption || (lang === "mr" ? "ग्रीनपुणे आनंदवन वृक्षारोपण मोहीम छायाचित्र" : "GreenPune Anandvan tree plantation drive highlight")}
                   className="lightbox-img"
                 />
               )}

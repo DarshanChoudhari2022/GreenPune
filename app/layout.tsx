@@ -1,32 +1,34 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AnalyticsAndConsent } from "./components/AnalyticsAndConsent";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://greenpune.in";
 
 export const metadata: Metadata = {
-  title: "GreenPune Events — Anandvan Mahadevwadi 110 Trees Drive",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "GreenPune — Native Tree Plantation & Urban Greening Movement",
+    template: "%s | GreenPune"
+  },
   description:
-    "110 native trees planted at Anandvan, Mahadevwadi, Pune (11:00 AM - 2:00 PM, 15 Aug 2026). Featuring Choksi School Pune awareness dance act & Sakal Hindu Samaj.",
-  metadataBase: new URL("https://greenpune.in"),
+    "Citizen-led urban greening initiative in Pune. Planting 1 million native trees across Pune neighborhoods, Anandvan, and tekdis with 3-year survival care.",
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
-    title: "GreenPune Events — Anandvan Mahadevwadi 110 Trees Drive",
-    description: "110 native trees planted at Anandvan, Mahadevwadi, Pune (11:00 AM - 2:00 PM, 15 Aug 2026). Featuring Choksi School Pune awareness dance act & Sakal Hindu Samaj.",
-    url: "https://greenpune.in",
+    title: "GreenPune — Native Tree Plantation & Urban Greening Movement",
+    description:
+      "Citizen-led urban greening initiative in Pune. Planting 1 million native trees across Pune neighborhoods, Anandvan, and tekdis with 3-year survival care.",
+    url: siteUrl,
     siteName: "GreenPune",
-    images: [
-      {
-        url: "/images/greenpune-logo.png",
-        width: 1200,
-        height: 630,
-        alt: "GreenPune Logo"
-      }
-    ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "GreenPune Events — Anandvan Mahadevwadi 110 Trees Drive",
-    description: "110 native trees planted at Anandvan, Mahadevwadi, Pune (11:00 AM - 2:00 PM, 15 Aug 2026). Featuring Choksi School Pune awareness dance act & Sakal Hindu Samaj.",
-    images: ["/images/greenpune-logo.png"]
+    title: "GreenPune — Native Tree Plantation & Urban Greening Movement",
+    description:
+      "Citizen-led urban greening initiative in Pune. Planting 1 million native trees across Pune neighborhoods, Anandvan, and tekdis with 3-year survival care."
   }
 };
 
@@ -37,7 +39,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="mr">
-      <body>{children}</body>
+      <body>
+        {children}
+        <AnalyticsAndConsent />
+      </body>
     </html>
   );
 }

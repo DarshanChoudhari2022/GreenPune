@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CookieSettingsButton } from "@/app/components/CookieSettingsButton";
 
 export const metadata: Metadata = {
-  title: "About GreenPune | Urban Greening Initiative",
+  title: "About Us — 1 Million Trees Urban Greening Mission",
   description:
-    "Learn about the GreenPune initiative — planting 1 million trees in Pune over 5 years, our first plantation drive on 15 August 2026, and how you can help.",
+    "Learn about the GreenPune initiative — planting 1 million native trees in Pune with 3-year care commitment, preserving tekdis and rivers.",
+  alternates: {
+    canonical: "/about"
+  },
+  openGraph: {
+    title: "About Us — 1 Million Trees Urban Greening Mission | GreenPune",
+    description:
+      "Learn about the GreenPune initiative — planting 1 million native trees in Pune with 3-year care commitment, preserving tekdis and rivers.",
+    url: "/about",
+    type: "website"
+  }
 };
 
 export default function AboutPage() {
@@ -391,8 +402,11 @@ export default function AboutPage() {
             <div className="about-footer-links">
               <h4>Quick Links</h4>
               <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/register">Register for Drive</a></li>
+                <li><Link href="/">Home</Link></li>
+                <li><Link href="/about">About Us</Link></li>
+                <li><Link href="/register">Register for Drive</Link></li>
+                <li><Link href="/faq">FAQs</Link></li>
+                <li><Link href="/privacy">Privacy Policy</Link></li>
                 <li><a href="#why-pune">Why Pune Needs Trees</a></li>
                 <li><a href="#first-event">First Event — 15 Aug 2026</a></li>
                 <li><a href="#forest">Forest Zones in Pune</a></li>
@@ -411,12 +425,24 @@ export default function AboutPage() {
           </div>
           <div className="about-footer-bottom">
             <p>© 2026 GreenPune Initiative. All rights reserved.</p>
-            <p>
-              Powered by{" "}
-              <a href="https://www.bracketdex.com/" target="_blank" rel="noopener noreferrer">
-                BracketDex Technologies
-              </a>
-            </p>
+            <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+              <CookieSettingsButton
+                style={{
+                  color: "rgba(255, 255, 255, 0.6)",
+                  fontSize: "13px",
+                  textDecoration: "underline"
+                }}
+              />
+              <Link href="/privacy" style={{ color: "rgba(255, 255, 255, 0.6)" }}>
+                Privacy
+              </Link>
+              <p style={{ margin: 0 }}>
+                Powered by{" "}
+                <a href="https://www.bracketdex.com/" target="_blank" rel="noopener noreferrer">
+                  BracketDex Technologies
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </section>

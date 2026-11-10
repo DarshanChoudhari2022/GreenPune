@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { RegistrationInput } from "@/lib/registration";
 import type { content, Language } from "@/lib/site-content";
 import { type QuestionItem } from "@/lib/questions-store";
@@ -29,6 +30,7 @@ export function RegisterForm({
   const [showSuccess, setShowSuccess] = useState(false);
   const [regCount, setRegCount] = useState<number | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   // Fetch live registration count on mount and after each successful registration
   const fetchCount = async () => {
@@ -69,6 +71,7 @@ export function RegisterForm({
         phoneCountryCode: String(formData.get("phoneCountryCode") || ""),
         phone: String(formData.get("phone") || ""),
         address: String(formData.get("address") || ""),
+        website: String(formData.get("website") || ""),
         answers
       };
 
@@ -100,6 +103,10 @@ export function RegisterForm({
         setShowSuccess(true);
         // Fire-and-forget: don't block success UI for count refresh
         fetchCount();
+        // Redirect to /thank-you after confirmed delivery
+        setTimeout(() => {
+          router.push("/thank-you");
+        }, 1500);
       }
     } catch (err: any) {
       // Handle network errors, timeouts, JSON parse failures
@@ -135,6 +142,18 @@ export function RegisterForm({
 
       <form className="registration-form" id="register" ref={formRef} onSubmit={handleSubmit}>
         <input name="eventId" type="hidden" value={eventId} />
+
+        {/* Anti-spam honeypot */}
+        <div style={{ display: "none", opacity: 0, position: "absolute", left: "-9999px" }} aria-hidden="true">
+          <label htmlFor="website">Leave this field blank</label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
 
         <label>
           <span>{copy.name}</span>
@@ -253,7 +272,10 @@ export function RegisterForm({
                 <span>{countLabel}</span>
               </div>
             )}
-            <button className="success-btn" onClick={() => setShowSuccess(false)}>
+            <button className="success-btn" onClick={() => {
+              setShowSuccess(false);
+              router.push("/thank-you");
+            }}>
               {successClose}
             </button>
           </div>

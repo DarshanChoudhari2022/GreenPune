@@ -7,6 +7,26 @@ import { listRegistrations } from "@/lib/registration-store";
 
 const fallbackPath = path.join(process.cwd(), "data", "registrations.json");
 
+// In-memory rate limiting: max 5 requests per 60 seconds per IP
+const rateLimitMap = new Map<string, { count: number; expiresAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now > entry.expiresAt) {
+    rateLimitMap.set(ip, { count: 1, expiresAt: now + 60000 });
+    return false;
+  }
+
+  if (entry.count >= 5) {
+    return true;
+  }
+
+  entry.count += 1;
+  return false;
+}
+
 async function saveLocal(record: any) {
   await fs.mkdir(path.dirname(fallbackPath), { recursive: true });
 
@@ -70,15 +90,34 @@ async function isDuplicatePhone(
 }
 
 export async function POST(request: Request) {
-  let payload: Partial<RegistrationInput>;
+  // Client IP for rate limiting
+  const forwarded = request.headers.get("x-forwarded-for");
+  const ip = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
+
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      {
+        ok: false,
+        message: "Too many requests. Please wait a minute before trying again."
+      },
+      { status: 429 }
+    );
+  }
+
+  let payload: Partial<RegistrationInput> & { website?: string };
 
   try {
-    payload = (await request.json()) as Partial<RegistrationInput>;
+    payload = (await request.json()) as Partial<RegistrationInput> & { website?: string };
   } catch {
     return NextResponse.json(
       { ok: false, message: "Invalid request body." },
       { status: 400 }
     );
+  }
+
+  // Honeypot check: If hidden 'website' field is filled, silently discard spam bot
+  if (payload.website && payload.website.trim().length > 0) {
+    return NextResponse.json({ ok: true, message: "Registration received." });
   }
 
   const validation = await validateRegistration(payload, payload.lang || "mr");
@@ -165,6 +204,33 @@ export async function POST(request: Request) {
         },
         { status: 500 }
       );
+    }
+  }
+
+  // Optional Web3Forms delivery for notifications if configured
+  const web3FormsKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+  if (web3FormsKey) {
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: web3FormsKey,
+          subject: `New GreenPune Volunteer Registration: ${trimmedName}`,
+          from_name: "GreenPune Registrations",
+          name: trimmedName,
+          phone: formattedPhone,
+          address: record.address,
+          can_bring_tree: record.canBringTree,
+          event_id: record.eventId,
+          submitted_at: record.createdAt
+        })
+      });
+    } catch (err: any) {
+      console.error("Web3Forms notification error (non-blocking):", err.message || err);
     }
   }
 

@@ -32,6 +32,12 @@ export function Topbar({ lang, setLang, variant = "home" }: TopbarProps) {
       )}
 
       <div className="topbar-right" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        <a href="/faq" className="nav-about">
+          FAQ
+        </a>
+        <a href={variant === "home" ? "/about" : "/"} className="nav-about">
+          {variant === "home" ? "ABOUT" : "HOME"}
+        </a>
         {setLang && lang && (
           <button
             type="button"
@@ -49,9 +55,6 @@ export function Topbar({ lang, setLang, variant = "home" }: TopbarProps) {
             🌐 {lang === "en" ? "मराठी" : "ENGLISH"}
           </button>
         )}
-        <a href={variant === "home" ? "/about" : "/"} className="nav-about">
-          {variant === "home" ? "ABOUT" : "HOME"}
-        </a>
       </div>
     </nav>
   );

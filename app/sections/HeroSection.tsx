@@ -35,7 +35,7 @@ export function HeroSection({ t }: HeroSectionProps) {
 
         <div className="hero-tree">
           <Image
-            alt="Lush green tree"
+            alt="Lush native tree canopy in Pune - GreenPune initiative"
             src="/images/hero-tree.png"
             width={700}
             height={800}
