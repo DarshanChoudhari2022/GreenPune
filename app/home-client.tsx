@@ -7,25 +7,20 @@ import { HeroSection } from "@/app/sections/HeroSection";
 import { MissionSection } from "@/app/sections/MissionSection";
 import { EventSection } from "@/app/sections/EventSection";
 import { InsightsSection } from "@/app/sections/InsightsSection";
-import { PortfolioSection } from "@/app/sections/PortfolioSection";
 import { FooterSection } from "@/app/sections/FooterSection";
-import { GallerySection } from "@/app/sections/GallerySection";
 import { type EventItem } from "@/lib/events";
 import { content, type Language } from "@/lib/site-content";
-import { type GalleryImage } from "@/lib/gallery-store";
 
-export function HomeClient({ 
-  events, 
-  initialImages 
-}: { 
-  events: EventItem[]; 
-  initialImages: GalleryImage[];
-}) {
+export function HomeClient({ events }: { events: EventItem[] }) {
   const [lang, setLang] = useState<Language>("en");
   const t = content[lang];
   const currentEvent = events.find((event) => event.status === "open") || events[0];
 
   useEffect(() => {
+    if (location.hash === "#gallery") {
+      location.replace("/gallery");
+      return;
+    }
     const saved = localStorage.getItem("greenpune_lang") as Language;
     if (saved === "en" || saved === "mr") {
       setLang(saved);
@@ -57,10 +52,8 @@ export function HomeClient({
         <MissionSection t={t} />
         <EventSection t={t} lang={lang} event={currentEvent} />
         <InsightsSection t={t} />
-        <PortfolioSection t={t} lang={lang} events={events} />
-        <GallerySection lang={lang} initialImages={initialImages} />
-        <FooterSection t={t} />
       </main>
+      <FooterSection lang={lang} />
     </>
   );
 }

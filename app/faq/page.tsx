@@ -1,19 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Frequently Asked Questions | GreenPune",
-  description: "Common questions about GreenPune tree plantation drives, volunteering, native saplings, and 3-year stewardship.",
-  alternates: {
-    canonical: "/faq"
-  },
-  openGraph: {
-    title: "Frequently Asked Questions | GreenPune",
-    description: "Common questions about GreenPune tree plantation drives, volunteering, native saplings, and 3-year stewardship.",
-    url: "/faq",
-    type: "website"
-  }
-};
+export const metadata = pageMetadata(
+  "/faq",
+  "Frequently Asked Questions",
+  "Common questions about GreenPune tree plantation drives, volunteering, native saplings, and 3-year stewardship."
+);
 
 const faqs = [
   {

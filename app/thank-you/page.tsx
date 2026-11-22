@@ -1,17 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Registration Confirmed",
-  description: "Your registration for the GreenPune tree plantation drive has been confirmed.",
-  robots: {
-    index: false,
-    follow: false
-  },
-  alternates: {
-    canonical: "/thank-you"
-  }
-};
+export const metadata = pageMetadata(
+  "/thank-you",
+  "Registration Confirmed",
+  "Your registration for the GreenPune tree plantation drive has been confirmed."
+);
 
 export default function ThankYouPage() {
   return (

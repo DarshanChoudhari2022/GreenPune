@@ -115,7 +115,16 @@ export async function POST(request: Request) {
     );
   }
 
-  // Honeypot check: If hidden 'website' field is filled, silently discard spam bot
+  if (!payload || typeof payload !== "object" || Array.isArray(payload) ||
+      [payload.eventId, payload.name, payload.phone, payload.phoneCountryCode, payload.address, payload.website]
+        .some((value) => value !== undefined && typeof value !== "string") ||
+      (payload.lang !== undefined && payload.lang !== "en" && payload.lang !== "mr") ||
+      (payload.answers !== undefined && (!payload.answers || typeof payload.answers !== "object" ||
+        Array.isArray(payload.answers) || Object.values(payload.answers).some((value) => typeof value !== "string")))) {
+    return NextResponse.json({ ok: false, message: "Invalid registration data." }, { status: 400 });
+  }
+
+  // Discard submissions that fill the hidden honeypot field.
   if (payload.website && payload.website.trim().length > 0) {
     return NextResponse.json({ ok: true, message: "Registration received." });
   }
@@ -211,8 +220,9 @@ export async function POST(request: Request) {
   const web3FormsKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
   if (web3FormsKey) {
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      const notification = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
+        signal: AbortSignal.timeout(5000),
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json"
@@ -229,6 +239,10 @@ export async function POST(request: Request) {
           submitted_at: record.createdAt
         })
       });
+      const result = await notification.json();
+      if (!notification.ok || result?.success !== true) {
+        console.error("Web3Forms notification rejected:", notification.status);
+      }
     } catch (err: any) {
       console.error("Web3Forms notification error (non-blocking):", err.message || err);
     }

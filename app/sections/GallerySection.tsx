@@ -23,7 +23,7 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
   const t = {
     en: {
       eyebrow: "Community Gallery & Highlights",
-      title: "Memories & Video Highlights",
+      title: "Community gallery",
       intro: "Photos and videos from our 15 August 2026 plantation drive at Anandvan, Mahadevwadi, Pune.",
       noImages: "Photos & video highlights will be uploaded here shortly by our team!",
       shareBtn: "Share Drive Highlights & Gallery",
@@ -43,7 +43,7 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
     ? `🌳 *आनंदवन महादेववाडी वृक्षारोपण मोहीम २०२६*\n📅 *दिनांक*: १५ ऑगस्ट २०२६ (सकाळी ११:०० ते दुपारी २:००)\n📍 *स्थान*: आनंदवन, महादेववाडी, पुणे\n🌿 *झाडे लावली*: ११० रोपे\n🤝 *आयोजक*: सकल हिंदू समाज आणि चोक्सी स्कूल पुणे\n🎭 *जनजागृती नृत्य*: चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य सादरीकरण\n📞 *संपर्क*: मयांक गोहर (+91 9623130157)\n\n📸 *मोहिमेचे फोटो व व्हिडिओ पहा*:`
     : `🌳 *Anandvan, Mahadevwadi Tree Plantation Drive 2026*\n📅 *Date*: 15 August 2026 (11:00 AM – 2:00 PM IST)\n📍 *Location*: Anandvan, Mahadevwadi, Pune\n🌿 *Trees Planted*: 110 Native Trees\n🤝 *Organizers*: Sakal Hindu Samaj & Choksi School Pune\n🎭 *Special Performance*: Tree Plantation Awareness Dance Act by students of Choksi School Pune\n📞 *Contact*: Mayank Goher (+91 9623130157)\n\n📸 *View Photos & Video Highlights*:`;
 
-  const shareUrl = typeof window !== "undefined" ? `${window.location.origin}/#gallery` : "https://greenpune.in/#gallery";
+  const shareUrl = new URL("/gallery", process.env.NEXT_PUBLIC_SITE_URL || "https://www.greenpune.in").href;
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
 
   const handleCopyLink = async () => {
@@ -69,7 +69,7 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
       <div className="slide-inner">
         <div className="section-header">
           <p className="eyebrow">{t.eyebrow}</p>
-          <h2 className="section-title">{t.title}</h2>
+          <h1 className="section-title">{t.title}</h1>
           <p className="section-intro">{t.intro}</p>
 
           <div className="gallery-share-bar" style={{ marginTop: "16px", display: "flex", gap: "12px", flexWrap: "wrap" }}>

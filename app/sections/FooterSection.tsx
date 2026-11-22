@@ -1,50 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { Section } from "@/app/components/Section";
+import { usePathname } from "next/navigation";
+import { content, type Language } from "@/lib/site-content";
 
-interface FooterSectionProps {
-  t: {
-    footer: {
-      line: string;
-      share: string;
-      poweredBy?: string;
-    };
-  };
+export function PublicFooter() {
+  const pathname = usePathname();
+  if (!["/about", "/faq", "/privacy", "/register", "/thank-you"].includes(pathname)) return null;
+  return <FooterSection />;
 }
 
-export function FooterSection({ t }: FooterSectionProps) {
+export function FooterSection({ lang = "en" }: { lang?: Language }) {
+  const marathi = lang === "mr";
+  const { footer } = content[lang];
+
   return (
-    <Section id="contact" className="footer-slide" theme="dark">
-      <footer className="footer-content fade-up delay-1" style={{ width: "100%" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <strong>GreenPune</strong>
-          <p>{t.footer.line}</p>
-          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", fontSize: "13px" }}>
-            <Link href="/" style={{ border: "none", padding: 0, textDecoration: "underline" }}>Home</Link>
-            <Link href="/about" style={{ border: "none", padding: 0, textDecoration: "underline" }}>About</Link>
-            <Link href="/register" style={{ border: "none", padding: 0, textDecoration: "underline" }}>Register</Link>
-            <Link href="/faq" style={{ border: "none", padding: 0, textDecoration: "underline" }}>FAQ</Link>
-            <Link href="/privacy" style={{ border: "none", padding: 0, textDecoration: "underline" }}>Privacy Policy</Link>
+    <footer id="contact" className="site-footer" lang={lang}>
+      <div className="site-footer-inner">
+        <div className="site-footer-grid">
+          <div>
+            <Link href="/" className="site-footer-brand">GreenPune</Link>
+            <p>{footer.line}</p>
           </div>
-          <p className="powered-by-text" style={{ marginTop: "4px" }}>
-            {t.footer.poweredBy || "Powered by"}{" "}
-            <a
-              href="https://www.bracketdex.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="powered-by-link"
-            >
-              BracketDex
-            </a>
-          </p>
+          <nav aria-label={marathi ? "पृष्ठे" : "Footer navigation"}>
+            <h2>{marathi ? "पृष्ठे" : "Explore"}</h2>
+            <ul>
+              <li><Link href="/">{marathi ? "मुख्यपृष्ठ" : "Home"}</Link></li>
+              <li><Link href="/about">{marathi ? "आमच्याबद्दल" : "About"}</Link></li>
+              <li><Link href="/register">{marathi ? "नोंदणी" : "Volunteer registration"}</Link></li>
+              <li><Link href="/faq">{marathi ? "प्रश्नोत्तरे" : "FAQ"}</Link></li>
+              <li><Link href="/events">{marathi ? "पूर्ण झालेल्या मोहिमा" : "Completed events"}</Link></li>
+              <li><Link href="/gallery">{marathi ? "गॅलरी" : "Gallery"}</Link></li>
+            </ul>
+          </nav>
+          <div>
+            <h2>{marathi ? "संपर्क" : "Contact"}</h2>
+            <ul>
+              <li><a href="mailto:hello@greenpune.in">hello@greenpune.in</a></li>
+              <li><a href="https://wa.me/919623130157">WhatsApp <bdi>+91 96231 30157</bdi></a></li>
+            </ul>
+          </div>
         </div>
-        <Link href="/register" className="fade-up delay-2">
-          {t.footer.share}
-        </Link>
-      </footer>
-    </Section>
+        <div className="site-footer-meta">
+          <p>{footer.poweredBy || "Powered by"} <a href="https://www.bracketdex.com/">BracketDex</a></p>
+          <div>
+            <Link href="/privacy">{marathi ? "गोपनीयता धोरण" : "Privacy policy"}</Link>
+          </div>
+        </div>
+        <span className="site-footer-wordmark" aria-hidden="true">GreenPune</span>
+      </div>
+    </footer>
   );
 }
-
-

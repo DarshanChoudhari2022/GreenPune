@@ -1,21 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "About Us — 1 Million Trees Urban Greening Mission",
-  description:
-    "Learn about the GreenPune initiative — planting 1 million native trees in Pune with 3-year care commitment, preserving tekdis and rivers.",
-  alternates: {
-    canonical: "/about"
-  },
-  openGraph: {
-    title: "About Us — 1 Million Trees Urban Greening Mission | GreenPune",
-    description:
-      "Learn about the GreenPune initiative — planting 1 million native trees in Pune with 3-year care commitment, preserving tekdis and rivers.",
-    url: "/about",
-    type: "website"
-  }
-};
+export const metadata = pageMetadata(
+  "/about",
+  "About Us — 1 Million Trees Urban Greening Mission",
+  "Learn about the GreenPune initiative — planting 1 million native trees in Pune with 3-year care commitment, preserving tekdis and rivers."
+);
 
 export default function AboutPage() {
   return (
@@ -381,63 +371,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Contact / Footer */}
-      <section className="about-section about-section-dark" id="contact">
-        <div className="about-section-inner">
-          <div className="about-footer-grid">
-            <div>
-              <div className="brand-text" style={{ marginBottom: "16px" }}>
-                <span className="drop" style={{ fontSize: "24px" }}>☘️</span>
-                <div className="brand-stack" style={{ fontSize: "20px" }}>
-                  <span className="brand-bold" style={{ color: "white" }}>GREEN</span>
-                  <span className="brand-light" style={{ color: "rgba(255,255,255,0.7)" }}>PUNE</span>
-                </div>
-              </div>
-              <p style={{ color: "rgba(255,255,255,0.7)", maxWidth: "320px", lineHeight: 1.7 }}>
-                A citizen-led urban tree plantation movement. Harit Nagar. Sundar
-                Nagar. Samruddha Nagar.
-              </p>
-            </div>
-            <div className="about-footer-links">
-              <h4>Quick Links</h4>
-              <ul>
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About Us</Link></li>
-                <li><Link href="/register">Register for Drive</Link></li>
-                <li><Link href="/faq">FAQs</Link></li>
-                <li><Link href="/privacy">Privacy Policy</Link></li>
-                <li><a href="#why-pune">Why Pune Needs Trees</a></li>
-                <li><a href="#first-event">First Event — 15 Aug 2026</a></li>
-                <li><a href="#forest">Forest Zones in Pune</a></li>
-                <li><a href="#donate">Donate / Support</a></li>
-              </ul>
-            </div>
-            <div className="about-footer-links">
-              <h4>Contact</h4>
-              <ul>
-                <li><a href="https://wa.me/919623130157?text=Hi%20Mayank,%20I%20want%20to%20know%20more%20about%20GreenPune%20Tree%20Plantation%20Drive" target="_blank" rel="noopener noreferrer">💬 Mayank Goher: +91 9623130157</a></li>
-                <li><a href="mailto:hello@greenpune.in">📧 hello@greenpune.in</a></li>
-                <li><a href="mailto:donate@greenpune.in">💚 donate@greenpune.in</a></li>
-                <li><a href="/register">📋 Register for Event</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="about-footer-bottom">
-            <p>© 2026 GreenPune Initiative. All rights reserved.</p>
-            <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-              <Link href="/privacy" style={{ color: "rgba(255, 255, 255, 0.6)" }}>
-                Privacy
-              </Link>
-              <p style={{ margin: 0 }}>
-                Powered by{" "}
-                <a href="https://www.bracketdex.com/" target="_blank" rel="noopener noreferrer">
-                  BracketDex Technologies
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

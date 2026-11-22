@@ -13,7 +13,8 @@ import { type EventItem } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Admin | GreenPune"
+  title: "Admin",
+  robots: { index: false, follow: false }
 };
 
 function formatDate(value: string) {

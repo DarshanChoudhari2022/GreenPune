@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AnalyticsAndConsent } from "./components/AnalyticsAndConsent";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://greenpune.in";
+import { PublicFooter } from "./sections/FooterSection";
+import { siteUrl } from "@/lib/site-metadata";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -26,10 +25,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/opengraph-image"],
     title: "GreenPune — Native Tree Plantation & Urban Greening Movement",
     description:
       "Citizen-led urban greening initiative in Pune. Planting 1 million native trees across Pune neighborhoods, Anandvan, and tekdis with 3-year survival care."
-  }
+  },
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION || undefined }
 };
 
 export default function RootLayout({
@@ -38,10 +39,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="mr">
+    <html lang="en">
       <body>
         {children}
-        <AnalyticsAndConsent />
+        <PublicFooter />
       </body>
     </html>
   );

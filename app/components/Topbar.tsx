@@ -32,11 +32,11 @@ export function Topbar({ lang, setLang, variant = "home" }: TopbarProps) {
       )}
 
       <div className="topbar-right" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-        <a href="/faq" className="nav-about">
-          FAQ
+        <a href={variant === "home" ? "/events" : "/faq"} className="nav-about">
+          {variant === "home" ? (lang === "mr" ? "मोहिमा" : "Events") : "FAQ"}
         </a>
-        <a href={variant === "home" ? "/about" : "/"} className="nav-about">
-          {variant === "home" ? "ABOUT" : "HOME"}
+        <a href={variant === "home" ? "/gallery" : "/"} className="nav-about">
+          {variant === "home" ? (lang === "mr" ? "गॅलरी" : "Gallery") : "Home"}
         </a>
         {setLang && lang && (
           <button

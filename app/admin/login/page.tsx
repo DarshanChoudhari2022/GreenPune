@@ -3,7 +3,8 @@ import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { AdminLoginForm } from "./login-form";
 
 export const metadata = {
-  title: "Admin Login | GreenPune"
+  title: "Admin Login",
+  robots: { index: false, follow: false }
 };
 
 export default async function AdminLoginPage() {
@@ -18,10 +19,6 @@ export default async function AdminLoginPage() {
         <h1>Sign in</h1>
         <p>View registrations and publish community plantation events.</p>
         <AdminLoginForm />
-        <small>
-          Set <code>ADMIN_PASSWORD</code> in your environment. Local fallback:
-          <code> greenpune-admin</code>.
-        </small>
       </section>
     </main>
   );

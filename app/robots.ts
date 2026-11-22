@@ -1,14 +1,14 @@
 import type { MetadataRoute } from "next";
+import { siteUrl as baseUrl } from "@/lib/site-metadata";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://greenpune.in";
 
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/admin/", "/api", "/api/", "/thank-you"]
+        disallow: ["/api/"]
       }
     ],
     sitemap: `${baseUrl}/sitemap.xml`

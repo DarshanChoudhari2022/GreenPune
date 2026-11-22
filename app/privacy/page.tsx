@@ -1,19 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site-metadata";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | GreenPune Initiative",
-  description: "Learn how GreenPune handles volunteer registrations, optional analytics, and communication with full transparency.",
-  alternates: {
-    canonical: "/privacy"
-  },
-  openGraph: {
-    title: "Privacy Policy | GreenPune Initiative",
-    description: "Learn how GreenPune handles volunteer registrations, optional analytics, and communication with full transparency.",
-    url: "/privacy",
-    type: "website"
-  }
-};
+export const metadata = pageMetadata(
+  "/privacy",
+  "Privacy Policy",
+  "Learn how GreenPune handles volunteer registrations, optional analytics, and communication with full transparency."
+);
 
 export default function PrivacyPage() {
   return (
@@ -113,7 +105,7 @@ export default function PrivacyPage() {
               3. Secure Server Processing
             </h2>
             <p>
-              All registration data is validated directly on our secure server endpoint with anti-spam honeypot verification and rate limiting. Volunteer entries are saved securely for drive coordination. We never sell, rent, or trade your personal data to advertisers, commercial brokers, or third parties.
+              The server validates registrations and uses a honeypot field and rate limits to reduce spam. GreenPune stores entries for drive coordination. When email notifications are enabled, Web3Forms processes registration details including your name, phone number and address to notify the organizers.
             </p>
           </section>
 
@@ -122,7 +114,7 @@ export default function PrivacyPage() {
               4. Analytics & Tracking
             </h2>
             <p>
-              We value visitor privacy. Our website does not run intrusive profiling trackers, aggressive tracking scripts, or commercial ad pixels. Standard server logs and optional privacy-friendly metrics are used solely to assess site availability and community reach.
+              GreenPune does not run website analytics or use analytics cookies. Our hosting provider may keep standard server logs. The admin login uses a session cookie to keep signed-in organizers authenticated.
             </p>
           </section>
 
@@ -131,7 +123,7 @@ export default function PrivacyPage() {
               5. Data Retention & Deletion Rights
             </h2>
             <p>
-              Volunteer information is retained for coordinating post-plantation watering schedules and announcing future drives in Pune. If at any time you wish to have your details removed from our registration records, simply message or email us, and your data will be permanently deleted within 48 hours.
+              GreenPune uses volunteer information to coordinate planting, follow-up care and future drives. Contact the organizers below to request access, correction or deletion of your registration details.
             </p>
           </section>
 
