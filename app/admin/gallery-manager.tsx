@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { type GalleryImage } from "@/lib/gallery-store";
+import { GALLERY_UPLOAD_MAX_BYTES, galleryMediaTypes } from "@/lib/gallery-upload";
 
 function isVideoUrl(url: string, mediaType?: string) {
   if (mediaType === "video") return true;
@@ -31,6 +32,10 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
       setUploadError("Please select a photo or video file.");
       return;
     }
+    if (file.size > GALLERY_UPLOAD_MAX_BYTES) {
+      setUploadError("Choose a photo or short video up to 4 MB.");
+      return;
+    }
 
     setIsUploading(true);
     setUploadError("");
@@ -46,6 +51,10 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
         body: formData
       });
 
+      if (response.status === 413) {
+        setUploadError("Choose a photo or short video up to 4 MB.");
+        return;
+      }
       const result = await response.json();
 
       if (response.ok && result.ok) {
@@ -110,7 +119,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
                 <input
                   type="file"
                   id="admin-gallery-file-input"
-                  accept="image/*,video/*"
+                  accept={Object.keys(galleryMediaTypes).join(",")}
                   onChange={handleFileChange}
                   required
                   style={{ border: "1px dashed #ccc", padding: "8px", background: "#fff", borderRadius: "4px" }}
@@ -177,6 +186,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
                           alt={img.caption || "Gallery Preview"}
                           fill
                           sizes="200px"
+                          unoptimized={!img.url.startsWith("/")}
                           style={{ objectFit: "cover" }}
                         />
                       )}

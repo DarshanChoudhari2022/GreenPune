@@ -62,6 +62,20 @@ create table if not exists public.gallery_images (
   created_at timestamptz not null default now()
 );
 
+alter table public.gallery_images
+  add column if not exists media_type text,
+  add column if not exists storage_path text,
+  add column if not exists hidden boolean not null default false,
+  add column if not exists bundled_id text unique;
+
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'gallery-media', 'gallery-media', true, 4194304,
+  array['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif',
+        'video/mp4', 'video/webm', 'video/quicktime']
+)
+on conflict (id) do nothing;
+
 alter table public.gallery_images enable row level security;
 
 drop policy if exists "Service role can manage gallery"

@@ -132,6 +132,7 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
                         alt={img.caption || (lang === "mr" ? "ग्रीनपुणे आनंदवन वृक्षारोपण मोहीम छायाचित्र" : "GreenPune Anandvan tree plantation drive highlight")}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        unoptimized={!img.url.startsWith("/")}
                         className="gallery-img"
                       />
                     )}
