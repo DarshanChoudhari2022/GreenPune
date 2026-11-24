@@ -28,7 +28,7 @@ Updated 22 November 2026.
 
 ## Operational limitations
 
-- Production gallery uploads require `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` on the host. Run the gallery portion of `supabase-schema.sql` in Supabase SQL Editor to provision the public `gallery-media` bucket and gallery metadata columns. Keep the service-role key server-only. Files up to 4 MB are supported; larger videos need a direct-upload workflow. Existing bundled media remains visible without a migration.
+- Production gallery uploads require `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` on the host. Run the gallery portion of `supabase-schema.sql` in Supabase SQL Editor to provision the public `gallery-media` bucket and gallery metadata columns. Keep the service-role key server-only. The admin browser compresses eligible photos and videos before upload; the final file must be 4 MB or less. Keep original proof files separately. The public gallery groups media by upload date in India time, not the date the photo or video was taken. Existing bundled media remains visible without a migration.
 
 - The registration rate limit runs per server instance and resets on restart. Use a host/WAF rule or shared limit store for sustained abuse protection. Local JSON files are unsuitable for durable writes on ephemeral hosts.
 - Production credentials, staging writes, inbox delivery and Search Console verification are not confirmed by local checks.

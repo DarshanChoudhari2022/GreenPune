@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { type GalleryImage } from "@/lib/gallery-store";
 import { GALLERY_UPLOAD_MAX_BYTES, galleryMediaTypes } from "@/lib/gallery-upload";
+import { prepareGalleryUpload } from "@/lib/gallery-compression";
 
 function isVideoUrl(url: string, mediaType?: string) {
   if (mediaType === "video") return true;
@@ -13,6 +14,7 @@ function isVideoUrl(url: string, mediaType?: string) {
 export function GalleryManager({ initialImages }: { initialImages: GalleryImage[] }) {
   const [images, setImages] = useState<GalleryImage[]>(initialImages);
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState("");
   const [uploadError, setUploadError] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState("");
 
@@ -32,33 +34,32 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
       setUploadError("Please select a photo or video file.");
       return;
     }
-    if (file.size > GALLERY_UPLOAD_MAX_BYTES) {
-      setUploadError("Choose a photo or short video up to 4 MB.");
-      return;
-    }
-
     setIsUploading(true);
+    setUploadStatus("Preparing media...");
     setUploadError("");
     setUploadSuccess("");
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("caption", caption);
-
     try {
+      const prepared = await prepareGalleryUpload(file, (progress) => {
+        setUploadStatus(`Compressing video... ${Math.round(progress * 100)}%`);
+      });
+      const formData = new FormData();
+      formData.append("file", prepared);
+      formData.append("caption", caption);
+      setUploadStatus("Uploading...");
       const response = await fetch("/api/gallery", {
         method: "POST",
         body: formData
       });
 
       if (response.status === 413) {
-        setUploadError("Choose a photo or short video up to 4 MB.");
+        setUploadError(`The prepared file exceeds the ${GALLERY_UPLOAD_MAX_BYTES / 1024 ** 2} MB upload limit.`);
         return;
       }
       const result = await response.json();
 
       if (response.ok && result.ok) {
-        setUploadSuccess("Photo / Video uploaded successfully!");
+        setUploadSuccess(prepared.size < file.size ? "Media compressed and uploaded." : "Media uploaded.");
         setImages((prev) => [result.image, ...prev]);
         setFile(null);
         setCaption("");
@@ -69,10 +70,11 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
       } else {
         setUploadError(result.error || "Failed to upload photo / video.");
       }
-    } catch (err) {
-      setUploadError("An error occurred during upload.");
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : "An error occurred during upload.");
     } finally {
       setIsUploading(false);
+      setUploadStatus("");
     }
   };
 
@@ -121,6 +123,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
                   id="admin-gallery-file-input"
                   accept={Object.keys(galleryMediaTypes).join(",")}
                   onChange={handleFileChange}
+                  disabled={isUploading}
                   required
                   style={{ border: "1px dashed #ccc", padding: "8px", background: "#fff", borderRadius: "4px" }}
                 />
@@ -135,6 +138,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
                 <input
                   type="text"
                   value={caption}
+                  disabled={isUploading}
                   onChange={(e) => setCaption(e.target.value)}
                   placeholder="e.g. Anandvan Mahadevwadi 110 Trees Drive - Choksi School Dance Act"
                   maxLength={150}
@@ -146,7 +150,7 @@ export function GalleryManager({ initialImages }: { initialImages: GalleryImage[
             {uploadSuccess && <p className="admin-success" style={{ margin: "12px 0 0" }}>{uploadSuccess}</p>}
 
             <button disabled={isUploading} type="submit" style={{ marginTop: "16px", width: "auto" }}>
-              {isUploading ? "Uploading Media..." : "Upload Photo / Video"}
+              {isUploading ? uploadStatus : "Upload Photo / Video"}
             </button>
           </form>
         </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { type Language } from "@/lib/site-content";
 import { type GalleryImage } from "@/lib/gallery-store";
+import { galleryTimeZone, groupGalleryByUploadDate } from "@/lib/gallery-dates";
 
 interface GallerySectionProps {
   lang: Language;
@@ -16,7 +17,7 @@ function isVideoUrl(url: string, mediaType?: string) {
 }
 
 export function GallerySection({ lang, initialImages }: GallerySectionProps) {
-  const [images] = useState<GalleryImage[]>(initialImages);
+  const groups = groupGalleryByUploadDate(initialImages);
   const [selectedMedia, setSelectedMedia] = useState<GalleryImage | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -24,24 +25,29 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
     en: {
       eyebrow: "Community Gallery & Highlights",
       title: "Community gallery",
-      intro: "Photos and videos from our 15 August 2026 plantation drive at Anandvan, Mahadevwadi, Pune.",
+      intro: "Photo and video records of GreenPune plantation drives and follow-up tree care.",
+      uploadedOn: "Uploaded on",
+      unknownDate: "Upload date unavailable",
       noImages: "Photos & video highlights will be uploaded here shortly by our team!",
       shareBtn: "Share Drive Highlights & Gallery",
       copiedText: "Link Copied to Clipboard!"
     },
     mr: {
       eyebrow: "कम्युनिटी गॅलरी आणि हायलाईट्स",
-      title: "आनंदवन मोहिमेचे क्षणचित्र आणि व्हिडिओ",
-      intro: "१५ ऑगस्ट २०२६ रोजी आनंदवन, महादेववाडी, पुणे येथील वृक्षारोपण मोहिमेची छायाचित्रे व व्हिडिओ हायलाईट्स.",
+      title: "ग्रीनपुणे गॅलरी",
+      intro: "ग्रीनपुणेच्या वृक्षारोपण मोहिमा आणि झाडांच्या देखभालीची छायाचित्रे व व्हिडिओ.",
+      uploadedOn: "अपलोड दिनांक",
+      unknownDate: "अपलोड दिनांक उपलब्ध नाही",
       noImages: "आनंदवन मोहिमेची छायाचित्रे आणि व्हिडिओ लवकरच येथे अपलोड केले जातील!",
       shareBtn: "मोहिमेचे फोटो व व्हिडिओ शेअर करा",
       copiedText: "दुवा कॉपी झाला!"
     }
   }[lang];
 
-  const shareText = lang === "mr"
-    ? `🌳 *आनंदवन महादेववाडी वृक्षारोपण मोहीम २०२६*\n📅 *दिनांक*: १५ ऑगस्ट २०२६ (सकाळी ११:०० ते दुपारी २:००)\n📍 *स्थान*: आनंदवन, महादेववाडी, पुणे\n🌿 *झाडे लावली*: ११० रोपे\n🤝 *आयोजक*: सकल हिंदू समाज आणि चोक्सी स्कूल पुणे\n🎭 *जनजागृती नृत्य*: चोक्सी स्कूल पुणे च्या विद्यार्थ्यांद्वारे वृक्षारोपण जनजागृती नृत्य सादरीकरण\n📞 *संपर्क*: मयांक गोहर (+91 9623130157)\n\n📸 *मोहिमेचे फोटो व व्हिडिओ पहा*:`
-    : `🌳 *Anandvan, Mahadevwadi Tree Plantation Drive 2026*\n📅 *Date*: 15 August 2026 (11:00 AM – 2:00 PM IST)\n📍 *Location*: Anandvan, Mahadevwadi, Pune\n🌿 *Trees Planted*: 110 Native Trees\n🤝 *Organizers*: Sakal Hindu Samaj & Choksi School Pune\n🎭 *Special Performance*: Tree Plantation Awareness Dance Act by students of Choksi School Pune\n📞 *Contact*: Mayank Goher (+91 9623130157)\n\n📸 *View Photos & Video Highlights*:`;
+  const shareText = t.intro;
+  const dateFormat = new Intl.DateTimeFormat(lang === "mr" ? "mr-IN" : "en-IN", {
+    dateStyle: "long", timeZone: galleryTimeZone
+  });
 
   const shareUrl = new URL("/gallery", process.env.NEXT_PUBLIC_SITE_URL || "https://www.greenpune.in").href;
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
@@ -102,54 +108,64 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
         </div>
 
         {/* Gallery Grid */}
-        {images.length === 0 ? (
+        {groups.length === 0 ? (
           <div className="gallery-empty" style={{ margin: "24px 0", padding: "32px", background: "rgba(255,255,255,0.8)", borderRadius: "16px", textAlign: "center" }}>
             <p style={{ margin: 0, color: "#444", fontWeight: 500 }}>{t.noImages}</p>
           </div>
         ) : (
-          <div className="gallery-grid">
-            {images.map((img) => {
-              const isVid = isVideoUrl(img.url, img.mediaType);
-              return (
-                <div 
-                  key={img.id} 
-                  className="gallery-card"
-                  onClick={() => setSelectedMedia(img)}
-                >
-                  <div className="gallery-image-wrapper">
-                    {isVid ? (
-                      <video
-                        src={img.url}
-                        controls={false}
-                        muted
-                        playsInline
-                        className="gallery-img"
-                        style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                      />
-                    ) : (
-                      <Image
-                        src={img.url}
-                        alt={img.caption || (lang === "mr" ? "ग्रीनपुणे आनंदवन वृक्षारोपण मोहीम छायाचित्र" : "GreenPune Anandvan tree plantation drive highlight")}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        unoptimized={!img.url.startsWith("/")}
-                        className="gallery-img"
-                      />
-                    )}
-                    {isVid && (
-                      <span className="media-play-badge" style={{ position: "absolute", top: "10px", right: "10px", background: "rgba(0,0,0,0.7)", color: "white", padding: "4px 8px", borderRadius: "12px", fontSize: "11px", fontWeight: 600 }}>
-                        ▶ Video
-                      </span>
-                    )}
-                  </div>
-                  {img.caption && (
-                    <div className="gallery-caption">
-                      <p>{img.caption}</p>
-                    </div>
-                  )}
+          <div className="gallery-date-groups">
+            {groups.map(({ date, media }) => (
+              <section className="gallery-date-group" key={date}>
+                <h2>{date
+                  ? <>{t.uploadedOn} <time dateTime={date}>{dateFormat.format(new Date(`${date}T00:00:00Z`))}</time></>
+                  : t.unknownDate}</h2>
+                <div className="gallery-grid">
+                  {media.map((img) => {
+                    const isVid = isVideoUrl(img.url, img.mediaType);
+                    return (
+                      <button
+                        type="button"
+                        key={img.id}
+                        className="gallery-card"
+                        onClick={() => setSelectedMedia(img)}
+                        aria-label={img.caption || (isVid ? (lang === "mr" ? "व्हिडिओ पहा" : "View video") : (lang === "mr" ? "फोटो पहा" : "View photo"))}
+                      >
+                        <span className="gallery-image-wrapper">
+                          {isVid ? (
+                            <video
+                              src={img.url}
+                              controls={false}
+                              muted
+                              playsInline
+                              preload="metadata"
+                              className="gallery-img"
+                              style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                            />
+                          ) : (
+                            <Image
+                              src={img.url}
+                              alt={img.caption || (lang === "mr" ? "ग्रीनपुणे आनंदवन वृक्षारोपण मोहीम छायाचित्र" : "GreenPune Anandvan tree plantation drive highlight")}
+                              fill
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              unoptimized={!img.url.startsWith("/")}
+                              className="gallery-img"
+                            />
+                          )}
+                          {isVid && (
+                            <span className="media-play-badge" style={{ position: "absolute", top: "10px", right: "10px", background: "rgba(0,0,0,0.7)", color: "white", padding: "4px 8px", borderRadius: "12px", fontSize: "11px", fontWeight: 600 }}>
+                              ▶ Video
+                            </span>
+                          )}
+                        </span>
+                        {img.caption && (
+                          <span className="gallery-caption">{img.caption}</span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              </section>
+            ))}
           </div>
         )}
       </div>
@@ -183,7 +199,8 @@ export function GallerySection({ lang, initialImages }: GallerySectionProps) {
                 <p>{selectedMedia.caption}</p>
                 <span className="lightbox-date">
                   {new Date(selectedMedia.createdAt).toLocaleDateString(lang === "mr" ? "mr-IN" : "en-IN", {
-                    dateStyle: "medium"
+                    dateStyle: "medium",
+                    timeZone: galleryTimeZone
                   })}
                 </span>
               </div>
